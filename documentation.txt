@@ -1,0 +1,84 @@
+--- Ceritfication Of Completion:
+Project Completion Status: False.
+
+-- Table Of Contents:
+
+
+
+--- Documention ---
+Project By Abdul Raffay Sheikh
+(ID: 41566742; Batch: 2210C2; Faculty: Sir. Ebad Uddin Ahmed)
+
+--Problem Definition:
+Our Client is a "Retail Dealer" of various -Stationary- products like gift Articles,
+dolls, files, handbags wallets, beauty Products etc. Since there is very high
+demand of such products so to increase the reach of our Client's store
+named "Arts", He wants us to build an application which can help him maneg 
+his products and retain customers through the ability of online purchasing
+
+-Mentioned Product Categories to be Sold:
+1- Greeting Cards
+2- Dolls
+3- Files
+4- Handbags
+5- Wallets
+6- Arts
+7- Gift Articles
+8- Beauty Products
+#Note: More Categories Can be Added by Admin.
+
+--Application Layout:
+		   Application
+			|
+	     |----Customer--------Admin---|
+	     |                        |
+	 |---------|           |--------------|
+ Non-Registered Registered    Employee       Super
+				Admin        Admin
+
+--Application Requirements: 
+1- Advance Search to Fetch Details
+2- Automated Details Production
+3- Product Will only be dispatched on clearence of payment
+
+-Admin Side:
+1- Update/Upload Products
+2- Update Order Status
+3- Update/Upload Employees
+4- Check Orders (Basis of: Date, Delivery Type)
+5- Update His/Her Profile(Id, Login, Password)
+6- Check Details:
+  i) Stock Details
+  ii) Feedbacks from Customer
+  iii) Faqs From Customer
+
+-Customer Side:
+1- Customer Login
+2- Placing Orders
+3- Search Through Products
+4- Edit Profile
+5- Check Orders Placed
+6- Place Orders Through Different Payments Options:
+	i) Credit Cards/DebitCards
+	ii) Cheques
+	iii) VVP
+7- Cancel Placed Orders (if not dispatached by Dealer)
+
+
+
+--Database Structure:
+Tables:
+-Products
+ --Price
+ --Title 
+ --Description
+ --Images
+ --Product Id/SKU (7-digit | 2 digit Product Code | 5 Digit Product Number)
+ --Warranty
+ --Product Created Date
+ --No of Units Available
+ --User Feedback
+
+
+
+
