@@ -1,3 +1,23 @@
+<?php
+session_start();
+include("../config.php");
+include('../functions.php');
+
+//UPLOAD PRODUCT
+$_SESSION['productUploadStatus'] = '';
+$productUploadStatus =  $_SESSION['productUploadStatus'];
+
+if (isset($_POST['uploadNewProduct'])) {
+    $_SESSION['productUploadStatus'] = "";
+}
+
+if (isset($_POST["uploadProduct"])) {
+    Product::uploadProduct($connection);
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +35,7 @@
     <title>Dashboard | <?php echo $site__name . " Admin"; ?></title>
 </head>
 
-<body>
+<body class="dashboard-body">
 
     <!-- DASHBOARD HEADER START -->
     <?php include('includes/header.php'); ?>
@@ -23,6 +43,8 @@
 
 
     <main id="wrapper">
+
+    <div class="loader center"></div>
         <div class="row">
             <!-- SIDEBAR START -->
             <div class="col-sm-2 col-lg-2 col-md-2 no-padding">
@@ -31,7 +53,7 @@
             <!-- SIDEBAR END -->
 
             <!-- SECTIONS START -->
-            <div class="col-sm-10 col-lg-10 col-md-10 no-padding">
+            <div class="col-sm-10 col-lg-10 col-md-10 no-padding dashboard-wrapper">
                 <div class="pb-4 px-5">
                     <?php include('sections/products.php'); ?>
                 </div>

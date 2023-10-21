@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <?php require_once 'config.php';?>
+ 
     
     <!--==== HEADER START ====-->
     <?php include('includes/header.php') ?>

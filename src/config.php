@@ -4,7 +4,7 @@ $dbConfig = array(
     'host' => 'localhost',
     'username' => 'root',
     'password' => '',
-    'database' => 'project-arts'
+    'database' => 'project-arts-import'
 );
 
 $connection = new mysqli(
@@ -16,5 +16,5 @@ $connection = new mysqli(
 
 if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
-} 
+}  
 ?>

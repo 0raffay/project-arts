@@ -220,6 +220,42 @@ input {
     width: var(--input-width);
     display: var(--input-display);
     color: var(--clr-secondary);
+    padding-block: 0;
+}
+
+*:has(> .loader.center) {
+    position: relative;
+}
+/* Safari */
+@-webkit-keyframes loader {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes loader {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+.loader{
+    display: none;
+    --size: 50px;
+    height: var(--size);
+    width: var(--size);
+
+    border: calc(var(--size) * .16) solid #f3f3f3;
+    border-radius: 100%;
+    border-top: calc(var(--size) * .16) solid var(--clr-secondary);
+    animation: loader 2s linear infinite;
+}
+
+
+.loader.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .form__wrap textarea {
@@ -541,6 +577,9 @@ input {
     line-height: normal;
 }
 
+
+
+.btn.active,
 .btn.btn-primary:focus,
 .btn.btn-secondary:focus,
 .btn-primary:hover,
@@ -549,18 +588,18 @@ input {
     border: none;
     box-shadow: none !important;
 
-    background-color: var(--clr-secondary);
+    background-color: var(--clr-secondary) !important;
     color: var(--clr-primary);
 }
 
 .btn-secondary:hover {
-    background-color: var(--clr-primary);
+    background-color: var(--clr-primary) !important;
     outline: 1px solid var(--clr-primary);
     color: var(--clr-secondary) !important;
 }
 
 .btn-primary {
-    background-color: var(--clr-primary);
+    background-color: var(--clr-primary)!important;
     color: var(--clr-secondary);
     outline: 1px solid #000;
     border: none !important;
@@ -684,6 +723,12 @@ input {
 /**==== FEATURED PRODUCT START ====*/
 .product-card {
     margin-bottom: 40px;
+}
+
+.product-card img {
+    min-height: 300px;
+    max-width: 100%;
+    aspect-ratio: 1/1;
 }
 
 /**==== FEATURED PRODUCT END ====*/
@@ -824,6 +869,33 @@ main#main {
 .sidebar-list button.active {
     background: #242424;
     color: #fff;
+}
+
+input[type='file'] {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.all-product-item {
+    border-radius: 10px;
+    padding: 10px 0;
+}
+
+.all-product-item:hover {
+    background: #F9F7F7;
+}
+body.dashboard-body {
+    overflow: hidden;
+}
+
+strong {
+    font-weight: 700 !important;
+}
+
+#wrapper {
+    min-height: 100%;
 }
 
 /**==== ADMIN PANEL BASICS END ====*/

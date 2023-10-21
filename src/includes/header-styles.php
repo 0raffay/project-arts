@@ -58,3 +58,6 @@ $og__filePath =  "/assets/images/og.png";
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/responsive.css">
 <!--==== LOCAL FILE END ====-->
+
+<?php include 'config.php'; ?>
+<?php include 'functions.php'; ?>
