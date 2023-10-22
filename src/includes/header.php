@@ -15,7 +15,7 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'"
                 </div>
                 <ul class="header--buttons list-unstyled d-md-flex gap-10">
                     <li><a class="fs-20" href=""><i class="ri-question-line"></i></a></li>
-                    <li><a class="fs-20" href=""><i class="ri-user-3-line"></i></a></li>
+                    <li><a class="fs-20" href="login.php"><i class="ri-user-3-line"></i></a></li>
                     <li><a class="fs-20" href=""><i class="ri-heart-line"></i></a></li>
                     <li><a class="fs-20" href=""><i class="ri-shopping-cart-line"></i></a></li>
                 </ul>

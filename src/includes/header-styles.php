@@ -1,5 +1,5 @@
 <!--==== FAVICON START ====-->
-<link rel="icon" type="image/png" href="assets/images/favicon/favicon.png">
+<link rel="icon" type="image/png" href="assets/images/logos/favicon/favicon-32x32.png">
 <!--==== FAVICON END ====-->
 
 
@@ -59,5 +59,3 @@ $og__filePath =  "/assets/images/og.png";
 <link rel="stylesheet" href="assets/css/responsive.css">
 <!--==== LOCAL FILE END ====-->
 
-<?php include 'config.php'; ?>
-<?php include 'functions.php'; ?>

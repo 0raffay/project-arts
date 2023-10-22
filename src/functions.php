@@ -1,4 +1,5 @@
 <?php
+session_start();
 class Product
 {
     public static $sortedInstances = array();
@@ -33,8 +34,7 @@ class Product
     }
 
     // UPLOAD PRODUCTS:
-    public static function uploadProduct($connection)
-    {
+    public static function uploadProduct($connection)  {
         if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
             //Product Price:
@@ -125,10 +125,6 @@ class Product
                 // For example, you can display the error message on the current page.
                 echo "Error: $em";
             }
-
-
-
-
         }
     }
 
@@ -173,8 +169,64 @@ class Product
             exit;
         }
     }
-
- 
 }
 // CREATING INITIAL PRODUCT BASE:
 Product::createInstancesOfProduct($connection);
+
+
+class Customer
+{
+    public static $allInstances = array();
+    public static $currentCustomer;
+    public $customerName;
+    public $customerEmail;
+    public $customerPassword;
+    public $customerAddress;
+    public $customerPhone;
+    public $customerCart = array();
+    public $customerWishList = array();
+    public $customerLoginStatus;
+
+    function __construct($connection, $name, $email, $password, $address, $phone)
+    {
+        $this->customerName = $name;
+        $this->customerEmail = $email;
+        $this->customerPassword = $password;
+        $this->customerAddress = $address;
+        $this->customerPhone = $phone;
+
+
+        $query = "INSERT INTO `customer` (`Customer Name`, `Customer Email`, `Customer Password`, `Customer Address`, `Customer Phone`, `Customer Cart`, `Customer Wishlist`, `Login Status`) VALUES ('$name', '$email', '$password', '$address', '$phone', '', '', '')";
+
+        $result = mysqli_query($connection, $query);
+
+        if ($result) {
+            $rowQuery = "SELECT * FROM `customer` WHERE `Customer Email` = '$email' AND `Customer Password` = '$password'";
+            $forRowResult = mysqli_query($connection, $rowQuery);
+            if($forRowResult) {
+                while($row = $forRowResult->fetch_assoc()) {
+                    $_SESSION["currentCustomer"] = $row;
+                }
+            }
+            header("location: customer-profile.php");
+            exit();
+        } else {
+            header("Location: " . $_SERVER["PHP_SELF"]);
+            exit();
+        }
+    }
+
+    public static function customerLogin($connection, $email, $password)
+    {
+        $query = "SELECT * FROM `customer` WHERE `Customer Email` = '$email' AND `Customer Password` = '$password'";
+        $result = mysqli_query($connection, $query);
+
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $_SESSION["currentCustomer"] = $row;
+            return true;
+        } else {
+            return false; 
+        }
+    }
+}

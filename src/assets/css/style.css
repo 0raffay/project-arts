@@ -30,6 +30,7 @@ a {
 html,
 body {
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -48,12 +49,12 @@ input[type='number']::-webkit-inner-spin-button {
 
 /* scoll bar */
 ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 5px;
+    height: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--clr-primary);
+    background: var(--clr-secondary-400);
     border-radius: 4px;
 }
 
@@ -711,7 +712,7 @@ input {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.22);
 }
 
 .bannerText * {
@@ -899,3 +900,39 @@ strong {
 }
 
 /**==== ADMIN PANEL BASICS END ====*/
+
+
+#loginMain {
+    min-height: calc(100vh - calc(321.44px));
+
+    display: flex;
+    align-items: center;
+}
+
+.tabbingButtons button {
+    padding: 10px 13px;
+    border: 1px solid #e7e7e7;
+    transition: all 100ms ease;
+}
+
+
+.tabbingButtons button:not(.disabled).active,
+.tabbingButtons button:not(.disabled):hover {
+    background: var(--clr-secondary);
+    color: #FFF;
+}
+
+.tabbingButtons {
+    display: flex;
+    gap: 1px;
+}
+
+button.disabled {
+    color: #fff;
+    background: rgb(199, 198, 198);
+}
+/* 
+.customer-details input[type="text"] {
+    text-transform: capitalize;
+    color: #555;
+} */
