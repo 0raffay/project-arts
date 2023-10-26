@@ -3,15 +3,11 @@ include 'config.php';
 include 'functions.php';
 
 if (isset($_POST["logout"])) {
-    $_SESSION["currentCustomer"] = null;
+    setcookie("currentCustomer", "", time() - 3600, "/");
     header("location: index.php");
 }
 
 
-if (isset($_SESSION["currentCustomer"])) {
-    Customer::$currentCustomer = $_SESSION["currentCustomer"];
-    $currentCustomer = Customer::$currentCustomer;
-}
 $message = ""; // Initialize the message variable
 
 if (isset($_POST["updateCustomerDetails"])) {
@@ -37,7 +33,7 @@ if (isset($_POST["updateCustomerDetails"])) {
             $queryResult = mysqli_query($connection, $query);
 
             $row = $queryResult->fetch_assoc();
-            $_SESSION["currentCustomer"] = $row;
+            $currentCustomer = $row;
 
             header("location: " . $_SERVER["PHP_SELF"]);
             $message = "Changes were saved"; // Corrected the spelling of "message"

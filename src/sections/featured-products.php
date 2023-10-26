@@ -9,17 +9,17 @@
             foreach (Product::$instances as $products) {
             ?>
                 <div class="col-lg-3 col-md-3 col-sm-12">
-                    <div class="product-card">
+                    <div class="product-card" onclick="window.location.href='single-product.php?id=<?php echo $products->SKU; ?>';">
                         <?php $url = "https://google.com" ?>
                         <div class="img__wrap">
-                            <a href=""><img src="assets/images/product-images/<?php echo $products->images;?>"></a>
+                            <img src="assets/images/product-images/<?php echo $products->images; ?>"></a>
                         </div>
                         <div class="product-card-text py-3">
-                            <a href="<?php echo $url; ?>">
-                                <h6 class="product-brand fw-300 fs-14 fc-secondary-400"><?php echo $products->brand;?></h6>
-                                <h4 class="product-title fw-400 fs-20 py-1 fc-secondary ff-secondary"><?php echo $products->name?></h4>
-                                <h5 class="product-price fw-300 fs-18">$<?php echo $products->price?></h5>
-                            </a>
+
+                            <h6 class="product-brand fw-300 fs-14 fc-secondary-400"><?php echo $products->brand; ?></h6>
+                            <h4 class="product-title fw-400 fs-20 py-1 fc-secondary ff-secondary"><?php echo $products->name ?></h4>
+                            <h5 class="product-price fw-300 fs-18"><?php echo $currencySymbol . $products->price ?></h5>
+
                         </div>
                         <div class="product-card-footer">
                             <div class="d-flex align-items-center justify-content-between pr-1">

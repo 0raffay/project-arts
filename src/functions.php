@@ -1,7 +1,6 @@
 <?php
 session_start();
-class Product
-{
+class Product {
     public static $sortedInstances = array();
     public static $instances = array();
     public $price;
@@ -176,8 +175,7 @@ Product::createInstancesOfProduct($connection);
 
 class Customer
 {
-    public static $allInstances = array();
-    public static $currentCustomer;
+    public static $instances = array();
     public $customerName;
     public $customerEmail;
     public $customerPassword;
@@ -223,10 +221,35 @@ class Customer
 
         if ($result && $result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            $_SESSION["currentCustomer"] = $row;
+            print_r($row);
+            setcookie('currentCustomer',json_encode($row), time() + (86400 * 30), "/");
             return true;
         } else {
             return false; 
         }
     }
+
+
+    public static function getAllCustomerData ($connection) {
+        $query = "SELECT * FROM `customer`";
+        $result = mysqli_query($connection, $query);
+
+        if($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                Customer::$instances[] = $row;
+            }
+        } else {
+            return "There Are No Customer Accounts.";
+        }
+
+    }
 }
+
+global $currentCustomer;
+if(isset($_COOKIE["currentCustomer"])) {
+    $currentCustomer = json_decode($_COOKIE["currentCustomer"], true);
+} else {
+    $currentCustomer = null;
+}
+
+

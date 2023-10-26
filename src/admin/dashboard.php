@@ -1,5 +1,4 @@
 <?php
-session_start();
 include("../config.php");
 include('../functions.php');
 
@@ -15,6 +14,7 @@ if (isset($_POST["uploadProduct"])) {
     Product::uploadProduct($connection);
 }
 
+$customerData = Customer::getAllCustomerData($connection);
 ?>
 
 
@@ -44,7 +44,7 @@ if (isset($_POST["uploadProduct"])) {
 
     <main id="wrapper">
 
-    <div class="loader center"></div>
+        <div class="loader center"></div>
         <div class="row">
             <!-- SIDEBAR START -->
             <div class="col-sm-2 col-lg-2 col-md-2 no-padding">
@@ -54,8 +54,9 @@ if (isset($_POST["uploadProduct"])) {
 
             <!-- SECTIONS START -->
             <div class="col-sm-10 col-lg-10 col-md-10 no-padding dashboard-wrapper">
-                <div class="pb-4 px-5">
+                <div class="pb-4 px-5 showAdminSections">
                     <?php include('sections/products.php'); ?>
+                    <?php include('sections/customer.php'); ?>
                 </div>
             </div>
             <!-- SECTIONS END -->

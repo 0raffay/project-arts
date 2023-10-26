@@ -136,7 +136,6 @@ function handleEditDetail() {
 handleEditDetail();
 
 function toggler(options) {
-    console.log("workign")
     const button = $(options.button);
     const action = $(options.actionContainer);
     const classToAdd = options.actionClass || "active";
@@ -167,3 +166,21 @@ toggler({
     preventDefault: true,
     removeAction: { eventTrigger: window.body, event: "click" },
 });
+
+
+function adminSectionsHideShow() {
+    let divToAppenedIn = $('.showAdminSections');
+    let buttons = $('[data-show');
+    
+    buttons.click(function() {
+        buttons.removeClass("active");
+        $(this).addClass('active');
+
+        let whatToShow = $(this).attr("data-show");
+        let whatToShowActually =  divToAppenedIn.find(whatToShow);
+        let whatToHide = divToAppenedIn.children('div');
+        showLoader('.loader', whatToHide, whatToShowActually, 500)
+    })
+}
+
+adminSectionsHideShow();

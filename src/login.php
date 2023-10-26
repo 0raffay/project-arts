@@ -4,7 +4,7 @@ include "functions.php";
 
 $error = "";
 
-if (isset($_SESSION["currentCustomer"])) {
+if (isset($currentCustomer)) {
     header("location: customer-profile.php");
 } else {
     if (isset($_POST["customerLogin"])) {

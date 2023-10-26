@@ -1,5 +1,5 @@
 
-<div class="position-relative">
+<div class="position-relative product-section">
     <div class="products-section">
         <div class="text-center">
             <h4 class="fs-30 py-4 border-bottom-hr mb-0 fc-secondary-300 fw-300">Products</h4>

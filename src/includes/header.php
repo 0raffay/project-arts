@@ -45,13 +45,17 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
                     <li><a href="">Sale</a></li>
                     <li><a href="">Catalogue</a></li>
                 </ul>
-                <div class="search--bar fw-300 fs-16">
-                    <span class="mr-2">Search</span><i class="fa-solid fa-magnifying-glass"></i>
+                <div class="search--bar d-flex align-items-center border-bottom-hr py-1 fw-300 fs-16">
+                    <input type="text" class="mr-3 d-block">
+                    <button class="d-flex gap-5 align-items-center">Search<i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </div>
         </div>
     </div>
 </header>
+
+
+
 
 
 <div class="modal-wrapper cart">

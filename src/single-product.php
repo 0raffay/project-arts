@@ -1,6 +1,17 @@
-<?php //include 'config.php'; 
-?>
-<?php // include 'functions.php'; 
+<?php
+include 'config.php';
+include 'functions.php';
+
+$products = Product::$instances;
+$productId = $_GET["id"];
+$thisProduct;
+
+foreach($products as $product) {
+    if($product->SKU == $productId) {
+        $thisProduct = $product;
+    } 
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +30,7 @@
     <!--==== HEADER STYLES START ====-->
     <?php include('includes/header-styles.php'); ?>
     <!--==== HEADER STYLES END ====-->
-    <title><?php echo "PRODUCT NAME"; ?></title>
+    <title><?php echo $thisProduct->name . " | " . $site__name ;?></title>
 </head>
 
 <body>
@@ -33,7 +44,7 @@
             <div class="row">
                 <div class="col-6 ">
                     <div class="product-gallery">
-                        <img src="assets/images/products/dummy.webp">
+                        <img src="assets/images/product-images/<?php echo  $thisProduct->images;?>">
                     </div>
                 </div>
                 <div class="col-6">
@@ -42,10 +53,11 @@
                             In Stock
                         </div>
                         <h6 class="product-title fs-24 mb-10 fw-300 fc-secondary">
-                            Forest Green Pullover Sweatshirt
+                            <!-- Forest Green Pullover Sweatshirt -->
+                            <?php echo $thisProduct->name;?>
                         </h6>
-                        <p class="product-price fs-24 mb-10 fw-300 fc-secondary">$32.00</p>
-                        <p class="small-product-stock-label fs-13 fw-300 mb-5 fc-secondary pb-2 border-bottom-hr">Hurry Only 10 Left In Stock!</p>
+                        <p class="product-price fs-24 mb-10 fw-300 fc-secondary"><?php echo $currencySymbol . $thisProduct->price;?></p>
+                        <p class="small-product-stock-label fs-13 fw-300 mb-5 fc-secondary pb-2 border-bottom-hr">Hurry Only <?php echo $thisProduct->stock;?> Left In Stock!</p>
                         <div class="product-policy py-3 pb-4">
                             <a href="policy" class="addHover fc-secondary-400 mr-4"><i class="fa-solid fa-cart-shopping mr-2"></i>Delivery And Return</a>
                             <a href="message" class="addHover fc-secondary-400"><i class="fa-solid fa-message mr-2"></i> Message</a>
@@ -56,7 +68,7 @@
                                 <div class="col-12 mb-30">
                                     <div class="form__wrap">
                                         <label for="notes">Notes</label>
-                                        <textarea class="px-3 py-2" name="notes"></textarea>
+                                        <textarea class="px-3 py-2 ouline-none" name="notes"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -78,7 +90,7 @@
                         <div class="product-description pt-3 pb-4">
                             <h6 class="product-description-title fw-300 fs-24 fc-secondary mb-2">Product Description</h6>
                             <div class="product-description-content fw-300 fc-secondary-400">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam recusandae nisi tempora accusamus consequatur porro veritatis doloribus quis incidunt alias.
+                      <?php echo $thisProduct->description;?>
                             </div>
                         </div>
                     </div>

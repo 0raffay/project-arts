@@ -5,6 +5,8 @@
 
 <!--==== OFINFO START ====-->
 <?php
+$currencySymbol = "$";
+
 $site__email = 'info@arts.com';
 $site__phone = '+92 3201 3212';
 
