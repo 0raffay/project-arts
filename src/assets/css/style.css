@@ -224,22 +224,39 @@ input {
     padding-block: 0;
 }
 
+/* 
+.form__wrap textarea {
+    width: 100%;
+    display: block;
+} */
+
 *:has(> .loader.center) {
     position: relative;
 }
+
 /* Safari */
 @-webkit-keyframes loader {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 @keyframes loader {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 
-.loader{
+.loader {
     display: none;
     --size: 50px;
     height: var(--size);
@@ -600,7 +617,7 @@ input {
 }
 
 .btn-primary {
-    background-color: var(--clr-primary)!important;
+    background-color: var(--clr-primary) !important;
     color: var(--clr-secondary);
     outline: 1px solid #000;
     border: none !important;
@@ -800,6 +817,7 @@ input {
 footer {
     padding: var(--section-padding);
 }
+
 footer ul li a {
     font-size: var(--fs-13);
     color: var(--clr-primary-400);
@@ -809,6 +827,7 @@ footer ul li a {
 footer li {
     list-style-type: none;
 }
+
 /**==== FOOTER END ====*/
 
 /**==== ADMIN PANEL BASICS START ====*/
@@ -887,6 +906,7 @@ input[type='file'] {
 .all-product-item:hover {
     background: #F9F7F7;
 }
+
 body.dashboard-body {
     overflow: hidden;
 }
@@ -931,8 +951,41 @@ button.disabled {
     color: #fff;
     background: rgb(199, 198, 198);
 }
+
 /* 
 .customer-details input[type="text"] {
     text-transform: capitalize;
     color: #555;
 } */
+
+.product-stock-label {
+    width: max-content;
+
+    padding: 3px 13px;
+    background: #25A799;
+}
+
+.product-gallery {
+    position: sticky;
+    top: 0;
+}
+
+/* MODAL CSS */
+.modal-wrapper {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+
+    background-color: #FFF;
+    transform: translateX(100%);
+    transition: transform 250ms ease;
+}
+
+.modal-wrapper.active {
+    transform: translateX(0);
+}
+
+.modal-wrapper.cart {
+    width: 400px;
+}

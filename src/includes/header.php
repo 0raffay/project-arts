@@ -1,11 +1,11 @@
 <?php
-$promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'"
+$promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
 ?>
 
 
 <header>
     <div class="top--header bg-secondary py-2">
-        <h6 class="fw-300 mb-0 fs-16 fc-primary text-center"><?php echo $promotionTitle;?></h6>
+        <h6 class="fw-300 mb-0 fs-16 fc-primary text-center"><?php echo $promotionTitle; ?></h6>
     </div>
     <div class="middle--header border-bottom-hr d-flex justify-content-between">
         <div class="container">
@@ -17,7 +17,7 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'"
                     <li><a class="fs-20" href=""><i class="ri-question-line"></i></a></li>
                     <li><a class="fs-20" href="login.php"><i class="ri-user-3-line"></i></a></li>
                     <li><a class="fs-20" href=""><i class="ri-heart-line"></i></a></li>
-                    <li><a class="fs-20" href=""><i class="ri-shopping-cart-line"></i></a></li>
+                    <li><a class="fs-20" href="javascript:;" data-cart-button><i class="ri-shopping-cart-line"></i></a></li>
                 </ul>
             </div>
         </div>
@@ -51,5 +51,21 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'"
             </div>
         </div>
     </div>
-
 </header>
+
+
+<div class="modal-wrapper cart">
+    <div class="cart-modal">
+        <div class="py-4 px-4">
+            <div class="position-relative d-flex px-2 mb-20 justify-content-between align-items-center">
+                <p class="fs-24 fw-300 text-upper">My Bag (0)</p>
+                <button data-cart-button class="btn btn-secondary px-2 py-2">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="py-3">
+            <p class="fs-14 fw-300 text-upper">Your Shopping Cart is Empty.</p>
+            </div>
+        </div>
+    </div>
+</div>
