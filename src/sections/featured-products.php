@@ -9,7 +9,7 @@
             foreach (Product::$instances as $products) {
                 $productIds = $products->SKU;
                 checkCurrentProduct($productIds);
-                print_r($currentProduct);
+                // print_r($currentProduct);
             ?>
                 <div class="col-lg-3 col-md-3 col-sm-12">
                     <div class="product-card">

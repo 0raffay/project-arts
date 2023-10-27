@@ -244,17 +244,17 @@ class Customer
     }
 
 
-    public static function updateCart($connection, $customerId, $currentCustomer)
-    {
-        $query = "SELECT * FROM `cart` WHERE `Customer Id` = '$customerId'";
-        $result = mysqli_query($connection, $query);
-        if ($result) {
-            while ($row = $result->fetch_assoc()) {
-                $products =   json_decode($row["Products"], true);
-                $currentCustomer["Customer Products"] = $products; 
-            }
-        }
-    }
+    // public static function updateCart($connection, $customerId, $currentCustomer)
+    // {
+    //     $query = "SELECT * FROM `cart` WHERE `Customer Id` = '$customerId'";
+    //     $result = mysqli_query($connection, $query);
+    //     if ($result) {
+    //         while ($row = $result->fetch_assoc()) {
+    //             $products =   json_decode($row["Products"], true);
+    //             $currentCustomer["Customer Products"] = $products; 
+    //         }
+    //     }
+    // }
 
 
     public static function getAllCustomerData($connection)
@@ -303,7 +303,7 @@ function checkCurrentProduct($productId)
     foreach ($products as $product) {
         if ($product->SKU == $productId) {
             $currentProduct = $product;
-            return;
+            return $currentProduct;
         }
     }
 }
