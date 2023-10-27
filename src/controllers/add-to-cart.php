@@ -22,18 +22,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 }
             }
 
-            $allProducts = array();
+            $productsInCart = array();
             $previousProducts = json_decode($result->fetch_assoc()["Products"], true);
 
             if ($previousProducts && isset($previousProducts["products"])) {
                 // If cart is not empty, add the product to the existing products array.
-                $allProducts = $previousProducts;
-                $allProducts["products"][] = $thisProduct;
+                $productsInCart = $previousProducts;
+                $productsInCart["products"][] = $thisProduct;
             } else {
                 // If cart is empty or has no 'products' key, create a new cart.
-                $allProducts = ["products" => [$thisProduct]];
+                $productsInCart = ["products" => [$thisProduct]];
             }
-            insertIntoCartTable($connection, $customerId, json_encode($allProducts));
+            insertIntoCartTable($connection, $customerId, json_encode($productsInCart));
         } else {
             echo "<script>console.error('Cart Is Not Active For Some Reason: Check add-to-cart.php :16');</script>";
         }

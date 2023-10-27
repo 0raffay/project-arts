@@ -68,7 +68,41 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
                 </button>
             </div>
             <div class="py-3">
-                <p class="fs-14 fw-300 text-upper">Your Shopping Cart is Empty.</p>
+   <?php// print_r($productsInCart);?>
+
+                <?php
+                $jsonData = json_decode($productsInCart);
+                print_r($productsInCart);
+                 if ($jsonData && isset($jsonData->products)) {
+                    $products = $jsonData->products;
+
+                    // Loop through the products
+                    foreach ($products as $product) {
+                        $userQuantity = $product->userQuantity;
+                        $price = $product->price;
+                        $name = $product->name;
+                        $SKU = $product->SKU;
+                        $category = $product->category;
+                        $stock = $product->stock;
+                        $images = $product->images;
+                        $keywords = $product->keywords;
+                        $description = $product->description;
+                        $warranty = $product->warranty;
+                        $brand = $product->brand;
+                        $errorStatements = $product->errorStatements;
+
+                        // Now you can use these variables as needed
+
+                    } ?>
+                    <div class="cart-products">
+                        <div class="img__wrap">
+                            <img height="80px" src="assets/images/product-images/<?php echo $images ?>" alt="">
+                        </div>
+                    </div>
+                <?php } else { ?>
+                    <p class="fs-14 fw-300 text-upper">Your Shopping Cart is Empty.</p>
+                <?php } ?>
+
             </div>
         </div>
     </div>

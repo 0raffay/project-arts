@@ -4,7 +4,7 @@ session_start();
 //GLOBALS:
 global $currentCustomer;
 global $currentProduct;
-
+global $productsInCart;
 
 //CLASSES:
 class Product
@@ -217,7 +217,7 @@ class Customer
             if ($forRowResult) {
                 while ($row = $forRowResult->fetch_assoc()) {
                     setcookie('currentCustomer', json_encode($row), time() + (86400 * 30), "/");
-                    Customer::initCart($connection, $row);
+                    Customer::creatingCustomerCart($connection, $row);
                 }
             }
             header("location: customer-profile.php");
@@ -236,26 +236,12 @@ class Customer
         if ($result && $result->num_rows > 0) {
             $row = $result->fetch_assoc();
             setcookie('currentCustomer', json_encode($row), time() + (86400 * 30), "/");
-            Customer::initCart($connection, $row);
+            Customer::creatingCustomerCart($connection, $row);
             return true;
         } else {
             return false;
         }
     }
-
-
-    // public static function updateCart($connection, $customerId, $currentCustomer)
-    // {
-    //     $query = "SELECT * FROM `cart` WHERE `Customer Id` = '$customerId'";
-    //     $result = mysqli_query($connection, $query);
-    //     if ($result) {
-    //         while ($row = $result->fetch_assoc()) {
-    //             $products =   json_decode($row["Products"], true);
-    //             $currentCustomer["Customer Products"] = $products; 
-    //         }
-    //     }
-    // }
-
 
     public static function getAllCustomerData($connection)
     {
@@ -271,7 +257,7 @@ class Customer
         }
     }
 
-    public static function initCart($connection, $currentCustomer)
+    public static function creatingCustomerCart($connection, $currentCustomer)
     {
         $customerId = $currentCustomer["Customer Id"];
         $query = "SELECT * FROM `cart` WHERE `Customer Id` = '$customerId' ";
@@ -306,4 +292,13 @@ function checkCurrentProduct($productId)
             return $currentProduct;
         }
     }
+}
+
+
+$customerId = $currentCustomer['Customer Id'];
+$query = "SELECT * FROM `cart` WHERE `Customer Id` = '$customerId'";
+$result = mysqli_query($connection, $query);
+
+if($result) {
+    $productsInCart = $result->fetch_assoc()["Products"];
 }
