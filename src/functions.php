@@ -1,8 +1,18 @@
 <?php
 session_start();
-class Product {
+
+//GLOBALS:
+global $currentCustomer;
+global $currentProduct;
+
+
+//CLASSES:
+class Product
+{
+    public static $Id;
     public static $sortedInstances = array();
     public static $instances = array();
+    public $userQuantity;
     public $price;
     public $name;
     public $SKU;
@@ -33,7 +43,8 @@ class Product {
     }
 
     // UPLOAD PRODUCTS:
-    public static function uploadProduct($connection)  {
+    public static function uploadProduct($connection)
+    {
         if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
             //Product Price:
@@ -138,6 +149,7 @@ class Product {
         if ($showQueryResult->num_rows > 0) {
 
             while ($eachRow = $showQueryResult->fetch_assoc()) {
+                Product::$Id = $eachRow["Product Id"];
                 $price = $eachRow["Product Price"];
                 $name = $eachRow['Product Name'];
                 $stock = $eachRow['Product Stock'];
@@ -175,6 +187,7 @@ Product::createInstancesOfProduct($connection);
 
 class Customer
 {
+    public $customerCartProducts;
     public static $instances = array();
     public $customerName;
     public $customerEmail;
@@ -194,16 +207,17 @@ class Customer
         $this->customerPhone = $phone;
 
 
-        $query = "INSERT INTO `customer` (`Customer Name`, `Customer Email`, `Customer Password`, `Customer Address`, `Customer Phone`, `Customer Cart`, `Customer Wishlist`, `Login Status`) VALUES ('$name', '$email', '$password', '$address', '$phone', '', '', '')";
+        $query = "INSERT INTO `customer` (`Customer Name`, `Customer Email`, `Customer Password`, `Customer Address`, `Customer Phone`, `Customer Wishlist`) VALUES ('$name', '$email', '$password', '$address', '$phone', '')";
 
         $result = mysqli_query($connection, $query);
 
         if ($result) {
             $rowQuery = "SELECT * FROM `customer` WHERE `Customer Email` = '$email' AND `Customer Password` = '$password'";
             $forRowResult = mysqli_query($connection, $rowQuery);
-            if($forRowResult) {
-                while($row = $forRowResult->fetch_assoc()) {
-                    $_SESSION["currentCustomer"] = $row;
+            if ($forRowResult) {
+                while ($row = $forRowResult->fetch_assoc()) {
+                    setcookie('currentCustomer', json_encode($row), time() + (86400 * 30), "/");
+                    Customer::initCart($connection, $row);
                 }
             }
             header("location: customer-profile.php");
@@ -221,35 +235,75 @@ class Customer
 
         if ($result && $result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            print_r($row);
-            setcookie('currentCustomer',json_encode($row), time() + (86400 * 30), "/");
+            setcookie('currentCustomer', json_encode($row), time() + (86400 * 30), "/");
+            Customer::initCart($connection, $row);
             return true;
         } else {
-            return false; 
+            return false;
         }
     }
 
 
-    public static function getAllCustomerData ($connection) {
+    public static function updateCart($connection, $customerId, $currentCustomer)
+    {
+        $query = "SELECT * FROM `cart` WHERE `Customer Id` = '$customerId'";
+        $result = mysqli_query($connection, $query);
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $products =   json_decode($row["Products"], true);
+                $currentCustomer["Customer Products"] = $products; 
+            }
+        }
+    }
+
+
+    public static function getAllCustomerData($connection)
+    {
         $query = "SELECT * FROM `customer`";
         $result = mysqli_query($connection, $query);
 
-        if($result->num_rows > 0) {
+        if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 Customer::$instances[] = $row;
             }
         } else {
             return "There Are No Customer Accounts.";
         }
+    }
 
+    public static function initCart($connection, $currentCustomer)
+    {
+        $customerId = $currentCustomer["Customer Id"];
+        $query = "SELECT * FROM `cart` WHERE `Customer Id` = '$customerId' ";
+        $result = mysqli_query($connection, $query);
+        if ($result && mysqli_num_rows($result) > 0) {
+            echo "Cart Already Exists";
+        } else {
+            $insertQuery = "INSERT INTO `cart` (`Cart Id`, `Customer Id`, `Products`) VALUES (NULL, '$customerId', '')";
+            $insertResult = mysqli_query($connection, $insertQuery);
+            if ($insertResult) {
+                echo "Cart Created";
+            } else {
+                echo "Cart Not Created";
+            }
+        }
     }
 }
 
-global $currentCustomer;
-if(isset($_COOKIE["currentCustomer"])) {
+if (isset($_COOKIE["currentCustomer"])) {
     $currentCustomer = json_decode($_COOKIE["currentCustomer"], true);
 } else {
     $currentCustomer = null;
 }
 
-
+function checkCurrentProduct($productId)
+{
+    global $currentProduct;
+    $products = Product::$instances;
+    foreach ($products as $product) {
+        if ($product->SKU == $productId) {
+            $currentProduct = $product;
+            return;
+        }
+    }
+}

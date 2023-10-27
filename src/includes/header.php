@@ -68,7 +68,7 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
                 </button>
             </div>
             <div class="py-3">
-            <p class="fs-14 fw-300 text-upper">Your Shopping Cart is Empty.</p>
+                <p class="fs-14 fw-300 text-upper">Your Shopping Cart is Empty.</p>
             </div>
         </div>
     </div>

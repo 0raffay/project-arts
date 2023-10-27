@@ -4,13 +4,8 @@ include 'functions.php';
 
 $products = Product::$instances;
 $productId = $_GET["id"];
-$thisProduct;
+checkCurrentProduct($productId);
 
-foreach($products as $product) {
-    if($product->SKU == $productId) {
-        $thisProduct = $product;
-    } 
-}
 
 ?>
 
@@ -30,7 +25,7 @@ foreach($products as $product) {
     <!--==== HEADER STYLES START ====-->
     <?php include('includes/header-styles.php'); ?>
     <!--==== HEADER STYLES END ====-->
-    <title><?php echo $thisProduct->name . " | " . $site__name ;?></title>
+    <title><?php echo $currentProduct->name . " | " . $site__name; ?></title>
 </head>
 
 <body>
@@ -44,7 +39,7 @@ foreach($products as $product) {
             <div class="row">
                 <div class="col-6 ">
                     <div class="product-gallery">
-                        <img src="assets/images/product-images/<?php echo  $thisProduct->images;?>">
+                        <img src="assets/images/product-images/<?php echo  $currentProduct->images; ?>">
                     </div>
                 </div>
                 <div class="col-6">
@@ -54,10 +49,10 @@ foreach($products as $product) {
                         </div>
                         <h6 class="product-title fs-24 mb-10 fw-300 fc-secondary">
                             <!-- Forest Green Pullover Sweatshirt -->
-                            <?php echo $thisProduct->name;?>
+                            <?php echo $currentProduct->name; ?>
                         </h6>
-                        <p class="product-price fs-24 mb-10 fw-300 fc-secondary"><?php echo $currencySymbol . $thisProduct->price;?></p>
-                        <p class="small-product-stock-label fs-13 fw-300 mb-5 fc-secondary pb-2 border-bottom-hr">Hurry Only <?php echo $thisProduct->stock;?> Left In Stock!</p>
+                        <p class="product-price fs-24 mb-10 fw-300 fc-secondary"><?php echo $currencySymbol . $currentProduct->price; ?></p>
+                        <p class="small-product-stock-label fs-13 fw-300 mb-5 fc-secondary pb-2 border-bottom-hr">Hurry Only <?php echo $currentProduct->stock; ?> Left In Stock!</p>
                         <div class="product-policy py-3 pb-4">
                             <a href="policy" class="addHover fc-secondary-400 mr-4"><i class="fa-solid fa-cart-shopping mr-2"></i>Delivery And Return</a>
                             <a href="message" class="addHover fc-secondary-400"><i class="fa-solid fa-message mr-2"></i> Message</a>
@@ -79,7 +74,7 @@ foreach($products as $product) {
                                     </div>
                                 </div>
                                 <div class="col-10">
-                                    <button type="submit" class="btn btn-secondary btn-lg" data-add-to-cart>ADD TO CART</button>
+                                    <button type="submit" class="btn btn-secondary btn-lg" data-add-to-cart data-product-id="<?php echo $productId; ?>">ADD TO CART</button>
                                 </div>
                             </div>
                         </form>
@@ -90,7 +85,7 @@ foreach($products as $product) {
                         <div class="product-description pt-3 pb-4">
                             <h6 class="product-description-title fw-300 fs-24 fc-secondary mb-2">Product Description</h6>
                             <div class="product-description-content fw-300 fc-secondary-400">
-                      <?php echo $thisProduct->description;?>
+                                <?php echo $currentProduct->description; ?>
                             </div>
                         </div>
                     </div>

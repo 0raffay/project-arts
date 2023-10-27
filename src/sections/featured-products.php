@@ -7,11 +7,14 @@
 
             <?php
             foreach (Product::$instances as $products) {
+                $productIds = $products->SKU;
+                checkCurrentProduct($productIds);
+                print_r($currentProduct);
             ?>
                 <div class="col-lg-3 col-md-3 col-sm-12">
-                    <div class="product-card" onclick="window.location.href='single-product.php?id=<?php echo $products->SKU; ?>';">
+                    <div class="product-card">
                         <?php $url = "https://google.com" ?>
-                        <div class="img__wrap">
+                        <div class="img__wrap" onclick="window.location.href='single-product.php?id=<?php echo $products->SKU; ?>';">
                             <img src="assets/images/product-images/<?php echo $products->images; ?>"></a>
                         </div>
                         <div class="product-card-text py-3">
@@ -23,7 +26,7 @@
                         </div>
                         <div class="product-card-footer">
                             <div class="d-flex align-items-center justify-content-between pr-1">
-                                <a href="" class="btn btn-primary">Add To Cart</a>
+                                <button class="btn btn-primary" data-add-to-cart data-product-id="<?php echo $currentProduct->SKU;?>">Add To Cart</button>
                                 <button class="addToWishList"><span class="icon__wrap fs-20"><i class="ri-heart-line"></i></span></button>
                             </div>
                             <div class="product-stars">

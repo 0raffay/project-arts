@@ -2,6 +2,23 @@ $(document).ready(function () {
     sliders();
     addToWishList();
     dashboard();
+    toggler({
+        button: "[data-cart-button]",
+        actionContainer: ".cart",
+        actionClass: "active",
+        preventDefault: true,
+        removeAction: { eventTrigger: window.body, event: "click" },
+    });
+    handleEditDetail();
+    adminSectionsHideShow();
+    tabbing(".tabbingButtons button", ".tabbingPanels .tabbingPanel");
+
+    let addToCartButton = $("[data-add-to-cart");
+    addToCartButton.click(function (e) {
+        e.preventDefault();
+        let id = $(this).attr("data-product-id");
+        addToCart(id);
+    });
 });
 
 function sliders() {
@@ -77,8 +94,6 @@ function tabbing(
     });
 }
 
-tabbing(".tabbingButtons button", ".tabbingPanels .tabbingPanel");
-
 function handleEditDetail() {
     let editedInputValue;
     let editedInput;
@@ -133,24 +148,22 @@ function handleEditDetail() {
     });
 }
 
-handleEditDetail();
-
 function toggler(options) {
     const button = $(options.button);
     const action = $(options.actionContainer);
     const classToAdd = options.actionClass || "active";
-    
+
     if (options.removeAction) {
         let _eventTrigger = $(options.removeAction.eventTrigger);
         let event = options.removeAction.event;
-        
+
         _eventTrigger.on(event, function () {
             action.removeClass(classToAdd);
         });
     }
 
     button.click(function (e) {
-        console.log("workign")
+        console.log("workign");
         if (options.preventDefault) {
             e.preventDefault();
         }
@@ -159,28 +172,33 @@ function toggler(options) {
     });
 }
 
-toggler({
-    button: "[data-cart-button]",
-    actionContainer: ".cart",
-    actionClass: "active",
-    preventDefault: true,
-    removeAction: { eventTrigger: window.body, event: "click" },
-});
-
-
 function adminSectionsHideShow() {
-    let divToAppenedIn = $('.showAdminSections');
-    let buttons = $('[data-show');
-    
-    buttons.click(function() {
+    let divToAppenedIn = $(".showAdminSections");
+    let buttons = $("[data-show");
+
+    buttons.click(function () {
         buttons.removeClass("active");
-        $(this).addClass('active');
+        $(this).addClass("active");
 
         let whatToShow = $(this).attr("data-show");
-        let whatToShowActually =  divToAppenedIn.find(whatToShow);
-        let whatToHide = divToAppenedIn.children('div');
-        showLoader('.loader', whatToHide, whatToShowActually, 500)
-    })
+        let whatToShowActually = divToAppenedIn.find(whatToShow);
+        let whatToHide = divToAppenedIn.children("div");
+        showLoader(".loader", whatToHide, whatToShowActually, 500);
+    });
 }
 
-adminSectionsHideShow();
+function addToCart(_thisId) {
+    $.ajax({
+        url: "controllers/add-to-cart.php",
+        method: "POST",
+        data: { _thisId },
+        success: function (response) {
+            console.log("Success:", response);
+
+            $('.cart').addClass('active');
+        },
+        error: function (xhr, status, error) {
+            console.log("Error:", error);
+        },
+    });
+}
