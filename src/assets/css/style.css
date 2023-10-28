@@ -990,10 +990,11 @@ button.disabled {
 }
 
 .modal-wrapper.cart {
-    width: 400px;
+    max-width: 500px;
+    width: 100%;
 }
 
-.showAdminSections > *:not(.product-section) {
+.showAdminSections>*:not(.product-section) {
     display: none;
 }
 
@@ -1004,4 +1005,22 @@ button.disabled {
 
 .table-row.head .table-cell {
     font-weight: 700;
+}
+
+.cart-item-quantity {
+    background: #FFF;
+    border: 1px solid #000;
+    max-width: 26px;
+    text-align: center;
+}
+
+.cart-item  img {
+    width: 180px;
+
+    object-position: center;
+    object-fit: contain;
+}
+
+.remove-cart-item:hover {
+    text-decoration: underline;
 }

@@ -19,6 +19,20 @@ $(document).ready(function () {
         let id = $(this).attr("data-product-id");
         addToCart(id);
     });
+
+    let removeFromCartButton = $("[data-remove-from-cart]");
+
+    removeFromCartButton.click(function () {
+        let item = $(this).closest(".cart-item");
+        let id = $(this).attr("data-id");
+
+        removeFromCart(id, function () {
+            item.remove(); 
+            if($('.cart-item-container .cart-item').length == 0) {
+                window.location.href = window.location.href.replace("?openCart", " "); 
+            }
+        });
+    });
 });
 
 function sliders() {
@@ -194,8 +208,26 @@ function addToCart(_thisId) {
         data: { _thisId },
         success: function (response) {
             console.log("Success:", response);
+            window.location.href = window.location.href + "?cartOpen";
+        },
+        error: function (xhr, status, error) {
+            console.log("Error:", error);
+        },
+    });
+}
 
-            $('.cart').addClass('active');
+if (window.location.href.indexOf("?cartOpen") !== -1) {
+    $(".cart").addClass("active");
+}
+
+function removeFromCart(_thisId, action) {
+    $.ajax({
+        url: "controllers/remove-from-cart.php",
+        method: "POST",
+        data: { _thisId },
+        success: function (response) {
+            console.log("success", response);
+            action();
         },
         error: function (xhr, status, error) {
             console.log("Error:", error);

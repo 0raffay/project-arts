@@ -5,6 +5,7 @@ session_start();
 global $currentCustomer;
 global $currentProduct;
 global $productsInCart;
+global $productsInCartQuantity;
 
 //CLASSES:
 class Product
@@ -141,8 +142,6 @@ class Product
     // CREATE INSTANCES OF PRODUCTS IN CLASS ON PAGE LOAD
     public static function createInstancesOfProduct($connection)
     {
-
-
         $showSQL = "SELECT * FROM `products`";
         $showQueryResult = mysqli_query($connection, $showSQL);
 
@@ -187,7 +186,6 @@ Product::createInstancesOfProduct($connection);
 
 class Customer
 {
-    public $customerCartProducts;
     public static $instances = array();
     public $customerName;
     public $customerEmail;
@@ -295,10 +293,30 @@ function checkCurrentProduct($productId)
 }
 
 
-$customerId = $currentCustomer['Customer Id'];
-$query = "SELECT * FROM `cart` WHERE `Customer Id` = '$customerId'";
-$result = mysqli_query($connection, $query);
+function fetchCartProducts($connection, $currentCustomer)
+{
+    global $productsInCart;
+    global $productsInCartQuantity;
 
-if($result) {
-    $productsInCart = $result->fetch_assoc()["Products"];
+    $customerId = $currentCustomer['Customer Id'];
+    $query = "SELECT * FROM `cart` WHERE `Customer Id` = '$customerId'";
+    $result = mysqli_query($connection, $query);
+
+    if ($result) {
+        $data = $result->fetch_assoc();
+
+        $productsInCart = explode(",",  $data["Products"]);
+        $productsInCartQuantity = explode(",",  $data["Product Quantity"]); 
+    }
 }
+
+fetchCartProducts($connection, $currentCustomer);
+
+
+// $customerId = $currentCustomer['Customer Id'];
+// $query = "SELECT * FROM `cart` WHERE `Customer Id` = '$customerId'";
+// $result = mysqli_query($connection, $query);
+
+// if($result) {
+//     $productsInCart = $result->fetch_assoc()["Products"];
+// }
