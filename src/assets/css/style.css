@@ -742,6 +742,10 @@ input {
 .product-card {
     margin-bottom: 40px;
     cursor: pointer;
+
+    max-width: 280px;
+    width: 100%;
+    margin-inline: auto;
 }
 
 .product-card img {
@@ -1012,6 +1016,8 @@ button.disabled {
     border: 1px solid #000;
     max-width: 26px;
     text-align: center;
+    font-size: 14px;
+    padding-block: 2px;
 }
 
 .cart-item  img {
@@ -1023,4 +1029,26 @@ button.disabled {
 
 .remove-cart-item:hover {
     text-decoration: underline;
+}
+
+
+/* CHECKOUT PAGE */
+
+#checkout-main {
+    min-height: 100vh;
+}
+
+.info-side,
+.payment-side{
+    height: 100%;
+}
+
+
+.info-side {
+    background: rgb(250,250,250);
+}
+
+.checkout-cart-item .img__wrap img {
+    width: 130px;
+    height: auto;
 }

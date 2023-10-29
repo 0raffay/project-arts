@@ -298,19 +298,28 @@ function fetchCartProducts($connection, $currentCustomer)
     global $productsInCart;
     global $productsInCartQuantity;
 
-    $customerId = $currentCustomer['Customer Id'];
-    $query = "SELECT * FROM `cart` WHERE `Customer Id` = '$customerId'";
-    $result = mysqli_query($connection, $query);
 
-    if ($result) {
-        $data = $result->fetch_assoc();
+    if ($currentCustomer == null) {
+       
+    } else {
+        $customerId = $currentCustomer['Customer Id'];
+        $query = "SELECT * FROM `cart` WHERE `Customer Id` = '$customerId'";
+        $result = mysqli_query($connection, $query);
 
-        $productsInCart = explode(",",  $data["Products"]);
-        $productsInCartQuantity = explode(",",  $data["Product Quantity"]); 
+        if ($result) {
+            $data = $result->fetch_assoc();
+
+            if($data["Products"] != null || $data["Products"] != "") {
+                $productsInCart = explode(",",  $data["Products"]);
+                $productsInCartQuantity = explode(",",  $data["Product Quantity"]);
+            }
+        }
     }
 }
 
 fetchCartProducts($connection, $currentCustomer);
+
+
 
 
 // $customerId = $currentCustomer['Customer Id'];

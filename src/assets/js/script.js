@@ -27,9 +27,13 @@ $(document).ready(function () {
         let id = $(this).attr("data-id");
 
         removeFromCart(id, function () {
-            item.remove(); 
-            if($('.cart-item-container .cart-item').length == 0) {
-                window.location.href = window.location.href.replace("?openCart", " "); 
+            item.remove();
+            cartTotalAmount();
+            if ($(".cart-item-container .cart-item").length == 0) {
+                window.location.href = window.location.href.replace(
+                    "?openCart",
+                    " "
+                );
             }
         });
     });
@@ -208,7 +212,11 @@ function addToCart(_thisId) {
         data: { _thisId },
         success: function (response) {
             console.log("Success:", response);
-            window.location.href = window.location.href + "?cartOpen";
+            if(window.location.href.indexOf(_thisId) !== -1) {
+                window.location.href = window.location.href + "&cartOpen";
+            } else {
+                window.location.href = window.location.href + "?cartOpen";
+            }
         },
         error: function (xhr, status, error) {
             console.log("Error:", error);
@@ -216,7 +224,7 @@ function addToCart(_thisId) {
     });
 }
 
-if (window.location.href.indexOf("?cartOpen") !== -1) {
+if (window.location.href.indexOf("&cartOpen") !== -1 || window.location.href.indexOf("?cartOpen") !== -1) {
     $(".cart").addClass("active");
 }
 
@@ -234,3 +242,39 @@ function removeFromCart(_thisId, action) {
         },
     });
 }
+
+function cartTotalAmount() {
+    let total = 0;
+
+    let allProductPrices = $(".cart-item-price");
+    let amountShowContainer = $(".amount");
+
+    allProductPrices.each(function () {
+        let inputNearItValue = $(this).parent().next().find("input").val();
+        let price = parseInt($(this).text()) * parseInt(inputNearItValue);
+        total += price;
+    });
+
+    amountShowContainer.html(total);
+}
+cartTotalAmount();
+
+function editItemQuantity() {
+    let inputs = $("input.cart-item-quantity");
+    inputs.change(function () {
+        let value = $(this).val();
+        if (value === "" || value.includes("+") || value.includes("-")) {
+            let previousVal = $(this).data("previous-value");
+            if (previousVal !== undefined) {
+                $(this).val(previousVal);
+            } else {
+                $(this).val(1);
+            }
+        } else {
+            $(this).data("previous-value", value);
+        }
+        cartTotalAmount();
+    });
+}
+
+editItemQuantity();

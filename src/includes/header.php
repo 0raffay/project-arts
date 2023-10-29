@@ -63,53 +63,84 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
         <div class="py-4 px-4">
             <div class="position-relative d-flex px-2 mb-20 justify-content-between align-items-center">
                 <p class="fs-24 fw-300 text-upper">My Bag (<?php
-                    if($productsInCart[0] == "") {
-                        echo "0";
-                    }else {
-                        echo count($productsInCart);
-                    }
-                ?>)</p>
+
+                                                            if ($currentCustomer !== null) {
+                                                                if ($productsInCart != null) {
+                                                                    if ($productsInCart[0] == "") {
+                                                                        echo "0";
+                                                                    } else {
+                                                                        echo count($productsInCart);
+                                                                    }
+                                                                } else {
+                                                                    echo "0";
+                                                                }
+                                                            } else {
+                                                                echo "0";
+                                                            }
+                                                            ?>)</p>
                 <button data-cart-button class="btn btn-secondary px-2 py-2">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
             <div class="py-3 cart-item-container">
-                
                 <?php
-                if ($productsInCart[0] !== "") {
-                    echo '<h6 class="fw-300 fs-24 fc-secondary">Products:</h6>';
-                    foreach (Product::$instances as $product) {
-                        if (in_array($product->SKU, $productsInCart)) {
-                            $productIndex  = array_search($product->SKU, $productsInCart);
-                            $productQuantity = $productsInCartQuantity[$productIndex];
+
+                if ($currentCustomer !== null) {
+                    if ($productsInCart != null  && $productsInCart[0] !== "") {
+                        $emptyCart = false;
+                        echo '<h6 class="fw-300 fs-24 fc-secondary">Products:</h6>';
+                        foreach (Product::$instances as $product) {
+                            if (in_array($product->SKU, $productsInCart)) {
+                                $productIndex  = array_search($product->SKU, $productsInCart);
+                                $productQuantity = $productsInCartQuantity[$productIndex];
                 ?>
 
-                            <div class="cart-item d-flex gap-10 py-4 border-bottom-hr">
-                                <div class="img__wrap">
-                                    <img height="130" src="assets/images/product-images/<?php echo $product->images; ?>" alt="">
-                                </div>
-                                <div class="cart-item-text flex-1">
-                                    <h5 class="cart-title mb-1 fs-22 fw-400 fc-black"><?php echo $product->name; ?></h5>
-                                    <h6 class="cart-price mb-3 fs-18 fw-400 fc-black"><?php echo $currencySymbol . $product->price; ?></h6>
+                                <div class="cart-item d-flex gap-10 py-4 border-bottom-hr">
+                                    <div class="img__wrap">
+                                        <img height="130" src="assets/images/product-images/<?php echo $product->images; ?>" alt="">
+                                    </div>
+                                    <div class="cart-item-text flex-1">
+                                        <h5 class="cart-title mb-1 fs-22 fw-400 fc-black"><?php echo $product->name; ?></h5>
+                                        <h6 class="cart-price mb-3 fs-18 fw-400 fc-black"><?php echo $currencySymbol; ?><span class="cart-item-price"><?php echo $product->price; ?></span> </h6>
 
 
-                                    <div class="d-flex justify-content-between align-items-end">
-                                        <div>
-                                            <label for="cart-quantity<?php echo $product->SKU;?>" class="fw-300 mb-1 addHover fs-14 fc-secondary-400">Edit Quantity:</label>
-                                            <input id="cart-quantity<?php echo $product->SKU;?>" value="<?php echo $productQuantity; ?>" class="cart-item-quantity">
-                                        </div>
-                                        <div>
-                                            <button data-remove-from-cart data-id="<?php echo $productIndex;?>" class="text-danger remove-cart-item fw-300 fs-14">Remove Item</button>
+                                        <div class="d-flex justify-content-between align-items-end">
+                                            <div>
+                                                <label for="cart-quantity<?php echo $product->SKU; ?>" class="fw-300 mb-1 addHover fs-14 fc-secondary-400">Edit Quantity:</label>
+                                                <input id="cart-quantity<?php echo $product->SKU; ?>" value="<?php echo $productQuantity; ?>" class="cart-item-quantity">
+                                            </div>
+                                            <div>
+                                                <button data-remove-from-cart data-id="<?php echo $productIndex; ?>" class="text-danger remove-cart-item fw-300 fs-14">Remove Item</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                    <?php  }
-                    }  ?>
-                <?php } else { ?>
-                    <p class="fs-14 fw-300 text-upper text-center py-5">Your Shopping Cart is Empty.</p>
+                            <?php  } ?>
+                        <?php  }  ?>
+                        <div class="totalCart py-4 d-flex justify-content-between align-items-center">
+                            <p class="fc-secondary fs-24  fw-300"><strong class="fw-700">Total:</strong> <?php echo $currencySymbol; ?><span class="amount">128</span></p>
+                            <button class="btn btn-secondary">Checkout</button>
+                        </div>
+                    <?php } else { ?>
+                        <?php $emptyCart = true;
+                        if ($emptyCart) {
+
+                        ?>
+
+                            <p class="fs-14 fw-300 text-upper text-center py-5">Your Shopping Cart is Empty.</p>
+
+                        <?php } ?>
+                    <?php }
+                } else {
+                    ?>
+                    <div class=" text-center py-5 px-4">
+                        <p class="fs-18 fw-300 text-upper mb-4">You Are Not Logged In.</p>
+                        <a href="login.php" class="btn btn-secondary d-block">Login</a>
+                    </div>
                 <?php } ?>
+
+
 
             </div>
         </div>

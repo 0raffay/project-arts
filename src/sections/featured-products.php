@@ -11,7 +11,7 @@
                 checkCurrentProduct($productIds);
                 // print_r($currentProduct);
             ?>
-                <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="product-card">
                         <?php $url = "https://google.com" ?>
                         <div class="img__wrap" onclick="window.location.href='single-product.php?id=<?php echo $products->SKU; ?>';">
