@@ -62,22 +62,22 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
     <div class="cart-modal">
         <div class="py-4 px-4">
             <div class="position-relative d-flex px-2 mb-20 justify-content-between align-items-center">
-                <p class="fs-24 fw-300 text-upper">My Bag (<?php
-
-                                                            if ($currentCustomer !== null) {
-                                                                if ($productsInCart != null) {
-                                                                    if ($productsInCart[0] == "") {
-                                                                        echo "0";
-                                                                    } else {
-                                                                        echo count($productsInCart);
-                                                                    }
-                                                                } else {
-                                                                    echo "0";
-                                                                }
-                                                            } else {
-                                                                echo "0";
-                                                            }
-                                                            ?>)</p>
+                <p class="fs-24 fw-300 text-upper">My Bag (
+                    <?php
+                    if ($currentCustomer !== null) {
+                        if ($productsInCart != null) {
+                            if ($productsInCart[0] == "") {
+                                echo "0";
+                            } else {
+                                echo count($productsInCart);
+                            }
+                        } else {
+                            echo "0";
+                        }
+                    } else {
+                        echo "0";
+                    }
+                    ?>)</p>
                 <button data-cart-button class="btn btn-secondary px-2 py-2">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
@@ -119,7 +119,7 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
                         <?php  }  ?>
                         <div class="totalCart py-4 d-flex justify-content-between align-items-center">
                             <p class="fc-secondary fs-24  fw-300"><strong class="fw-700">Total:</strong> <?php echo $currencySymbol; ?><span class="amount">128</span></p>
-                            <button class="btn btn-secondary">Checkout</button>
+                            <a class="btn btn-secondary" href="checkout.php">Checkout</a>
                         </div>
                     <?php } else { ?>
                         <?php $emptyCart = true;

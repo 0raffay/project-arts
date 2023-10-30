@@ -38,15 +38,15 @@ $(document).ready(function () {
         });
     });
 
-    let setBilling = $('[data-save-billing-details]');
-    setBilling.click(function(e) {
-        let address = $('[data-address]').val(); 
-        let city = $('[data-city]').val(); 
-        let zip = $('[data-zip]').val(); 
+    let setBilling = $("[data-save-billing-details]");
+    setBilling.click(function (e) {
+        let address = $("[data-address]").val();
+        let city = $("[data-city]").val();
+        let zip = $("[data-zip]").val();
 
-        setBillingDetails(address, city, zip)
+        setBillingDetails(address, city, zip);
         e.preventDefault();
-    })
+    });
 });
 
 function sliders() {
@@ -222,7 +222,7 @@ function addToCart(_thisId) {
         data: { _thisId },
         success: function (response) {
             console.log("Success:", response);
-            if(window.location.href.indexOf(_thisId) !== -1) {
+            if (window.location.href.indexOf(_thisId) !== -1) {
                 window.location.href = window.location.href + "&cartOpen";
             } else {
                 window.location.href = window.location.href + "?cartOpen";
@@ -234,7 +234,10 @@ function addToCart(_thisId) {
     });
 }
 
-if (window.location.href.indexOf("&cartOpen") !== -1 || window.location.href.indexOf("?cartOpen") !== -1) {
+if (
+    window.location.href.indexOf("&cartOpen") !== -1 ||
+    window.location.href.indexOf("?cartOpen") !== -1
+) {
     $(".cart").addClass("active");
 }
 
@@ -289,18 +292,186 @@ function editItemQuantity() {
 
 editItemQuantity();
 
-
 function setBillingDetails(address, city, zip) {
     $.ajax({
         url: "controllers/set-billing-details.php",
         method: "POST",
-        data: {address: address, city: city, zip: zip},
-        success: function(response) {
+        data: { address: address, city: city, zip: zip },
+        success: function (response) {
             console.log(response);
             window.location.href = window.location.href;
-        }, 
-        error: function(xhr, status, error) {
+        },
+        error: function (xhr, status, error) {
             console.log(error);
-        }
-    })
+        },
+    });
 }
+
+function paymentTabbing($this) {
+    if ($this.val() == "debit") {
+        $(".payment").show();
+        $(".delivery").hide();
+    } else {
+        $(".payment").hide();
+        $(".delivery").show();
+    }
+}
+
+$(".payInputs").change(function () {
+    paymentTabbing($(this));
+    $(".payInputs").next().removeClass("active");
+    $(this).next().addClass("active");
+});
+
+// Initialize the tabbing on page load
+$(document).ready(function () {
+    paymentTabbing($(".payInputs:checked"));
+});
+
+function validateForm(options, action) {
+    let errorClass = options.errorClass || "error";
+    let disableClass = options.disableClass || "disabled";
+
+    let isValid = false;
+    let button = $(options.button);
+    let inputs = $(options.inputs);
+
+    let email = $(options.email.selector);
+    let emailRegex =
+        options.email.regex ||
+        /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+    let telephone = $(options.telephone.selector);
+    let telephoneRegex = options.telephone.regex || /^\d{9,}$/;
+
+    let checkValidateType = {
+        inputs: "empty",
+        email: "email",
+        telephone: "telephone",
+    };
+
+    function addUtilties() {
+        inputs.attr("validation", checkValidateType.inputs);
+        email.attr("validation", checkValidateType.email);
+        telephone.attr("validation", checkValidateType.telephone);
+    }
+    addUtilties();
+
+    function checkInputs(_this) {
+        let isSpecial = undefined;
+
+        function checkIfSpecialFields(input) {
+            inputValidationType = input.attr("validation");
+            emailValidationType = email.attr("validation");
+            telephoneValidationType = telephone.attr("validation");
+
+            if (inputValidationType == emailValidationType) {
+                isSpecial = true;
+                validateSpecialFields(email, emailRegex);
+            } else if (inputValidationType == telephoneValidationType) {
+                isSpecial = true;
+                validateSpecialFields(telephone, telephoneRegex);
+            } else {
+                isSpecial = false;
+            }
+        }
+
+        function validateSpecialFields(field, regex) {
+            let fieldValue = field.val();
+            let test = regex.test(fieldValue) && fieldValue !== "";
+            if (!test) {
+                field.addClass(errorClass);
+            } else {
+                field.removeClass(errorClass);
+            }
+        }
+
+        if (_this) {
+            checkIfSpecialFields(_this);
+            if (!isSpecial) {
+                if (_this.val() == "") {
+                    _this.addClass(errorClass);
+                } else {
+                    _this.removeClass(errorClass);
+                }
+            }
+        } else {
+            inputs.each(function () {
+                checkIfSpecialFields($(this));
+                if (!isSpecial) {
+                    if ($(this).val() == "") {
+                        $(this).addClass(errorClass);
+                    } else {
+                        $(this).removeClass(errorClass);
+                    }
+                }
+            });
+        }
+    }
+
+    function checkErrorClass() {
+        isValid = inputs
+            .toArray()
+            .every((input) => !$(input).hasClass(errorClass));
+
+        if (isValid) {
+            button.removeClass(disableClass);
+        }
+    }
+
+    inputs.on("change", function () {
+        checkInputs($(this));
+        checkErrorClass();
+    });
+
+    button.on("click", function (e) {
+        e.preventDefault();
+        checkInputs();
+        checkErrorClass();
+
+        if (isValid) {
+            action();
+        } else {
+            $(this).addClass(disableClass);
+        }
+    });
+}
+
+validateForm(
+    {
+        button: "[data-order]",
+        inputs: "[data-validate-order]",
+        email: {
+            selector: "[data-validate-email]",
+            regex: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+        },
+        telephone: {
+            selector: "[data-telephone-field]",
+            regex: /^\d{9,}$/,
+        },
+        errorClass: "error",
+        disableClass: "disabled",
+    },
+    function () {
+        $(".loader").show();
+        $(".toBeHidden").hide();
+
+        setTimeout(function () {
+
+
+            if(options.button.hasClass("payWithCard")) {
+                $(".checkCardInfo").each(function() {
+                    let thisValue = $(this).val();
+                    if(thisValue == "") {
+                        $(this).addClass("error");
+                    } else {
+                        $(this).removeClass('error');
+                        $('.loader').hide();
+                    }
+                })
+            } else {
+                window.location.href = "thankyou.php";
+            }
+        }, 1000);
+    }
+);

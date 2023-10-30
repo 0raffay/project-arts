@@ -351,6 +351,7 @@ function fetchCartProducts($connection, $currentCustomer)
 fetchCartProducts($connection, $currentCustomer);
 
 
+
 // print_r($currentCustomer);
 
 // $customerId = $currentCustomer['Customer Id'];

@@ -1060,3 +1060,12 @@ button.disabled {
 .tabbingPanel:nth-of-type(1) {
     display: block;
 }
+
+.delivery {
+    min-height: 280px;
+}
+
+
+.checkoutBody {
+    min-height: 100vh;
+}
