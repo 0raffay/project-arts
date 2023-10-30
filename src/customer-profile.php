@@ -75,6 +75,7 @@ if (isset($_POST["updateCustomerDetails"])) {
             <div class="d-flex justify-content-between border-bottom-hr align-items-end">
                 <div class="tabbingButtons userProfileTabbingButtons">
                     <button class="active">Details</button>
+                    <button>Billing Details</button>
                     <button>Order History</button>
                 </div>
                 <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
@@ -113,15 +114,6 @@ if (isset($_POST["updateCustomerDetails"])) {
                                     <button data-edit-details class="btn btn-secondary">Edit</button>
                                 </div>
                             </div>
-                            <div class="wrap fs-20 mb-10 d-flex justify-content-between border-bottom-hr">
-                                <div class="d-flex">
-                                    <label class="mr-4 mb-0">Address:</label>
-                                    <input name="updatedAddress" type="text" readonly value="<?php echo $currentCustomer["Customer Address"]; ?>">
-                                </div>
-                                <div>
-                                    <button data-edit-details class="btn btn-secondary">Edit</button>
-                                </div>
-                            </div>
                             <div class="wrap fs-20 mb-10 d-flex justify-content-between">
                                 <div class="d-flex">
                                     <label class="mr-4 mb-0">Phone:</label>
@@ -141,6 +133,26 @@ if (isset($_POST["updateCustomerDetails"])) {
                         </form>
                     </div>
                 </div>
+                <div class="tabbingPanel customer-billing-details">
+                    <h4 class="fw-300 pb-3 fs-24 text-center fc-secondary">Billing Address</h4>
+                    <div class="row g-3 text-left">
+                        <div class="col-md-6 mb-1">
+                            <label for="your-name" class="form-label">Your Address:</label>
+                            <input type="text" value="<?php echo $currentCustomer["Customer Address"]; ?>" data-address class="form-control" id="your-name" name="address" required>
+                        </div>
+                        <div class="col-md-6 mb-1">
+                            <label for="your-surname" class="form-label">City</label>
+                            <input type="text" value="<?php echo $currentCustomer["Customer City"]; ?>" data-city class="form-control" id="your-surname" name="city" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="your-email" class="form-label">Zip Code</label>
+                            <input type="email" data-zip class="form-control" value="<?php echo $currentCustomer["Customer Zipcode"]; ?>" id="your-email" name="zipcode" required>
+                        </div>
+                        <div class="col-md-6 text-right d-flex align-items-center justify-content-between">
+                            <button class="btn btn-primary ml-auto mt-4" data-save-billing-details>Save Details</button>
+                        </div>
+                    </div>
+                </div>
                 <div class="tabbingPanel order-history">
                     <h4 class="fw-300 pb-3 fs-24 text-center fc-secondary">Order History</h4>
                     <div class="d-flex">
@@ -153,11 +165,11 @@ if (isset($_POST["updateCustomerDetails"])) {
 
                 </div>
             </div>
+
         </div>
 
 
     </section>
-
 
     <!--==== FOOTER START ====-->
     <?php include('includes/footer.php') ?>

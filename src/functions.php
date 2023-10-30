@@ -190,22 +190,29 @@ class Customer
     public $customerName;
     public $customerEmail;
     public $customerPassword;
-    public $customerAddress;
     public $customerPhone;
-    public $customerCart = array();
-    public $customerWishList = array();
-    public $customerLoginStatus;
 
-    function __construct($connection, $name, $email, $password, $address, $phone)
+    
+    // REINITIALIZAIN CUSTOMER INTO COOKIE;
+    public static function reInitializeCustomerInCookie($connection, $newRow)
+    {
+        setcookie('currentCustomer', json_encode($newRow), time() + (86400 * 30), "/");
+        Customer::creatingCustomerCart($connection, $newRow);
+    }
+ 
+
+    //SIGN UP;
+    function __construct($connection, $name, $email, $password, $phone)
     {
         $this->customerName = $name;
         $this->customerEmail = $email;
         $this->customerPassword = $password;
-        $this->customerAddress = $address;
         $this->customerPhone = $phone;
 
 
-        $query = "INSERT INTO `customer` (`Customer Name`, `Customer Email`, `Customer Password`, `Customer Address`, `Customer Phone`, `Customer Wishlist`) VALUES ('$name', '$email', '$password', '$address', '$phone', '')";
+        // $query = "INSERT INTO `customer` (`Customer Name`, `Customer Email`, `Customer Password`, `Customer Phone`) VALUES ('$name', '$email', '$password', '$phone', '')";
+
+$query = "INSERT INTO `customer` (`Customer Id`, `Customer Name`, `Customer Email`, `Customer Password`, `Customer Phone`, `Customer Address`, `Customer City`, `Customer Zipcode`) VALUES (NULL, '$name', '$email', '$password', '$phone', '', '', '')";
 
         $result = mysqli_query($connection, $query);
 
@@ -214,8 +221,9 @@ class Customer
             $forRowResult = mysqli_query($connection, $rowQuery);
             if ($forRowResult) {
                 while ($row = $forRowResult->fetch_assoc()) {
-                    setcookie('currentCustomer', json_encode($row), time() + (86400 * 30), "/");
-                    Customer::creatingCustomerCart($connection, $row);
+                    Customer::reInitializeCustomerInCookie($connection, $row);
+                    // setcookie('currentCustomer', json_encode($row), time() + (86400 * 30), "/");
+                    // Customer::creatingCustomerCart($connection, $row);
                 }
             }
             header("location: customer-profile.php");
@@ -226,6 +234,7 @@ class Customer
         }
     }
 
+    // CUSTOMER LOGIN:
     public static function customerLogin($connection, $email, $password)
     {
         $query = "SELECT * FROM `customer` WHERE `Customer Email` = '$email' AND `Customer Password` = '$password'";
@@ -233,14 +242,14 @@ class Customer
 
         if ($result && $result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            setcookie('currentCustomer', json_encode($row), time() + (86400 * 30), "/");
-            Customer::creatingCustomerCart($connection, $row);
+            Customer::reInitializeCustomerInCookie($connection, $row);
             return true;
         } else {
             return false;
         }
     }
 
+    // FOR DASHBOARD GETTING ALL CSUTOMERS:
     public static function getAllCustomerData($connection)
     {
         $query = "SELECT * FROM `customer`";
@@ -255,6 +264,7 @@ class Customer
         }
     }
 
+    // SETTING UP CUSTOMER CART:
     public static function creatingCustomerCart($connection, $currentCustomer)
     {
         $customerId = $currentCustomer["Customer Id"];
@@ -269,6 +279,28 @@ class Customer
                 echo "Cart Created";
             } else {
                 echo "Cart Not Created";
+            }
+        }
+    }
+
+
+    // SETTING CUSTOMER ADDRESS/BILLING DETAILS:
+    public static function setBillingDetails($connection, $address,  $city, $zip)
+    {
+        global $currentCustomer;
+        if ($currentCustomer !== null) {
+            $customerId = $currentCustomer["Customer Id"];
+            $query = "UPDATE `customer` SET `Customer Address` = '$address', `Customer City` = '$city', `Customer Zipcode` = '$zip' WHERE `Customer Id` = '$customerId'";
+            $result = mysqli_query($connection, $query);
+            if (!$result) {
+                echo "Something Went Wrong";
+            } else {
+                $query = "SELECT * FROM `customer` WHERE `Customer Id` = '$customerId'";
+                $result = mysqli_query($connection, $query);
+                if($result) {
+                    $newRow = $result->fetch_assoc();
+                    Customer::reInitializeCustomerInCookie($connection, $newRow);
+                }
             }
         }
     }
@@ -300,7 +332,6 @@ function fetchCartProducts($connection, $currentCustomer)
 
 
     if ($currentCustomer == null) {
-       
     } else {
         $customerId = $currentCustomer['Customer Id'];
         $query = "SELECT * FROM `cart` WHERE `Customer Id` = '$customerId'";
@@ -309,7 +340,7 @@ function fetchCartProducts($connection, $currentCustomer)
         if ($result) {
             $data = $result->fetch_assoc();
 
-            if($data["Products"] != null || $data["Products"] != "") {
+            if ($data["Products"] != null && $data["Products"] != "") {
                 $productsInCart = explode(",",  $data["Products"]);
                 $productsInCartQuantity = explode(",",  $data["Product Quantity"]);
             }
@@ -320,7 +351,7 @@ function fetchCartProducts($connection, $currentCustomer)
 fetchCartProducts($connection, $currentCustomer);
 
 
-
+// print_r($currentCustomer);
 
 // $customerId = $currentCustomer['Customer Id'];
 // $query = "SELECT * FROM `cart` WHERE `Customer Id` = '$customerId'";

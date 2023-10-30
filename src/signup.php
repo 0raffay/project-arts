@@ -13,8 +13,6 @@ if (isset($currentCustomer)) {
         $name = $_POST["customerNameSignUp"];
         // Number
         $number = $_POST["customerNumberSignUp"];
-        // Address:
-        $address = $_POST["customerAddressSignUp"];
 
         // Password:
         $password = $_POST["customerPasswordSignUp"];
@@ -27,7 +25,7 @@ if (isset($currentCustomer)) {
         if ($result->num_rows > 0) {
             $error = "Another account is already linked to this email address.";
         } else {
-            new Customer($connection, $name, $email, $password, $address, $password);
+            new Customer($connection, $name, $email, $password,$number);
         }
     }
 }
@@ -78,14 +76,8 @@ if (isset($currentCustomer)) {
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="input__wrap">
-                                            <label for="">Your Phone Number (optional)</label>
-                                            <input name="customerNumberSignUp" type="number" inputmode="numeric">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="input__wrap">
-                                            <label for="">Your Address (optional)</label>
-                                            <input name="customerAddressSignUp" type="text">
+                                            <label for="">Your Phone Number</label>
+                                            <input name="customerNumberSignUp" required type="number" inputmode="numeric">
                                         </div>
                                     </div>
                                 </div>

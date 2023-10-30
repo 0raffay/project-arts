@@ -37,6 +37,16 @@ $(document).ready(function () {
             }
         });
     });
+
+    let setBilling = $('[data-save-billing-details]');
+    setBilling.click(function(e) {
+        let address = $('[data-address]').val(); 
+        let city = $('[data-city]').val(); 
+        let zip = $('[data-zip]').val(); 
+
+        setBillingDetails(address, city, zip)
+        e.preventDefault();
+    })
 });
 
 function sliders() {
@@ -278,3 +288,19 @@ function editItemQuantity() {
 }
 
 editItemQuantity();
+
+
+function setBillingDetails(address, city, zip) {
+    $.ajax({
+        url: "controllers/set-billing-details.php",
+        method: "POST",
+        data: {address: address, city: city, zip: zip},
+        success: function(response) {
+            console.log(response);
+            window.location.href = window.location.href;
+        }, 
+        error: function(xhr, status, error) {
+            console.log(error);
+        }
+    })
+}

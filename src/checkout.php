@@ -1,17 +1,17 @@
 <?php
 include 'config.php';
 include 'functions.php';
-
-if ($currentCustomer == null) {
+if ($currentCustomer == null || $productsInCart== null || $productsInCart == "") {
     header("location: index.php");
 }
 
 $userName = $currentCustomer["Customer Name"];
-$userEmail = $currentCustomer["Customer Email"] ;
-$userAddress = $currentCustomer["Customer Address"];
+$userEmail = $currentCustomer["Customer Email"];
 $userPhone = $currentCustomer["Customer Phone"];
+$userAddress = $currentCustomer["Customer Address"];
+$userCity = $currentCustomer["Customer City"];
+$userZip = $currentCustomer["Customer Zipcode"];
 
-print_r($currentCustomer);
 
 ?>
 
@@ -115,23 +115,29 @@ print_r($currentCustomer);
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="firstName">Name</label>
-                                <input type="text" value="<?php echo $userName;?>" class="form-control" id="firstName" placeholder=""  required>
+                                <input type="text" value="<?php echo $userName; ?>" class="form-control" id="firstName" placeholder="" required>
                                 <div class="invalid-feedback">
                                     Valid first name is required.
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="email">Email</label>
-                                <input type="email" value="<?php echo $userEmail;?>" class="form-control" id="email">
+                                <input type="email" value="<?php echo $userEmail; ?>" class="form-control" id="email">
                                 <div class="invalid-feedback">
                                     Please enter a valid email address for shipping updates.
                                 </div>
                             </div>
                         </div>
-
+                        <div class="mb-3">
+                            <label for="num">Phone</label>
+                            <input type="number" value="<?php echo $userPhone;?>" class="form-control" id="num">
+                            <div class="invalid-feedback">
+                                Please enter a valid Phone Number for shipping updates.
+                            </div>
+                        </div>
                         <div class="mb-3">
                             <label for="address">Address</label>
-                            <input type="text" value="<?php echo $userAddress;?>" class="form-control" id="address" required>
+                            <input type="text" value="<?php echo $userAddress; ?>" class="form-control" id="address" required>
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
                             </div>
@@ -149,14 +155,14 @@ print_r($currentCustomer);
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="state">State/City</label>
-                                <input type="text" class="form-control" value="" id="city" placeholder="" required>
+                                <input type="text" class="form-control" value="<?php echo $userCity;?>" id="city" placeholder="" required>
                                 <div class="invalid-feedback">
                                     Please provide a valid state.
                                 </div>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="zip">Zip Code <span class="fc-secondary-400">(Optional)</span></label>
-                                <input type="text" class="form-control" id="zip" placeholder="" required>
+                                <input type="text" class="form-control" value="<?php echo $userZip;?>" id="zip" placeholder="" required>
                                 <div class="invalid-feedback">
                                     Zip code required.
                                 </div>

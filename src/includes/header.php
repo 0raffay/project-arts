@@ -85,7 +85,6 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
 
             <div class="py-3 cart-item-container">
                 <?php
-
                 if ($currentCustomer !== null) {
                     if ($productsInCart != null  && $productsInCart[0] !== "") {
                         $emptyCart = false;
