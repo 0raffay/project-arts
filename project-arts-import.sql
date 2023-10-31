@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 30, 2023 at 12:57 PM
+-- Generation Time: Oct 31, 2023 at 11:35 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -44,7 +44,8 @@ INSERT INTO `cart` (`Cart Id`, `Customer Id`, `Products`, `Product Quantity`) VA
 (6, 5, '', ''),
 (7, 19, 'SW-299775,BE-394912', ' 1,3'),
 (8, 20, 'SW-299775', '1'),
-(9, 21, 'MA-260442', '1');
+(9, 21, 'MA-260442', '2'),
+(10, 22, 'SW-299775,BE-394912,MA-260442', '21, 21,21');
 
 -- --------------------------------------------------------
 
@@ -78,7 +79,8 @@ INSERT INTO `customer` (`Customer Id`, `Customer Name`, `Customer Email`, `Custo
 (18, 'Beverly Hills', 'bhills_6731@mailinator.com', 'Zfomu', 0, '', '', ''),
 (19, 'new', 'new1234@gmail.com', '123', 123, 'House No. 8/282 Nagori Milk Shop Building 3rd floor Near MA High School, Liaquatabad.', 'OUTER HEBRIDES', 'OUTER HEBRIDES'),
 (20, 'azeem', 'azeem@gmail.com', '123', 123, '', '', ''),
-(21, 'User1', 'user1@gmail.com', '123', 1234567890, '0522 Beverly Dr', 'Williamstown', '1234');
+(21, 'User1', 'user1@gmail.com', '123', 1234567890, '0522 Beverly Dr', 'Williamstown', '1234'),
+(22, 'Donald R. Mustard', 'DonaldRMustard_1@gmail.com', '123', 1231231, 'House No. 8/282 Nagori Milk Shop Building 3rd floor Near MA High School, Liaquatabad.', 'Karachi', '123');
 
 -- --------------------------------------------------------
 
@@ -141,13 +143,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `Cart Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `Cart Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `Customer Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `Customer Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `products`
