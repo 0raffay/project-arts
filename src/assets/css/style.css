@@ -1069,3 +1069,22 @@ button.disabled {
 .checkoutBody {
     min-height: 100vh;
 }
+
+.checkoutBody input + p {
+    display: none;
+}
+
+* >:has(.invalid-feedback) {
+    position: relative;
+}
+.checkoutBody .error {
+    outline: none !important;
+}
+
+.checkoutBody .error + .invalid-feedback{
+    display: block;
+
+    position: absolute;
+    bottom: -23px;
+    left: 10px;
+} 

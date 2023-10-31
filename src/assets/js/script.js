@@ -453,25 +453,65 @@ validateForm(
         disableClass: "disabled",
     },
     function () {
+        // Show the loader
         $(".loader").show();
         $(".toBeHidden").hide();
-
+        // Use a setTimeout to simulate async behavior, you can adjust the delay as needed
         setTimeout(function () {
-
-
-            if(options.button.hasClass("payWithCard")) {
-                $(".checkCardInfo").each(function() {
+            if ($("[data-order]").hasClass("payWithCard")) {
+                let hasError = false;
+                $(".checkCardInfo").each(function () {
                     let thisValue = $(this).val();
-                    if(thisValue == "") {
+                    if (thisValue === "") {
+                        hasError = true;
                         $(this).addClass("error");
                     } else {
-                        $(this).removeClass('error');
-                        $('.loader').hide();
+                        $(this).removeClass("error");
                     }
-                })
+                });
+
+                // Check if any error occurred
+                if (hasError) {
+                    $(".toBeHidden").show();
+                    $(".loader").hide();
+                } else {
+                    // No errors, proceed to thank you page
+                    window.location.href = "thankyou-page.html"; // Change the URL as needed
+                }
             } else {
-                window.location.href = "thankyou.php";
+                // Handle other cases if needed
             }
+        }, 1000); // Adjust the delay (in milliseconds) as needed
+    }
+);
+validateForm(
+    {
+        button: "[data-delivery-order]",
+        inputs: "[data-validate-order]",
+        email: {
+            selector: "[data-validate-email]",
+            regex: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+        },
+        telephone: {
+            selector: "[data-telephone-field]",
+            regex: /^\d{9,}$/,
+        },
+        errorClass: "error",
+        disableClass: "disabled",
+    },
+    function () {
+        $(".loader").show();
+        $(".toBeHidden").hide();
+        setTimeout(function () {
+            window.location.href = "thankyou-page.html"; // Change the URL as needed
         }, 1000);
     }
 );
+
+$(".checkCardInfo").change(function () {
+    if ($(this).val() != "") {
+        $(this).removeClass("error");
+    } else {
+        $(this).addClass("error");
+    }
+});
