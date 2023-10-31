@@ -1,5 +1,11 @@
 <?php
 
-$productId = $_POST["_thisId"];
-$customerId = $currentCustomer['Customer Id'];
+include "../config.php";
+include "../functions.php";
+
+$index = $_POST["index"];
+$value = $_POST["value"];
+
+Customer::editProductQuantityInCart($connection, $index, $value)
+
 ?>

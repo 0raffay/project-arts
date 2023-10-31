@@ -192,16 +192,16 @@ class Customer
     public $customerPassword;
     public $customerPhone;
 
-    
+
     // REINITIALIZAIN CUSTOMER INTO COOKIE;
     public static function reInitializeCustomerInCookie($connection, $newRow)
     {
         setcookie('currentCustomer', json_encode($newRow), time() + (86400 * 30), "/");
         Customer::creatingCustomerCart($connection, $newRow);
     }
- 
 
-    //SIGN UP;
+
+    //CUSTOMER SIGN UP;
     function __construct($connection, $name, $email, $password, $phone)
     {
         $this->customerName = $name;
@@ -209,11 +209,7 @@ class Customer
         $this->customerPassword = $password;
         $this->customerPhone = $phone;
 
-
-        // $query = "INSERT INTO `customer` (`Customer Name`, `Customer Email`, `Customer Password`, `Customer Phone`) VALUES ('$name', '$email', '$password', '$phone', '')";
-
-$query = "INSERT INTO `customer` (`Customer Id`, `Customer Name`, `Customer Email`, `Customer Password`, `Customer Phone`, `Customer Address`, `Customer City`, `Customer Zipcode`) VALUES (NULL, '$name', '$email', '$password', '$phone', '', '', '')";
-
+        $query = "INSERT INTO `customer` (`Customer Id`, `Customer Name`, `Customer Email`, `Customer Password`, `Customer Phone`, `Customer Address`, `Customer City`, `Customer Zipcode`) VALUES (NULL, '$name', '$email', '$password', '$phone', '', '', '')";
         $result = mysqli_query($connection, $query);
 
         if ($result) {
@@ -222,8 +218,6 @@ $query = "INSERT INTO `customer` (`Customer Id`, `Customer Name`, `Customer Emai
             if ($forRowResult) {
                 while ($row = $forRowResult->fetch_assoc()) {
                     Customer::reInitializeCustomerInCookie($connection, $row);
-                    // setcookie('currentCustomer', json_encode($row), time() + (86400 * 30), "/");
-                    // Customer::creatingCustomerCart($connection, $row);
                 }
             }
             header("location: customer-profile.php");
@@ -249,7 +243,7 @@ $query = "INSERT INTO `customer` (`Customer Id`, `Customer Name`, `Customer Emai
         }
     }
 
-    // FOR DASHBOARD GETTING ALL CSUTOMERS:
+    // FOR DASHBOARD GETTING ALL CUSTOMER:
     public static function getAllCustomerData($connection)
     {
         $query = "SELECT * FROM `customer`";
@@ -297,11 +291,45 @@ $query = "INSERT INTO `customer` (`Customer Id`, `Customer Name`, `Customer Emai
             } else {
                 $query = "SELECT * FROM `customer` WHERE `Customer Id` = '$customerId'";
                 $result = mysqli_query($connection, $query);
-                if($result) {
+                if ($result) {
                     $newRow = $result->fetch_assoc();
                     Customer::reInitializeCustomerInCookie($connection, $newRow);
                 }
             }
+        }
+    }
+
+
+    // EDIT CART QUANTITY:
+    public static function editProductQuantityInCart($connection, $productIndex, $updatedQuantity)
+    {
+        global $currentCustomer;
+        $customerId = $currentCustomer["Customer Id"];
+
+        $query = "SELECT * FROM `cart` WHERE `Customer Id` = '$customerId'";
+        $result = mysqli_query($connection, $query);
+        if ($result && $result->num_rows > 0) {
+            $resultArray = $result->fetch_assoc();
+            $previousProductsQuantity = $resultArray["Product Quantity"];
+            $previousProductsQuantityArray = explode(",", $previousProductsQuantity);
+
+            $previousProductsQuantityArray[$productIndex] = $updatedQuantity;
+            $previousProductsQuantityArray = array_values($previousProductsQuantityArray);
+            $newQuantity = implode(",", $previousProductsQuantityArray);
+
+            // Update the Product Quantity with the new value
+            $updateQuery = "UPDATE `cart` SET `Product Quantity` = '$newQuantity' WHERE `Customer Id` = '$customerId'";
+            $updateResult = mysqli_query($connection, $updateQuery);
+            if ($updateResult) {
+                // Quantity updated successfully
+                return true;
+            } else {
+                // Failed to update quantity
+                return false;
+            }
+        } else {
+            // Handle the case where the customer's cart data doesn't exist.
+            return false;
         }
     }
 }
@@ -329,8 +357,6 @@ function fetchCartProducts($connection, $currentCustomer)
 {
     global $productsInCart;
     global $productsInCartQuantity;
-
-
     if ($currentCustomer == null) {
     } else {
         $customerId = $currentCustomer['Customer Id'];
@@ -347,17 +373,4 @@ function fetchCartProducts($connection, $currentCustomer)
         }
     }
 }
-
 fetchCartProducts($connection, $currentCustomer);
-
-
-
-// print_r($currentCustomer);
-
-// $customerId = $currentCustomer['Customer Id'];
-// $query = "SELECT * FROM `cart` WHERE `Customer Id` = '$customerId'";
-// $result = mysqli_query($connection, $query);
-
-// if($result) {
-//     $productsInCart = $result->fetch_assoc()["Products"];
-// }

@@ -6,6 +6,7 @@ $products = Product::$instances;
 $productId = $_GET["id"];
 checkCurrentProduct($productId);
 
+print_r($currentProduct);
 
 ?>
 

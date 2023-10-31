@@ -47,6 +47,15 @@ $(document).ready(function () {
         setBillingDetails(address, city, zip);
         e.preventDefault();
     });
+
+    let quantityInputs = $('.cart-item-quantity');
+
+    quantityInputs.change(function() {
+        let index = $(this).attr("data-product-index");
+        let value = $(this).val();
+        updateProductQuantity(index, value);
+    });
+
 });
 
 function sliders() {
@@ -515,3 +524,17 @@ $(".checkCardInfo").change(function () {
         $(this).addClass("error");
     }
 });
+
+function updateProductQuantity(index, value) {
+    $.ajax({
+        url: "controllers/edit-cart-quantity.php",
+        method: "POST",
+        data: { index: index, value: value },
+        success: function (response) {
+            console.log(response);
+        },
+        error: function (xhr, status, error) {
+            console.log(error);
+        },
+    });
+}
