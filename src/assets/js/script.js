@@ -538,3 +538,8 @@ function updateProductQuantity(index, value) {
         },
     });
 }
+
+function order (customerData) {
+
+
+}

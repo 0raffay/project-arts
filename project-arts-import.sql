@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2023 at 11:35 AM
+-- Generation Time: Nov 04, 2023 at 09:29 PM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -39,13 +39,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`Cart Id`, `Customer Id`, `Products`, `Product Quantity`) VALUES
-(4, 18, '0', ''),
-(5, 8, '{\"products\":[{\"userQuantity\":null,\"price\":\"4247\",\"name\":\"Manager\",\"SKU\":\"MA-260442\",\"category\":\"Wallets\",\"stock\":\"12\",\"images\":\"IMG-653412cb8f5069.31050753.png\",\"keywords\":\"12\",\"description\":\"12\",\"warranty\":\"W-897328\",\"brand\":\"Chanel\",\"errorStatements\":[]},{\"userQuantity\":null,\"price\":\"4247\",\"name\":\"Manager\",\"SKU\":\"MA-260442\",\"category\":\"Wallets\",\"stock\":\"12\",\"images\":\"IMG-653412cb8f5069.31050753.png\",\"keywords\":\"12\",\"description\":\"12\",\"warranty\":\"W-897328\",\"brand\":\"Chanel\",\"errorStatements\":[]},{\"userQuantity\":null,\"price\":\"23\",\"name\":\"Sweater\",\"SKU\":\"SW-299775\",\"category\":\"Wallets\",\"stock\":\"24\",\"images\":\"IMG-65341453490669.47098053.png\",\"keywords\":\"dah a hdlaw hdladhdl h\",\"description\":\"This is the best Product\",\"warranty\":\"W-389733\",\"brand\":\"Victoria\",\"errorStatements\":[]},{\"userQuantity\":null,\"price\":\"23\",\"name\":\"Sweater\",\"SKU\":\"SW-299775\",\"category\":\"Wallets\",\"stock\":\"24\",\"images\":\"IMG-65341453490669.47098053.png\",\"keywords\":\"dah a hdlaw hdladhdl h\",\"description\":\"This is the best Product\",\"warranty\":\"W-389733\",\"brand\":\"Victoria\",\"errorStatements\":[]},{\"userQuantity\":null,\"price\":\"23\",\"name\":\"Sweater\",\"SKU\":\"SW-299775\",\"category\":\"Wallets\",\"stock\":\"24\",\"images\":\"IMG-65341453490669.47098053.png\",\"keywords\":\"dah a hdlaw hdladhdl h\",\"description\":\"This is the best Product\",\"warranty\":\"W-389733\",\"brand\":\"Victoria\",\"errorStatements\":[]}]}', ''),
-(6, 5, '', ''),
-(7, 19, 'SW-299775,BE-394912', ' 1,3'),
-(8, 20, 'SW-299775', '1'),
-(9, 21, 'MA-260442', '2'),
-(10, 22, 'SW-299775,BE-394912,MA-260442', '21, 21,21');
+(12, 24, 'BE-394912,SW-299775', '2, 1');
 
 -- --------------------------------------------------------
 
@@ -69,18 +63,25 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`Customer Id`, `Customer Name`, `Customer Email`, `Customer Password`, `Customer Phone`, `Customer Address`, `Customer City`, `Customer Zipcode`) VALUES
-(5, 'Abdul Raffay Sheikh', '0.abdulraffay@gmail.com', '123', 2147483647, '', '', ''),
-(8, 'test123', 'test123@gmail.com', '123', 123, '', '', ''),
-(13, 'New User ', 'newuser@gmail.com', '123', 123, '', '', ''),
-(14, 'Beverly Hills', 'bhills_3204@mailinator.com', 'Wlumv', 0, '', '', ''),
-(15, 'Beverly Hills', 'bhills_9580@mailinator.com', 'Obpkp', 0, '', '', ''),
-(16, 'Beverly Hills', 'bhills_5021@mailinator.com', 'Nqmjp', 0, '', '', ''),
-(17, 'Beverly Hills', 'bhills_5915@mailinator.com', 'Nmodz', 0, '', '', ''),
-(18, 'Beverly Hills', 'bhills_6731@mailinator.com', 'Zfomu', 0, '', '', ''),
-(19, 'new', 'new1234@gmail.com', '123', 123, 'House No. 8/282 Nagori Milk Shop Building 3rd floor Near MA High School, Liaquatabad.', 'OUTER HEBRIDES', 'OUTER HEBRIDES'),
-(20, 'azeem', 'azeem@gmail.com', '123', 123, '', '', ''),
-(21, 'User1', 'user1@gmail.com', '123', 1234567890, '0522 Beverly Dr', 'Williamstown', '1234'),
-(22, 'Donald R. Mustard', 'DonaldRMustard_1@gmail.com', '123', 1231231, 'House No. 8/282 Nagori Milk Shop Building 3rd floor Near MA High School, Liaquatabad.', 'Karachi', '123');
+(24, '123', '123@gmail.com', '123', 123, '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order`
+--
+
+CREATE TABLE `order` (
+  `Order Id` int(255) NOT NULL,
+  `Order Number` varchar(255) NOT NULL,
+  `Customer Id` varchar(255) NOT NULL,
+  `Order Type` int(255) NOT NULL,
+  `Order Amount` varchar(255) NOT NULL,
+  `Order Date` varchar(255) NOT NULL DEFAULT current_timestamp(),
+  `Order Items` longtext NOT NULL,
+  `Order Items Quantity` longtext NOT NULL,
+  `Order Status` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -130,6 +131,12 @@ ALTER TABLE `customer`
   ADD PRIMARY KEY (`Customer Id`);
 
 --
+-- Indexes for table `order`
+--
+ALTER TABLE `order`
+  ADD PRIMARY KEY (`Order Id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -143,13 +150,19 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `Cart Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `Cart Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `Customer Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `Customer Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `order`
+--
+ALTER TABLE `order`
+  MODIFY `Order Id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `products`
