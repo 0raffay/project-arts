@@ -13,7 +13,6 @@ $message = ""; // Initialize the message variable
 if (isset($_POST["updateCustomerDetails"])) {
     $name = $_POST['updatedName'];
     $password = $_POST['updatedPassword'];
-    $address = $_POST['updatedAddress'];
     $phone = $_POST['updatedPhone'];
 
     $email = $_POST['updatedEmail'];
@@ -23,7 +22,7 @@ if (isset($_POST["updateCustomerDetails"])) {
         $message = "Email Provided is linked to another account";
     } else {
         $customerId = $currentCustomer["Customer Id"];
-        $query = "UPDATE `customer` SET `Customer Name` = '$name', `Customer Email` = '$email', `Customer Password` = '$password', `Customer Address` = '$address', `Customer Phone` = '$phone' WHERE `Customer Id` = '$customerId'";
+        $query = "UPDATE `customer` SET `Customer Name` = '$name', `Customer Email` = '$email', `Customer Password` = '$password', `Customer Phone` = '$phone' WHERE `Customer Id` = '$customerId'";
         $result = mysqli_query($connection, $query);
 
         if (!$result) {

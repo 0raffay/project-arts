@@ -320,9 +320,12 @@ function paymentTabbing($this) {
     if ($this.val() == "debit") {
         $(".payment").show();
         $(".delivery").hide();
+
+        $(".paymentMethodInput").val('Card Payment')
     } else {
         $(".payment").hide();
         $(".delivery").show();
+        $(".paymentMethodInput").val('Cash on Delivery')
     }
 }
 
@@ -485,7 +488,7 @@ validateForm(
                     $(".loader").hide();
                 } else {
                     // No errors, proceed to thank you page
-                    window.location.href = "thankyou-page.html"; // Change the URL as needed
+                    // window.location.href = "thankyou-page.html"; // Change the URL as needed
                 }
             } else {
                 // Handle other cases if needed
@@ -512,7 +515,7 @@ validateForm(
         $(".loader").show();
         $(".toBeHidden").hide();
         setTimeout(function () {
-            window.location.href = "thankyou-page.html"; // Change the URL as needed
+            // window.location.href = "thankyou-page.html"; // Change the URL as needed
         }, 1000);
     }
 );
@@ -539,7 +542,33 @@ function updateProductQuantity(index, value) {
     });
 }
 
-function order (customerData) {
-
-
+function order (shippingDetails, orderType) {
+    $.ajax({
+        URL: "controllers/place-order.php",
+        method: "POST",
+        data: {
+            shipping_detail: shippingDetails, 
+            order_type: orderType,
+        },
+        success: function(response) {
+            console.log("response :", response);
+        },
+        error: function(xhr, status, error) {
+            console.log("error:", error)
+        }
+    })
 }
+
+$("[placeOrder]").click(function() {
+    let userDetails = {
+        phone: $('.userPhoneField').val(),
+        address: $('.shippingAddress').val(),
+        city: $('.userCity').val(),
+        zipCode: $('.zipCode').val()
+    }
+
+    
+    let orderType = $(".paymentMethodInput").val();
+
+    order(userDetails, orderType)
+})

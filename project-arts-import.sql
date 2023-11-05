@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2023 at 09:29 PM
+-- Generation Time: Nov 05, 2023 at 09:46 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -63,7 +63,7 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`Customer Id`, `Customer Name`, `Customer Email`, `Customer Password`, `Customer Phone`, `Customer Address`, `Customer City`, `Customer Zipcode`) VALUES
-(24, '123', '123@gmail.com', '123', 123, '', '', '');
+(24, '123', '1234@gmail.com', '123', 120371023, 'this is my address', 'karachi', '1237102397');
 
 -- --------------------------------------------------------
 
