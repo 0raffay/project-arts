@@ -542,13 +542,14 @@ function updateProductQuantity(index, value) {
     });
 }
 
-function order (shippingDetails, orderType) {
+function order (shippingDetails, orderType, total) {
     $.ajax({
-        URL: "controllers/place-order.php",
+        url: "controllers/place-order.php",
         method: "POST",
         data: {
             shipping_detail: shippingDetails, 
             order_type: orderType,
+            order_total: total,
         },
         success: function(response) {
             console.log("response :", response);
@@ -567,8 +568,9 @@ $("[placeOrder]").click(function() {
         zipCode: $('.zipCode').val()
     }
 
-    
+
+    let total = $('.amount').html();
     let orderType = $(".paymentMethodInput").val();
 
-    order(userDetails, orderType)
+    order(userDetails, orderType, total)
 })

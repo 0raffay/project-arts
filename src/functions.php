@@ -374,3 +374,4 @@ function fetchCartProducts($connection, $currentCustomer)
     }
 }
 fetchCartProducts($connection, $currentCustomer);
+
