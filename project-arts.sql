@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 05, 2023 at 09:46 AM
+-- Generation Time: Nov 07, 2023 at 12:15 PM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `project-arts-import`
+-- Database: `project-arts`
 --
 
 -- --------------------------------------------------------
@@ -39,7 +39,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`Cart Id`, `Customer Id`, `Products`, `Product Quantity`) VALUES
-(12, 24, 'BE-394912,SW-299775', '2, 1');
+(12, 24, '', '');
 
 -- --------------------------------------------------------
 
@@ -75,13 +75,22 @@ CREATE TABLE `order` (
   `Order Id` int(255) NOT NULL,
   `Order Number` varchar(255) NOT NULL,
   `Customer Id` varchar(255) NOT NULL,
-  `Order Type` int(255) NOT NULL,
+  `Order Type` varchar(255) NOT NULL,
   `Order Amount` varchar(255) NOT NULL,
   `Order Date` varchar(255) NOT NULL DEFAULT current_timestamp(),
   `Order Items` longtext NOT NULL,
   `Order Items Quantity` longtext NOT NULL,
   `Order Status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order`
+--
+
+INSERT INTO `order` (`Order Id`, `Order Number`, `Customer Id`, `Order Type`, `Order Amount`, `Order Date`, `Order Items`, `Order Items Quantity`, `Order Status`) VALUES
+(3, '451874845676', '24', 'Cash on Delivery', '23', '07-11-23', 'NE-181059', '1', 'Placed'),
+(4, '510853705094', '24', 'Cash on Delivery', '169', '07-11-23', 'SW-299775,BE-394912,NE-181059', '1, 1, 1', 'Placed'),
+(5, '233299150713', '24', 'Cash on Delivery', '23', '07-11-23', 'SW-299775', '1', 'Placed');
 
 -- --------------------------------------------------------
 
@@ -162,7 +171,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `Order Id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `Order Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `products`
