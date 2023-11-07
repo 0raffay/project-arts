@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2023 at 12:15 PM
+-- Generation Time: Nov 07, 2023 at 02:23 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -90,7 +90,10 @@ CREATE TABLE `order` (
 INSERT INTO `order` (`Order Id`, `Order Number`, `Customer Id`, `Order Type`, `Order Amount`, `Order Date`, `Order Items`, `Order Items Quantity`, `Order Status`) VALUES
 (3, '451874845676', '24', 'Cash on Delivery', '23', '07-11-23', 'NE-181059', '1', 'Placed'),
 (4, '510853705094', '24', 'Cash on Delivery', '169', '07-11-23', 'SW-299775,BE-394912,NE-181059', '1, 1, 1', 'Placed'),
-(5, '233299150713', '24', 'Cash on Delivery', '23', '07-11-23', 'SW-299775', '1', 'Placed');
+(5, '233299150713', '24', 'Cash on Delivery', '23', '07-11-23', 'SW-299775', '1', 'Placed'),
+(6, '111212546932', '24', 'Cash on Delivery', '4247', '07-11-23', 'MA-260442', '1', 'Placed'),
+(7, '134985079908', '24', 'Card Payment', '4247', '07-11-23', 'MA-260442', '1', 'Placed'),
+(9, '758341957922', '24', 'Card Payment', '23', '07-11-23', 'SW-299775', '1', 'Placed');
 
 -- --------------------------------------------------------
 
@@ -171,7 +174,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `Order Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Order Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `products`
