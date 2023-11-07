@@ -30,6 +30,8 @@ $customerData = Customer::getAllCustomerData($connection);
     <?php include('../includes/header-styles.php') ?>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/responsive.css">
+
+    <link rel="shortcut icon" href="../assets/images/logos/favicon/favicon.ico" type="image/x-icon">
     <!--==== HEADER STYLES END ====-->
 
     <title>Dashboard | <?php echo $site__name . " Admin"; ?></title>
@@ -57,6 +59,8 @@ $customerData = Customer::getAllCustomerData($connection);
                 <div class="pb-4 px-5 showAdminSections">
                     <?php include('sections/products.php'); ?>
                     <?php include('sections/customer.php'); ?>
+                    <?php include('sections/category.php'); ?>
+                    <?php include('sections/orders.php'); ?>
                 </div>
             </div>
             <!-- SECTIONS END -->

@@ -351,6 +351,65 @@ class Customer
             return " RESULT NOT FOUND;";
         }
     }
+
+    public static function fetchAllOrders()
+    {
+        global $connection;
+        $query = "SELECT * FROM `order`";
+        $result = mysqli_query($connection, $query);
+        if ($result) {
+            $rows = array();
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            return $rows;
+        } else {
+            return " RESULT NOT FOUND;";
+        }
+    }
+
+    public static function fetchSpecificProducts($column, $value)
+    {
+        global $connection;
+        $query = "SELECT * FROM `order` WHERE `$column` = '$value'";
+        $result = mysqli_query($connection, $query);
+        if ($result) {
+            $rows = array();
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            return $rows;
+        } else {
+            return " RESULT NOT FOUND;";
+        }
+    }
+}
+
+class Category
+{
+    public static function fetchAllCategory() {
+        global $connection;
+        $query = "SELECT * FROM `category`";
+        $result = mysqli_query($connection, $query);
+
+        if($result) {
+            $rows = array();
+            while($row = $result->fetch_assoc()) {
+                $rows[] = $row; 
+            }
+            return $rows;
+        } else {
+            return "No Categories";
+        }
+    }
+
+    public static function createCategory($catName) {
+        global $connection;
+        $query = "INSERT INTO `category` (`Category Id`, `Category Name`) VALUES (NULL, '$catName')
+        ";
+        $result = mysqli_query($connection, $query);
+        
+    }
 }
 
 if (isset($_COOKIE["currentCustomer"])) {

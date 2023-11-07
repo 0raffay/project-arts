@@ -572,3 +572,37 @@ $("[placeOrder]").click(function() {
 
     order(userDetails, orderType, total)
 })
+
+
+
+function tabbingWithClasses(options) {
+    let container = $(options.container);
+    let attribute = options.button.replace(/\[|\]/g, "") || "[data-show]";
+    let buttons = options.button ? $(options.button) : $("[data-show]");  
+    let activeClass = options.activeClass || "active";
+    let hide = options.hide || "div";
+
+    buttons.click(function () {
+        buttons.removeClass(activeClass);
+        $(this).addClass(activeClass);
+
+        let whatToShow = $(this).attr(attribute);
+        let whatToShowActually = container.find(whatToShow);
+        let whatToHide = container.children(hide);
+
+        whatToHide.hide();
+        whatToShowActually.show();
+
+
+        console.log(whatToHide)
+        console.log(whatToShow)
+        console.log("clicked");
+    });
+}
+
+tabbingWithClasses( {
+    container: ".orderArea",
+    hide: "div",
+    button: "[data-show-orders]",
+    activeClass: "active",
+})

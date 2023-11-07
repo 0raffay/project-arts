@@ -1,4 +1,3 @@
-
 <div class="position-relative product-section">
     <div class="products-section">
         <div class="text-center">
@@ -6,22 +5,22 @@
         </div>
         <div class="d-flex border-bottom-hr justify-content-between py-2">
             <div class="d-flex align-items-center gap-10">
-                <form action="<?php echo $_SERVER["PHP_SELF"];?>">
+                <form action="<?php echo $_SERVER["PHP_SELF"]; ?>">
                     <div class="search--bar fw-300 fs-16">
                         <span class="mr-2 addHover"><button type="submit" name="searchProduct">Search</button> <input required style="display: inline; width: auto;" type="text"></span><i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                 </form>
                 <button data-view-all-products class="addHover border-right active">View All</button>
-                <p class="fs-16 border-right"><span class="fc-secondary fw-500">Total No.Of Products:</span>  <?php echo count(Product::$instances);?></p>
-    
+                <p class="fs-16 border-right"><span class="fc-secondary fw-500">Total No.Of Products:</span> <?php echo count(Product::$instances); ?></p>
+
             </div>
             <button class="btn btn-primary " data-add-product>Add New Product</button>
         </div>
 
-    
+
         <div class="addProduct hidden">
             <div class="form__wrap">
-                <form method="post" action="<?php echo $_SERVER["PHP_SELF"] ?>"  enctype="multipart/form-data" >
+                <form method="post" action="<?php echo $_SERVER["PHP_SELF"] ?>" enctype="multipart/form-data">
                     <div class="row py-4">
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="input__wrap">
@@ -88,18 +87,18 @@
                     <div class="col-lg-12 col-sm-12">
                         <button type="submit" name="uploadProduct" class="btn btn-secondary d-block mx-auto">Add Product to Catalogue</button>
                     </div>
-    
+
                     <?php
-                        if(isset($_POST["uploadProduct"])) {
-                            Product::uploadProduct($connection);
-                        }
-    
+                    if (isset($_POST["uploadProduct"])) {
+                        Product::uploadProduct($connection);
+                    }
+
                     ?>
-    
+
                 </form>
             </div>
         </div>
-    
+
         <div class="allProducts ">
             <?php
             // if (isset($_GET["searchButton"])) {
@@ -107,18 +106,18 @@
             //     Product::sortProducts($connection, $userQuery);
             // }
             ?>
-    
+
             <div class="row all-product-container py-3">
                 <?php foreach (Product::$instances as $product) { ?>
                     <div class="all-product-item col-lg-6 col-md-6 col-sm-12  d-flex align-items-center ">
                         <div class="col-lg-3">
                             <div class="img__wrap">
-                                <img src ="../assets/images/product-images/<?php echo $product->images;?>">
+                                <img src="../assets/images/product-images/<?php echo $product->images; ?>">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <h6 class="fc-secondary fw-400 fs-24 mb-2">Title: <?php echo $product->name; ?></h6>
-                            <p class="fc-secondary fw-400 fs-20 mb-5"><strong>Price:</strong> $<?php echo $product->price;?></p>
+                            <p class="fc-secondary fw-400 fs-20 mb-5"><strong>Price:</strong> $<?php echo $product->price; ?></p>
                             <h6 class="fc-secondary fw-300 fs-18 mb-2"><strong>SKU: </strong><?php echo $product->SKU; ?> </h6>
                             <h6 class="fc-secondary fw-300 fs-18 mb-2"><strong>Category: </strong><?php echo $product->category; ?></h6>
                             <h6 class="fc-secondary fw-300 fs-16 mb-2"><strong>Units: </strong><?php echo $product->stock; ?></h6>
@@ -131,9 +130,9 @@
                 <?php } ?>
             </div>
         </div>
-    
-    
-    
-    
+
+
+
+
     </div>
 </div>
