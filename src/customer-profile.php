@@ -158,7 +158,7 @@ if (isset($_POST["updateCustomerDetails"])) {
                     $orders = Customer::fetchOrders();
                     $orderCount = count($orders);
                     ?>
-                    <div class="d-flex">
+                    <div class="d-flex mb-10">
                         <p class="fs-16">No of Orders: <?php echo $orderCount; ?></p>
                     </div>
 
@@ -175,7 +175,8 @@ if (isset($_POST["updateCustomerDetails"])) {
                                     <th>Items</th>
                                     <th>Total</th>
                                     <th>Payment Method</th>
-                                    <th></th>
+                                    <th>Order Status</th>
+                                    <th class="text-center">Info:</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -186,34 +187,38 @@ if (isset($_POST["updateCustomerDetails"])) {
                                     $orderAmount = $order["Order Amount"];
                                     $orderDate = $order["Order Date"];
                                     $orderItems = explode(",", $order["Order Items"]);
+                                    $orderStatus = $order["Order Status"];
                                 ?>
                                     <tr>
                                         <td>
                                             <?php echo $orderNum; ?>
                                         </td>
                                         <td>
-                                            <?php echo $orderType; ?>
+                                            <?php echo $orderDate; ?>
                                         </td>
                                         <td>
                                             <?php
+                                            $productArray = array();
                                             foreach ($orderItems as $item) {
-                                                $product = checkCurrentProduct($item);
+                                                $productArray[] = checkCurrentProduct($item);
+                                            }
 
-                                                foreach($product as $productItem) {
-                                                    print_r($productItem["images"]);
-                                                }
-                                            ?>
-                                                <!-- <img src="assets/images/product-images/<?php // echo $product["images"]; 
-                                                                                            ?>" alt=""> -->
+                                            foreach ($productArray as $product) { ?>
+                                                <img class="orderImg" src="assets/images/product-images/<?php echo $product->images ?>">
                                             <?php } ?>
                                         </td>
                                         <td>
                                             <?php echo $currencySymbol; ?><?php echo $orderAmount; ?>
                                         </td>
                                         <td>
-                                            <?php echo $orderDate; ?>
+                                            <?php echo $orderType; ?>
                                         </td>
-
+                                        <td>
+                                            <?php echo $orderStatus; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="" class="addHover">Manage</a>
+                                        </td>
                                     </tr>
                                 <?php } ?>
 

@@ -32,7 +32,7 @@ $orderQuantity = $cart["Product Quantity"];
 
 $date = date("d-m-y");
 
-$query = "INSERT INTO `order` (`Order Id`, `Order Number`, `Customer Id`, `Order Type`, `Order Amount`, `Order Date`, `Order Items`, `Order Items Quantity`, `Order Status`) VALUES (NULL, '$orderNumber', '$customerId', '$orderType', '$cartTotal', '$date', '$orderItems', '$orderQuantity', 'Placed')";
+$query = "INSERT INTO `order` (`Order Id`, `Order Number`, `Customer Id`, `Order Type`, `Order Amount`, `Order Date`, `Order Items`, `Order Items Quantity`, `Order Status`) VALUES (NULL, '$orderNumber', '$customerId', '$orderType', '$cartTotal', '$date', '$orderItems', '$orderQuantity', 'In Process')";
 
 $result = mysqli_query($connection, $query);
 

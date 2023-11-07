@@ -70,8 +70,6 @@ $userZip = $currentCustomer["Customer Zipcode"];
                     <ul class="list-group mb-3">
 
                         <?php
-
-
                         foreach (Product::$instances as $product) {
                             if (in_array($product->SKU, $productsInCart)) {
                                 $productIndex  = array_search($product->SKU, $productsInCart);

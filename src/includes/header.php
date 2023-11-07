@@ -91,6 +91,7 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
                         echo '<h6 class="fw-300 fs-24 fc-secondary">Products:</h6>';
                         foreach (Product::$instances as $product) {
                             if (in_array($product->SKU, $productsInCart)) {
+                                // print_r($productsInCart);
                                 $productIndex  = array_search($product->SKU, $productsInCart);
                                 $productQuantity = $productsInCartQuantity[$productIndex];
                 ?>
@@ -107,7 +108,7 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
                                         <div class="d-flex justify-content-between align-items-end">
                                             <div>
                                                 <label for="cart-quantity<?php echo $product->SKU; ?>" class="fw-300 mb-1 addHover fs-14 fc-secondary-400">Edit Quantity:</label>
-                                                <input id="cart-quantity<?php echo $product->SKU; ?>" data-product-index="<?php echo $productIndex;?>" value="<?php echo $productQuantity; ?>" class="cart-item-quantity">
+                                                <input id="cart-quantity<?php echo $product->SKU; ?>" data-product-index="<?php echo $productIndex; ?>" value="<?php echo $productQuantity; ?>" class="cart-item-quantity">
                                             </div>
                                             <div>
                                                 <button data-remove-from-cart data-id="<?php echo $productIndex; ?>" class="text-danger remove-cart-item fw-300 fs-14">Remove Item</button>

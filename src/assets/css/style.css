@@ -1095,6 +1095,11 @@ button.disabled {
     padding: 10px 15px;
     border: 1px solid #000;
     width: 50%;
+    vertical-align: middle;
+}
+
+.table td, .table th{
+    vertical-align: middle;
 }
 
 .thankyouSection th {
@@ -1109,4 +1114,12 @@ button.disabled {
 
 .thankyouSection tr:nth-last-of-type(1) th {
     border-bottom: 1px solid #000;
+}
+
+.orderImg {
+    --_size: 90px;
+    height: var(--_size);
+    width: var(--_size);
+    object-fit: contain;
+
 }
