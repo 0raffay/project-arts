@@ -154,17 +154,72 @@ if (isset($_POST["updateCustomerDetails"])) {
                 </div>
                 <div class="tabbingPanel order-history">
                     <h4 class="fw-300 pb-3 fs-24 text-center fc-secondary">Order History</h4>
+                    <?php
+                    $orders = Customer::fetchOrders();
+                    $orderCount = count($orders);
+                    ?>
                     <div class="d-flex">
-                        <p class="fs-16">No of Orders: 0</p>
+                        <p class="fs-16">No of Orders: <?php echo $orderCount; ?></p>
                     </div>
 
-                    <div class="orderHistory">
-                        <p class="text-center pt-5 fs-20 fw-400 fc-secondary-400">You have no orders.</p>
-                    </div>
-                    <?php
-                    $result = Customer::fetchOrders();
-                    print_r($result);
-                    ?>
+                    <?php if ($orderCount <= 0) { ?>
+                        <div class="orderHistory">
+                            <p class="text-center pt-5 fs-20 fw-400 fc-secondary-400">You have no orders.</p>
+                        </div>
+                    <?php } else { ?>
+                        <table class="table text-left">
+                            <thead>
+                                <tr>
+                                    <th>Order #</th>
+                                    <th>Placed On</th>
+                                    <th>Items</th>
+                                    <th>Total</th>
+                                    <th>Payment Method</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach ($orders as $order) {
+                                    $orderNum = $order["Order Number"];
+                                    $orderType = $order["Order Type"];
+                                    $orderAmount = $order["Order Amount"];
+                                    $orderDate = $order["Order Date"];
+                                    $orderItems = explode(",", $order["Order Items"]);
+                                ?>
+                                    <tr>
+                                        <td>
+                                            <?php echo $orderNum; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $orderType; ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            foreach ($orderItems as $item) {
+                                                $product = checkCurrentProduct($item);
+
+                                                foreach($product as $productItem) {
+                                                    print_r($productItem["images"]);
+                                                }
+                                            ?>
+                                                <!-- <img src="assets/images/product-images/<?php // echo $product["images"]; 
+                                                                                            ?>" alt=""> -->
+                                            <?php } ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $currencySymbol; ?><?php echo $orderAmount; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $orderDate; ?>
+                                        </td>
+
+                                    </tr>
+                                <?php } ?>
+
+                            </tbody>
+                        </table>
+                    <?php } ?>
                 </div>
             </div>
 

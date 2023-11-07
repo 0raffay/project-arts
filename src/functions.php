@@ -338,15 +338,17 @@ class Customer
         global $connection;
         global $currentCustomer;
         $customerID = $currentCustomer["Customer Id"];
-
-        $query = "SELECT * FROM `order` WHERE `Customer Id`='$customerID'";
+        $query = "SELECT * FROM `order` WHERE `Customer Id` = '$customerID'";
         $result = mysqli_query($connection, $query);
         if ($result) {
+            $rows = array();
             while ($row = $result->fetch_assoc()) {
-                return $row;
+                $rows[] = $row;
+                // print_r($rows);
             }
+            return $rows;
         } else {
-            echo " RESULT NOT FOUND;";
+            return " RESULT NOT FOUND;";
         }
     }
 }

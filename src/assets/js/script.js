@@ -567,8 +567,6 @@ $("[placeOrder]").click(function() {
         city: $('.userCity').val(),
         zipCode: $('.zipCode').val()
     }
-
-
     let total = $('.amount').html();
     let orderType = $(".paymentMethodInput").val();
 
