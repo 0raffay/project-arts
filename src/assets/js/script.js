@@ -488,7 +488,7 @@ validateForm(
                     $(".loader").hide();
                 } else {
                     // No errors, proceed to thank you page
-                    // window.location.href = "thankyou-page.html"; // Change the URL as needed
+                    window.location.href = "thankyou.php"; // Change the URL as needed
                 }
             } else {
                 // Handle other cases if needed
@@ -515,7 +515,7 @@ validateForm(
         $(".loader").show();
         $(".toBeHidden").hide();
         setTimeout(function () {
-            // window.location.href = "thankyou-page.html"; // Change the URL as needed
+            window.location.href = "thankyou.php"; // Change the URL as needed
         }, 1000);
     }
 );

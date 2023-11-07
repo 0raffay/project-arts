@@ -1020,7 +1020,7 @@ button.disabled {
     padding-block: 2px;
 }
 
-.cart-item  img {
+.cart-item img {
     width: 180px;
 
     object-position: center;
@@ -1039,13 +1039,13 @@ button.disabled {
 }
 
 .info-side,
-.payment-side{
+.payment-side {
     height: 100%;
 }
 
 
 .info-side {
-    background: rgb(250,250,250);
+    background: rgb(250, 250, 250);
 }
 
 .checkout-cart-item .img__wrap img {
@@ -1070,21 +1070,43 @@ button.disabled {
     min-height: 100vh;
 }
 
-.checkoutBody input + p {
+.checkoutBody input+p {
     display: none;
 }
 
-* >:has(.invalid-feedback) {
+*>:has(.invalid-feedback) {
     position: relative;
 }
+
 .checkoutBody .error {
     outline: none !important;
 }
 
-.checkoutBody .error + .invalid-feedback{
+.checkoutBody .error+.invalid-feedback {
     display: block;
 
     position: absolute;
     bottom: -23px;
     left: 10px;
-} 
+}
+
+.thankyouSection th,
+.thankyouSection td {
+    padding: 10px 15px;
+    border: 1px solid #000;
+    width: 50%;
+}
+
+.thankyouSection th {
+    background-color: #1c1112;
+    color: #fff;
+    user-select: none;
+}
+
+.thankyouSection tr:not(:nth-last-of-type(1)) th {
+    border-bottom: 1px solid #fff;
+}
+
+.thankyouSection tr:nth-last-of-type(1) th {
+    border-bottom: 1px solid #000;
+}

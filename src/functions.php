@@ -332,6 +332,23 @@ class Customer
             return false;
         }
     }
+
+    public static function fetchOrders()
+    {
+        global $connection;
+        global $currentCustomer;
+        $customerID = $currentCustomer["Customer Id"];
+
+        $query = "SELECT * FROM `order` WHERE `Customer Id`='$customerID'";
+        $result = mysqli_query($connection, $query);
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                return $row;
+            }
+        } else {
+            echo " RESULT NOT FOUND;";
+        }
+    }
 }
 
 if (isset($_COOKIE["currentCustomer"])) {
@@ -373,5 +390,5 @@ function fetchCartProducts($connection, $currentCustomer)
         }
     }
 }
-fetchCartProducts($connection, $currentCustomer);
 
+fetchCartProducts($connection, $currentCustomer);

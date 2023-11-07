@@ -36,13 +36,23 @@ $query = "INSERT INTO `order` (`Order Id`, `Order Number`, `Customer Id`, `Order
 
 $result = mysqli_query($connection, $query);
 
-if($result) {
+if ($result) {
     $query = "UPDATE `cart` SET `Products` = '', `Product Quantity` = '' WHERE `Customer Id` = '$customerId'";
     $result = mysqli_query($connection, $query);
     if (!$result) {
         echo "Couldn't Update Cart";
-    }   else {
+    } else {
         echo "CART WAS UPDATED";
+
+        $recentProduct = array(
+            "OrderNum" => "$orderNumber",
+            "OrderDate" => "$date",
+            "deliveryDate" => "24.24.24",
+            "orderAmount" => $cartTotal,
+            "paymentMethod" => $orderType,
+        );
+
+        $_SESSION["recentOrder"] = $recentProduct;
     }
 } else {
     echo "Nahi yar";

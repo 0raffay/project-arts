@@ -4,7 +4,7 @@ $dbConfig = array(
     'host' => 'localhost',
     'username' => 'root',
     'password' => '',
-    'database' => 'project-arts-import'
+    'database' => 'project-arts'
 );
 
 $connection = new mysqli(

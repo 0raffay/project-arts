@@ -58,7 +58,7 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
 
 
 
-<div class="modal-wrapper cart active">
+<div class="modal-wrapper cart ">
     <div class="cart-modal">
         <div class="py-4 px-4">
             <div class="position-relative d-flex px-2 mb-20 justify-content-between align-items-center">

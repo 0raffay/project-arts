@@ -11,11 +11,6 @@ $userPhone = $currentCustomer["Customer Phone"];
 $userAddress = $currentCustomer["Customer Address"];
 $userCity = $currentCustomer["Customer City"];
 $userZip = $currentCustomer["Customer Zipcode"];
-
-
-
-
-
 ?>
 
 
