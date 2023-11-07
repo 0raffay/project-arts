@@ -161,7 +161,10 @@ if (isset($_POST["updateCustomerDetails"])) {
                     <div class="orderHistory">
                         <p class="text-center pt-5 fs-20 fw-400 fc-secondary-400">You have no orders.</p>
                     </div>
-
+                    <?php
+                    $result = Customer::fetchOrders();
+                    print_r($result);
+                    ?>
                 </div>
             </div>
 
