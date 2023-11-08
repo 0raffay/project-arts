@@ -713,7 +713,6 @@ function sortProducts(keywords) {
         },
         success: function (response) {
             var products = JSON.parse(response);
-            console.log(products);
             showSearchedProducts(products);
         },
         error: function (xhr, status, error) {
@@ -726,7 +725,7 @@ function showSearchedProducts(products) {
 
     if (products.length === 0) {
         productsContainer.empty();
-        console.log("No Products with these keywords");
+        productsContainer.html("No Products with these keywords");
     } else {
         productsContainer.empty();
 
@@ -760,14 +759,36 @@ function showSearchedProducts(products) {
         }
     }
 }
-
 let searchInput = $("[header-search]");
 
 searchInput.on("keyup", function () {
     let keywords = $(this).val();
-    sortProducts(keywords);
 
-    if($(this).val() == "") {
+    // Check if the input is empty
+    if (keywords === "") {
         $(".showSearchedProducts").empty();
+    } else {
+        // Call sortProducts only if the input is not empty
+        sortProducts(keywords);
     }
 });
+
+$(".searchInput").on("keyup", function (e) {
+    if (e.key === "Enter") {
+        redirectToSearchPage();
+    }
+});
+
+// Add a click event listener to the search button
+$(".searchButton").on("click", function () {
+    redirectToSearchPage();
+});
+
+function redirectToSearchPage() {
+    let searchQuery = $(".searchInput").val().trim();
+
+    if (searchQuery !== "") {
+        window.location.href =
+            "search.php?query=" + encodeURIComponent(searchQuery);
+    }
+}

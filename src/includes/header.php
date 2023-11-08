@@ -160,20 +160,14 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
                 <button class="close" data-search-modal><i class="ri-close-line"></i></button>
             </div>
             <div class="d-flex pb-2 justify-content-between border-bottom-hr fs-24">
-                <input class="fc-secondary fw-400" type="text" header-search placeholder="Search Products...">
-                <i class=" fa-solid fa-magnifying-glass"></i>
+                <input class="fc-secondary fw-400 searchInput" type="text"  header-search placeholder="Search Products...">
+                <button class="searchButton" type="button"><i class=" fa-solid fa-magnifying-glass"></i></button>
             </div>
 
 
             <!-- //SHOW PRODUCTS HERE: -->
             <div class="showSearchedProducts row py-2">
-                <!-- <div class="header-search-item">
-                    <img src="assets/images/product-images/">
-                </div>
-                <div class="header-search-text">
-                    <h5 class="fs-14 fw-400 fc-secondary">Product</h5>
-                    <h6 class="fs-16 fw-400 fc-secondary"><?php echo $currencySymbol;?> <span class="amount"></span></h6>
-                </div> -->
+                    <p class="searchError"></p>
             </div>
 
         </div>
