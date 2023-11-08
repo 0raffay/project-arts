@@ -486,6 +486,7 @@ validateForm(
                     $(".toBeHidden").show();
                     $(".loader").hide();
                 } else {
+                    actualPlaceOrder(); 
                     // No errors, proceed to thank you page
                     window.location.href = "thankyou.php"; // Change the URL as needed
                 }
@@ -514,10 +515,24 @@ validateForm(
         $(".loader").show();
         $(".toBeHidden").hide();
         setTimeout(function () {
+            actualPlaceOrder();
             window.location.href = "thankyou.php"; // Change the URL as needed
         }, 1000);
     }
 );
+
+function actualPlaceOrder(){ 
+    let userDetails = {
+        phone: $(".userPhoneField").val(),
+        address: $(".shippingAddress").val(),
+        city: $(".userCity").val(),
+        zipCode: $(".zipCode").val(),
+    };
+    let total = $(".amount").html();
+    let orderType = $(".paymentMethodInput").val();
+
+    order(userDetails, orderType, total);
+}
 
 $(".checkCardInfo").change(function () {
     if ($(this).val() != "") {
@@ -560,16 +575,16 @@ function order(shippingDetails, orderType, total) {
 }
 
 $("[placeOrder]").click(function () {
-    let userDetails = {
-        phone: $(".userPhoneField").val(),
-        address: $(".shippingAddress").val(),
-        city: $(".userCity").val(),
-        zipCode: $(".zipCode").val(),
-    };
-    let total = $(".amount").html();
-    let orderType = $(".paymentMethodInput").val();
+    // let userDetails = {
+    //     phone: $(".userPhoneField").val(),
+    //     address: $(".shippingAddress").val(),
+    //     city: $(".userCity").val(),
+    //     zipCode: $(".zipCode").val(),
+    // };
+    // let total = $(".amount").html();
+    // let orderType = $(".paymentMethodInput").val();
 
-    order(userDetails, orderType, total);
+    // order(userDetails, orderType, total);
 });
 
 function tabbingWithClasses(options) {
@@ -630,7 +645,6 @@ addToCategoryButton.click(function () {
     addCategory(value);
 });
 
-
 function deleteCategory(value) {
     $.ajax({
         url: "../controllers/delete-category.php",
@@ -648,16 +662,16 @@ function deleteCategory(value) {
     });
 }
 
-let removeCatButton = $('[removeCat]');
+let removeCatButton = $("[removeCat]");
 
-removeCatButton.click(function (){
+removeCatButton.click(function () {
     let value = $(this).attr("data-id");
     deleteCategory(value);
-})
+});
 
-function renameCategory(id,value) {
+function renameCategory(id, value) {
     $.ajax({
-        url: "../controllers/delete-category.php",
+        url: "../controllers/rename-category.php",
         data: {
             id: id,
             value: value,
@@ -673,14 +687,14 @@ function renameCategory(id,value) {
     });
 }
 
-$(".focusOnCat").click(function (){
-    let container = $(this).closest('.list-group-item ');
+$(".focusOnCat").click(function () {
+    let container = $(this).closest(".list-group-item");
     let input = container.find(".catInput");
     input.removeAttr("readonly");
     input.focus();
     input.change(function () {
-        let value = $(this).val();
+        let name = $(this).val();
         let id = $(this).attr("data-id");
-        renameCategory(id, value);
-    })
-})
+        renameCategory(id, name);
+    });
+});

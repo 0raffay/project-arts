@@ -28,21 +28,21 @@ $categories = Category::fetchAllCategory();
                 ?>
                     <li class="list-group-item d-flex justify-content-between fs-30">
                         <div class="d-flex gap-10">
-                            <span class="border-right"><?php echo $count; ?>:</span> <input class="catInput"  id="<?php echo $categoryId?>" data-id="<?php echo $categoryId?>"  type="text" value="<?php echo $categoryName; ?>">
+                            <span class="border-right"><?php echo $count; ?>:</span> <input class="catInput" id="<?php echo $categoryId ?>" data-id="<?php echo $categoryId ?>" type="text" value="<?php echo $categoryName; ?>">
                         </div>
                         <div class="d-flex gap-10 fs-20">
-                            <button  class="border-right addHover focusOnCat">Rename</button>
-                            <button class=" addHover text-danger" removeCat data-id="<?php echo $categoryId?>">Remove</button>
+                            <button class="border-right addHover focusOnCat">Rename</button>
+                            <button class=" addHover text-danger" removeCat data-id="<?php echo $categoryId ?>">Remove</button>
                         </div>
                     </li>
 
                 <?php   } ?>
-                    <?php
-                    
-                        if(count($categories) <=0 ) {
-                            echo "<p class='text-center py-3'>There are 0 Categories</p>";
-                        }
-                    ?>
+                <?php
+
+                if (count($categories) <= 0) {
+                    echo "<p class='text-center py-3'>There are 0 Categories</p>";
+                }
+                ?>
 
 
 
@@ -72,7 +72,7 @@ $categories = Category::fetchAllCategory();
                 </div>
             </div>
             <div class="modal-footer text-center">
-                <button type="button" data-save-category class="btn btn-primary">Save changes</button>
+                <button type="button" data-save-category class="btn btn-primary">Save Category</button>
             </div>
         </div>
     </div>

@@ -33,10 +33,14 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
 
                         <div class="submenu--wrapper">
                             <ul class="submenu">
-                                <li><a href="">Greeting Cards</a></li>
-                                <li><a href="">Wallets</a></li>
-                                <li><a href="">Beauty Products</a></li>
-                                <li><a href="">Beauty Products</a></li>
+                                <?php
+                                $categories = Category::fetchAllCategory();
+                                foreach ($categories as $category) {
+                                    $categoryName = $category["Category Name"];
+                                    $categoryId = $category["Category Id"];
+                                ?>
+                                    <li><a href=""><?php echo $categoryName; ?></a></li>
+                                <?php   } ?>
                             </ul>
                         </div>
                     </li>

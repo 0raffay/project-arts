@@ -51,8 +51,15 @@
                                 <label for="">Product Category*</label>
                                 <select required name="productCategory" id="">
                                     <option value="" selected></option>
-                                    <option value="Wallets">Wallets</option>
-                                    <option value="Bags">Bags</option>
+                                    <?php
+                                    $categories = Category::fetchAllCategory();
+                                    foreach ($categories as $category) {
+                                        $categoryName = $category["Category Name"];
+                                        $categoryId = $category["Category Id"];
+                                    ?>
+                                        <option value="<?php echo $categoryName; ?>"><?php echo $categoryName; ?></option>
+                                    <?php   } ?>
+
                                 </select>
                             </div>
                         </div>

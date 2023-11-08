@@ -38,7 +38,8 @@
 
 
     <!--==== FOLLOW US START ====-->
-    <?php include('sections/follow-us-section.php') ?>
+    <div class="py-4"></div>
+    <?php //include('sections/follow-us-section.php') ?>
     <!--==== FOLLOW US END ====-->
 
     <!--==== BRAND SLIDER START ====-->

@@ -431,12 +431,12 @@ class Category
     public static function renameCategory($catId, $newName)
     {
         global $connection;
-        $query = "UPDATE FROM `category` SET `Category Name` = '$newName'  WHERE `Category Id` = '$catId' ";
+        $query = "UPDATE  `category` SET `Category Name` = '$newName'  WHERE `Category Id` = '$catId' ";
         $result = mysqli_query($connection, $query);
         if ($result) {
             return "Category Has been renamed";
         } else {
-            return "Error";
+            return "Error: " . mysqli_error($connection);
         }
     }
 }
