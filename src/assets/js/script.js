@@ -733,7 +733,7 @@ function showSearchedProducts(products) {
         for (let i = 0; i < products.length; i++) {
             var product = products[i];
             var productDiv = $(
-                `<a class="d-block col-3 header-search-item" href='single-product.php?id=${product.SKU}'>></a>`
+                `<a class="d-block col-3 header-search-item" href='single-product.php?id=${product.SKU}'></a>`
             );
             var productImage = $(
                 "<img src='assets/images/product-images/" +
@@ -766,4 +766,8 @@ let searchInput = $("[header-search]");
 searchInput.on("keyup", function () {
     let keywords = $(this).val();
     sortProducts(keywords);
+
+    if($(this).val() == "") {
+        $(".showSearchedProducts").empty();
+    }
 });

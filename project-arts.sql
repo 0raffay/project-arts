@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 08, 2023 at 02:22 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Nov 08, 2023 at 09:19 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -48,7 +48,7 @@ INSERT INTO `cart` (`Cart Id`, `Customer Id`, `Products`, `Product Quantity`) VA
 --
 
 CREATE TABLE `category` (
-  `Category Id` int(11) NOT NULL,
+  `Category Id` int(255) NOT NULL,
   `Category Name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -57,7 +57,14 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`Category Id`, `Category Name`) VALUES
-(4, 'Wallets');
+(4, 'Files'),
+(5, 'Handbags'),
+(11, 'Beauty Products'),
+(12, 'Gift Articles'),
+(13, 'Arts'),
+(14, 'Wallets'),
+(17, 'Dolls'),
+(18, 'Greeting Cards');
 
 -- --------------------------------------------------------
 
@@ -106,12 +113,13 @@ CREATE TABLE `order` (
 --
 
 INSERT INTO `order` (`Order Id`, `Order Number`, `Customer Id`, `Order Type`, `Order Amount`, `Order Date`, `Order Items`, `Order Items Quantity`, `Order Status`) VALUES
-(3, '451874845676', '24', 'Cash on Delivery', '23', '07-11-23', 'NE-181059', '1', 'Placed'),
-(4, '510853705094', '24', 'Cash on Delivery', '169', '07-11-23', 'SW-299775,BE-394912,NE-181059', '1, 1, 1', 'Placed'),
-(5, '233299150713', '24', 'Cash on Delivery', '23', '07-11-23', 'SW-299775', '1', 'Placed'),
-(6, '111212546932', '24', 'Cash on Delivery', '4247', '07-11-23', 'MA-260442', '1', 'Placed'),
-(7, '134985079908', '24', 'Card Payment', '4247', '07-11-23', 'MA-260442', '1', 'Placed'),
-(9, '758341957922', '24', 'Card Payment', '23', '07-11-23', 'SW-299775', '1', 'Placed');
+(10, '657733404571', '24', 'Cash on Delivery', '4393', '07-11-23', 'MA-260442,BE-394912,SW-299775', '1, 1, 1', 'In Process'),
+(11, '942135826867', '24', 'Cash on Delivery', '123', '07-11-23', 'BE-394912', '1', 'In Process'),
+(12, '765715483556', '24', 'Cash on Delivery', '8494', '07-11-23', 'MA-260442', '1,2', 'Delivered'),
+(13, '135642164201', '24', 'Card Payment', '23', '08-11-23', 'SW-299775', '1', 'In Process'),
+(14, '409134222811', '24', 'Cash on Delivery', '23', '08-11-23', '', '', 'In Process'),
+(15, '383468171897', '24', 'Card Payment', '23', '08-11-23', 'SW-299775', '1', 'In Process'),
+(16, '471373028881', '24', 'Cash on Delivery', '123', '08-11-23', 'BE-394912', '1', 'In Process');
 
 -- --------------------------------------------------------
 
@@ -138,10 +146,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`Product Id`, `Product Name`, `Product Stock`, `Product Category`, `Product SKU`, `Images`, `Keywords`, `Warranty`, `Product Price`, `Product Description`, `Product Brand`) VALUES
-(43, 'Manager', 12, 'Wallets', 'MA-260442', 'IMG-653412cb8f5069.31050753.png', '12', 'W-897328', '4247', '12', 'Chanel'),
-(44, 'Sweater', 24, 'Wallets', 'SW-299775', 'IMG-65341453490669.47098053.png', 'dah a hdlaw hdladhdl h', 'W-389733', '23', 'This is the best Product', 'Victoria'),
-(45, 'New Product', 44, 'Bags', 'NE-181059', 'IMG-653b5e73cc52b6.09116770.png', 'Wallet and Best Wallet', 'W-628687', '23', 'This has been the most selling product of all times.', 'brand'),
-(46, 'Best Product Ever', 123, 'Wallets', 'BE-394912', 'IMG-653f7ef04a0816.40438093.png', '123', 'W-295694', '123', '1231', '123');
+(47, 'Istanbul Wallet', 10, 'Wallets', 'IS-511272', 'IMG-654be451cca2b3.89862110.jpg', 'wallets,wallet,instanbul', 'W-392480', '22', 'DETAILS:\r\nJust like the city from which it draws its name, this wallet is traditional in appearance despite its sleek and modern design.\r\nFEATURES:\r\nOne Cash compartment\r\nSix credit card slots\r\nTwo pockets for receipts\r\nDIMENSIONS:\r\n110mm x 85mm', 'jafferees'),
+(48, ' Greeting Card in a Mini Envelope', 23, 'Greeting Cards', ' G-805307', 'IMG-654be906a9fb26.35473431.jpg', 'card,cards', 'W-873703', '22', 'Package Dimensions ‏ : ‎ 5 x 3.11 x 0.28 inches; 0.32 Ounces\r\nItem model number ‏ : ‎ VariableDenomination', 'Amazon'),
+(49, 'Barbie Dreamtopia Doll with Removable Unicorn Headband & Tail, Blue & Purple Fantasy Hair & Cloudy Star-Print Skirt, Unicorn Toy', 12, 'Dolls', 'BA-246336', 'IMG-654bec942975c8.46179078.jpg', 'barbie, best barbie, new barbie, barbie pink, pink, pink barbie,barbie,dreamtopia,doll,with,removable,unicorn,headband,&,tail,,blue,&,purple,fantasy,hair,&,cloudy,star-print,skirt,,unicorn,toy,dolls,barbie', 'W-953113', '29', 'Unicorn dolls from Barbie Dreamtopia bring fairytale dreams to life with fantastical looks and a magical transformation!\r\nThis Barbie doll wears a sparkly bodice and a removable skirt with a cloud and star print.\r\nKids can add a unicorn headband and clip-', 'Barbie');
 
 --
 -- Indexes for dumped tables
@@ -192,7 +199,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `Category Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Category Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -204,13 +211,13 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `Order Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `Order Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `Product Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `Product Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- Constraints for dumped tables

@@ -24,7 +24,6 @@ class Product
     public $description;
     public $warranty;
     public $brand;
-    public $errorStatements = array();
 
     // CREATES PRODUCT OBJECT -- RUNNING IN createInstancesOfProduct();
     public function __construct($name, $SKU, $category, $stock, $img, $productKeywords, $price, $description, $warranty, $brand)
@@ -74,12 +73,24 @@ class Product
             //PRODUCT CATEGROY:
             $productCategory = $_POST["productCategory"];
 
-            //PRODUCT KEYWORDS:
-            $productKeywords = $_POST['productKeywords'];
-            $allProductKeywords = strtolower($productKeywords) . " " . strtolower($productCategory) . " " . strtolower($productName) . " " . strtolower($productSKU);
-
             //PRODUCT DESCRIPTION:
             $productDescription = $_POST["productDescription"];
+
+            //Product Brand;
+            $productBrand = $_POST["productBrand"];
+
+
+            //PRODUCT KEYWORDS:
+            $productKeywords = explode(",", $_POST['productKeywords']);
+            $titleArray = explode(" ", strtolower($productName));
+            $productCategoryArray = explode(" ", strtolower($productCategory));
+            $productBrandArray = explode(" ", strtolower($productBrand));
+
+            $allProductKeywordsArray = array_merge($productKeywords, $titleArray, $productCategoryArray, $productBrandArray);
+
+            $allProductKeywordsArrayString = implode(",", $allProductKeywordsArray);
+
+            // $allProductKeywords = strtolower($productKeywords) . " " . strtolower($productCategory) . " " . strtolower($productName) . " " . strtolower($productSKU);
 
 
             //PRODUCT WARRANTY:
@@ -91,8 +102,6 @@ class Product
                 $productWarranty = "No Warranty";
             }
 
-            //Product Brand;
-            $productBrand = $_POST["productBrand"];
 
             //CREATING IMAGE FILES
             if ($_FILES['productImages']['error'] === 0) {
@@ -119,7 +128,7 @@ class Product
 
             if (!isset($em)) {
                 $insertSQL =
-                    "INSERT INTO `products` (`Product Id`, `Product Name`, `Product Stock`, `Product Category`, `Product SKU`, `Images`,  `Keywords`, `Warranty`, `Product Price`, `Product Description`, `Product Brand`) VALUES (NULL, '$productName', '$productStock', '$productCategory', '$productSKU', '$imgUrl', '$productKeywords', '$productWarranty', '$productPrice', '$productDescription', '$productBrand')";
+                    "INSERT INTO `products` (`Product Id`, `Product Name`, `Product Stock`, `Product Category`, `Product SKU`, `Images`,  `Keywords`, `Warranty`, `Product Price`, `Product Description`, `Product Brand`) VALUES (NULL, '$productName', '$productStock', '$productCategory', '$productSKU', '$imgUrl', '$allProductKeywordsArrayString', '$productWarranty', '$productPrice', '$productDescription', '$productBrand')";
 
 
                 $resultOfQuery = mysqli_query($connection, $insertSQL);
@@ -172,9 +181,9 @@ class Product
         $deleteResult = mysqli_query($connection, $deleteSQL);
 
         if (!$deleteResult) {
-            $this->errorStatements['deleteProduct'] = "Product Couldn't Be Deleted";
+            echo  "Product Couldn't Be Deleted";
         } else {
-            $this->errorStatements['deleteProduct'] = "Product Was Deleted";
+            echo  "Product Was Deleted";
             header("Location: " . $_SERVER["PHP_SELF"]);
             exit;
         }
@@ -185,24 +194,20 @@ class Product
         $lowerCaseKeywords = strtolower($keyword);
         $keywordsArray = explode(" ", $lowerCaseKeywords);
         $matchingProducts = [];
-    
+
         $products = Product::$instances;
-    
+
         foreach ($products as $product) {
-            $title = strtolower($product->name);
-            $titleArray = explode(" ", $title);
+            $keys = strtolower($product->keywords);
+            $keyArray = explode(",", $keys);
 
             // Check if any of the keywords are present in the product's title
-            if (array_intersect($keywordsArray, $titleArray)) {
+            if (array_intersect($keywordsArray, $keyArray)) {
                 $matchingProducts[] = $product;
             }
         }
-
-        
-    
         return json_encode($matchingProducts);
     }
-    
 }
 // CREATING INITIAL PRODUCT BASE:
 Product::createInstancesOfProduct($connection);
