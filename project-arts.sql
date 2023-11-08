@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2023 at 11:09 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Nov 08, 2023 at 02:22 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -48,9 +48,16 @@ INSERT INTO `cart` (`Cart Id`, `Customer Id`, `Products`, `Product Quantity`) VA
 --
 
 CREATE TABLE `category` (
-  `Category Id` int(255) NOT NULL,
+  `Category Id` int(11) NOT NULL,
   `Category Name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`Category Id`, `Category Name`) VALUES
+(4, 'Wallets');
 
 -- --------------------------------------------------------
 
@@ -99,9 +106,12 @@ CREATE TABLE `order` (
 --
 
 INSERT INTO `order` (`Order Id`, `Order Number`, `Customer Id`, `Order Type`, `Order Amount`, `Order Date`, `Order Items`, `Order Items Quantity`, `Order Status`) VALUES
-(10, '657733404571', '24', 'Cash on Delivery', '4393', '07-11-23', 'MA-260442,BE-394912,SW-299775', '1, 1, 1', 'In Process'),
-(11, '942135826867', '24', 'Cash on Delivery', '123', '07-11-23', 'BE-394912', '1', 'In Process'),
-(12, '765715483556', '24', 'Cash on Delivery', '8494', '07-11-23', 'MA-260442', '1,2', 'Delivered');
+(3, '451874845676', '24', 'Cash on Delivery', '23', '07-11-23', 'NE-181059', '1', 'Placed'),
+(4, '510853705094', '24', 'Cash on Delivery', '169', '07-11-23', 'SW-299775,BE-394912,NE-181059', '1, 1, 1', 'Placed'),
+(5, '233299150713', '24', 'Cash on Delivery', '23', '07-11-23', 'SW-299775', '1', 'Placed'),
+(6, '111212546932', '24', 'Cash on Delivery', '4247', '07-11-23', 'MA-260442', '1', 'Placed'),
+(7, '134985079908', '24', 'Card Payment', '4247', '07-11-23', 'MA-260442', '1', 'Placed'),
+(9, '758341957922', '24', 'Card Payment', '23', '07-11-23', 'SW-299775', '1', 'Placed');
 
 -- --------------------------------------------------------
 
@@ -182,7 +192,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `Category Id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `Category Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -194,7 +204,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `Order Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `Order Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `products`

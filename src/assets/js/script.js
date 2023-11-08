@@ -48,14 +48,13 @@ $(document).ready(function () {
         e.preventDefault();
     });
 
-    let quantityInputs = $('.cart-item-quantity');
+    let quantityInputs = $(".cart-item-quantity");
 
-    quantityInputs.change(function() {
+    quantityInputs.change(function () {
         let index = $(this).attr("data-product-index");
         let value = $(this).val();
         updateProductQuantity(index, value);
     });
-
 });
 
 function sliders() {
@@ -321,11 +320,11 @@ function paymentTabbing($this) {
         $(".payment").show();
         $(".delivery").hide();
 
-        $(".paymentMethodInput").val('Card Payment')
+        $(".paymentMethodInput").val("Card Payment");
     } else {
         $(".payment").hide();
         $(".delivery").show();
-        $(".paymentMethodInput").val('Cash on Delivery')
+        $(".paymentMethodInput").val("Cash on Delivery");
     }
 }
 
@@ -542,43 +541,41 @@ function updateProductQuantity(index, value) {
     });
 }
 
-function order (shippingDetails, orderType, total) {
+function order(shippingDetails, orderType, total) {
     $.ajax({
         url: "controllers/place-order.php",
         method: "POST",
         data: {
-            shipping_detail: shippingDetails, 
+            shipping_detail: shippingDetails,
             order_type: orderType,
             order_total: total,
         },
-        success: function(response) {
+        success: function (response) {
             console.log("response :", response);
         },
-        error: function(xhr, status, error) {
-            console.log("error:", error)
-        }
-    })
+        error: function (xhr, status, error) {
+            console.log("error:", error);
+        },
+    });
 }
 
-$("[placeOrder]").click(function() {
+$("[placeOrder]").click(function () {
     let userDetails = {
-        phone: $('.userPhoneField').val(),
-        address: $('.shippingAddress').val(),
-        city: $('.userCity').val(),
-        zipCode: $('.zipCode').val()
-    }
-    let total = $('.amount').html();
+        phone: $(".userPhoneField").val(),
+        address: $(".shippingAddress").val(),
+        city: $(".userCity").val(),
+        zipCode: $(".zipCode").val(),
+    };
+    let total = $(".amount").html();
     let orderType = $(".paymentMethodInput").val();
 
-    order(userDetails, orderType, total)
-})
-
-
+    order(userDetails, orderType, total);
+});
 
 function tabbingWithClasses(options) {
     let container = $(options.container);
     let attribute = options.button.replace(/\[|\]/g, "") || "[data-show]";
-    let buttons = options.button ? $(options.button) : $("[data-show]");  
+    let buttons = options.button ? $(options.button) : $("[data-show]");
     let activeClass = options.activeClass || "active";
     let hide = options.hide || "div";
 
@@ -593,16 +590,97 @@ function tabbingWithClasses(options) {
         whatToHide.hide();
         whatToShowActually.show();
 
-
-        console.log(whatToHide)
-        console.log(whatToShow)
+        console.log(whatToHide);
+        console.log(whatToShow);
         console.log("clicked");
     });
 }
 
-tabbingWithClasses( {
+tabbingWithClasses({
     container: ".orderArea",
     hide: "div",
     button: "[data-show-orders]",
     activeClass: "active",
+});
+
+function addCategory(value) {
+    $.ajax({
+        url: "../controllers/add-category.php",
+        data: {
+            categoryName: value,
+        },
+        method: "POST",
+        success: function (response) {
+            $(".closeCat").trigger("click");
+            window.location.href = window.location.href;
+        },
+        error: function (xhr, status, error) {
+            console.log("error:", error);
+        },
+    });
+}
+
+let addToCategoryButton = $("[data-save-category]");
+addToCategoryButton.click(function () {
+    let value = $(".categoryName").val();
+    if (value == "") {
+        $(".categoryName").addClass("error");
+        return;
+    }
+    addCategory(value);
+});
+
+
+function deleteCategory(value) {
+    $.ajax({
+        url: "../controllers/delete-category.php",
+        data: {
+            id: value,
+        },
+        method: "POST",
+        success: function (response) {
+            // console.log(response);
+            window.location.href = window.location.href;
+        },
+        error: function (xhr, status, error) {
+            console.log(error);
+        },
+    });
+}
+
+let removeCatButton = $('[removeCat]');
+
+removeCatButton.click(function (){
+    let value = $(this).attr("data-id");
+    deleteCategory(value);
+})
+
+function renameCategory(id,value) {
+    $.ajax({
+        url: "../controllers/delete-category.php",
+        data: {
+            id: id,
+            value: value,
+        },
+        method: "POST",
+        success: function (response) {
+            console.log(response);
+            // window.location.href = window.location.href;
+        },
+        error: function (xhr, status, error) {
+            console.log(error);
+        },
+    });
+}
+
+$(".focusOnCat").click(function (){
+    let container = $(this).closest('.list-group-item ');
+    let input = container.find(".catInput");
+    input.removeAttr("readonly");
+    input.focus();
+    input.change(function () {
+        let value = $(this).val();
+        let id = $(this).attr("data-id");
+        renameCategory(id, value);
+    })
 })

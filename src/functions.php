@@ -387,15 +387,16 @@ class Customer
 
 class Category
 {
-    public static function fetchAllCategory() {
+    public static function fetchAllCategory()
+    {
         global $connection;
         $query = "SELECT * FROM `category`";
         $result = mysqli_query($connection, $query);
 
-        if($result) {
+        if ($result) {
             $rows = array();
-            while($row = $result->fetch_assoc()) {
-                $rows[] = $row; 
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
             }
             return $rows;
         } else {
@@ -403,12 +404,40 @@ class Category
         }
     }
 
-    public static function createCategory($catName) {
+    public static function createCategory($catName)
+    {
         global $connection;
         $query = "INSERT INTO `category` (`Category Id`, `Category Name`) VALUES (NULL, '$catName')
         ";
         $result = mysqli_query($connection, $query);
-        
+        if ($result) {
+            echo "Category was set";
+        } else {
+            echo "Something went wrong";
+        }
+    }
+    public static function deleteCategory($catId)
+    {
+        global $connection;
+        $query = "DELETE  FROM `category` WHERE `Category Id` = '$catId' ";
+        $result = mysqli_query($connection, $query);
+        if ($result) {
+            return "category has been deleted";
+        } else {
+            return "No Categories";
+        }
+    }
+
+    public static function renameCategory($catId, $newName)
+    {
+        global $connection;
+        $query = "UPDATE FROM `category` SET `Category Name` = '$newName'  WHERE `Category Id` = '$catId' ";
+        $result = mysqli_query($connection, $query);
+        if ($result) {
+            return "Category Has been renamed";
+        } else {
+            return "Error";
+        }
     }
 }
 
