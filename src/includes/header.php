@@ -49,9 +49,8 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
                     <li><a href="">Sale</a></li>
                     <li><a href="">Catalogue</a></li>
                 </ul>
-                <div class="search--bar d-flex align-items-center border-bottom-hr py-1 fw-300 fs-16">
-                    <input type="text" class="mr-3 d-block">
-                    <button class="d-flex gap-5 align-items-center">Search<i class="fa-solid fa-magnifying-glass"></i></button>
+                <div class="d-flex align-items-center py-1 fw-300 fs-16">
+                    <button data-search-modal class="d-flex gap-5 align-items-center"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </div>
         </div>
@@ -147,6 +146,36 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
 
 
             </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="searchModal border">
+    <div class="searchModalMain py-5 bg-white">
+        <div class="container">
+            <div class="d-flex justify-content-between mb-30">
+                <p class="text-upper fw-400 fc-secondary-400 fs-16">WHAT ARE YOU LOOKING FOR?</p>
+                <button class="close" data-search-modal><i class="ri-close-line"></i></button>
+            </div>
+            <div class="d-flex pb-2 justify-content-between border-bottom-hr fs-24">
+                <input class="fc-secondary fw-400" type="text" header-search placeholder="Search Products...">
+                <i class=" fa-solid fa-magnifying-glass"></i>
+            </div>
+
+
+            <!-- //SHOW PRODUCTS HERE: -->
+            <div class="showSearchedProducts row py-2">
+                <!-- <div class="header-search-item">
+                    <img src="assets/images/product-images/">
+                </div>
+                <div class="header-search-text">
+                    <h5 class="fs-14 fw-400 fc-secondary">Product</h5>
+                    <h6 class="fs-16 fw-400 fc-secondary"><?php echo $currencySymbol;?> <span class="amount"></span></h6>
+                </div> -->
+            </div>
+
         </div>
     </div>
 </div>

@@ -9,6 +9,12 @@ $(document).ready(function () {
         preventDefault: true,
         removeAction: { eventTrigger: window.body, event: "click" },
     });
+
+    toggler({
+        button: "[data-search-modal]",
+        actionContainer: ".searchModal",
+    });
+
     handleEditDetail();
     adminSectionsHideShow();
     tabbing(".tabbingButtons button", ".tabbingPanels .tabbingPanel");
@@ -486,7 +492,7 @@ validateForm(
                     $(".toBeHidden").show();
                     $(".loader").hide();
                 } else {
-                    actualPlaceOrder(); 
+                    actualPlaceOrder();
                     // No errors, proceed to thank you page
                     window.location.href = "thankyou.php"; // Change the URL as needed
                 }
@@ -521,7 +527,7 @@ validateForm(
     }
 );
 
-function actualPlaceOrder(){ 
+function actualPlaceOrder() {
     let userDetails = {
         phone: $(".userPhoneField").val(),
         address: $(".shippingAddress").val(),
@@ -583,7 +589,6 @@ $("[placeOrder]").click(function () {
     // };
     // let total = $(".amount").html();
     // let orderType = $(".paymentMethodInput").val();
-
     // order(userDetails, orderType, total);
 });
 
@@ -697,4 +702,68 @@ $(".focusOnCat").click(function () {
         let id = $(this).attr("data-id");
         renameCategory(id, name);
     });
+});
+
+function sortProducts(keywords) {
+    $.ajax({
+        url: "controllers/product-search.php",
+        method: "POST",
+        data: {
+            keyword: keywords,
+        },
+        success: function (response) {
+            var products = JSON.parse(response);
+            console.log(products);
+            showSearchedProducts(products);
+        },
+        error: function (xhr, status, error) {
+            console.log(error);
+        },
+    });
+}
+function showSearchedProducts(products) {
+    var productsContainer = $(".showSearchedProducts");
+
+    if (products.length === 0) {
+        productsContainer.empty();
+        console.log("No Products with these keywords");
+    } else {
+        productsContainer.empty();
+
+        for (let i = 0; i < products.length; i++) {
+            var product = products[i];
+            var productDiv = $(
+                `<a class="d-block col-3 header-search-item" href='single-product.php?id=${product.SKU}'>></a>`
+            );
+            var productImage = $(
+                "<img src='assets/images/product-images/" +
+                    product.images +
+                    "'>"
+            );
+            var productText = $("<div class='header-search-text'></div>");
+            var productName = $(
+                "<h5 class='fs-14 fw-400 fc-secondary'>" +
+                    product.name +
+                    "</h5>"
+            );
+            var productPrice = $(
+                "<h6 class='fs-16 fw-400 fc-secondary'>" +
+                    " <span class='amount'>$" +
+                    product.price +
+                    "</span></h6>"
+            );
+            productText.append(productName);
+            productText.append(productPrice);
+            productDiv.append(productImage);
+            productDiv.append(productText);
+            productsContainer.append(productDiv);
+        }
+    }
+}
+
+let searchInput = $("[header-search]");
+
+searchInput.on("keyup", function () {
+    let keywords = $(this).val();
+    sortProducts(keywords);
 });

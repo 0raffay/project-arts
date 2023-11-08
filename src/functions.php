@@ -179,6 +179,30 @@ class Product
             exit;
         }
     }
+
+    public static function sortProducts($keyword)
+    {
+        $lowerCaseKeywords = strtolower($keyword);
+        $keywordsArray = explode(" ", $lowerCaseKeywords);
+        $matchingProducts = [];
+    
+        $products = Product::$instances;
+    
+        foreach ($products as $product) {
+            $title = strtolower($product->name);
+            $titleArray = explode(" ", $title);
+
+            // Check if any of the keywords are present in the product's title
+            if (array_intersect($keywordsArray, $titleArray)) {
+                $matchingProducts[] = $product;
+            }
+        }
+
+        
+    
+        return json_encode($matchingProducts);
+    }
+    
 }
 // CREATING INITIAL PRODUCT BASE:
 Product::createInstancesOfProduct($connection);
