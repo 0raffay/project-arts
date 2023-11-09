@@ -1,3 +1,9 @@
+<?php
+    include("../config.php");
+    include("../functions.php");
+    
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

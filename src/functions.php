@@ -6,6 +6,7 @@ global $currentCustomer;
 global $currentProduct;
 global $productsInCart;
 global $productsInCartQuantity;
+global $currentAdmin;
 
 //CLASSES:
 class Product
@@ -467,6 +468,42 @@ class Category
         } else {
             return "Error: " . mysqli_error($connection);
         }
+    }
+}
+
+class Admin
+{
+    public $userName;
+    public $userEmail;
+    public $userPass;
+    public $rights;
+
+    public static function Signup($userName, $userEmail, $userPass, $rights)
+    {
+        global $connection;
+        //check email before;
+        $query = "SELECT * FROM `admin` WHERE `Admin Email` = '$userEmail'";
+        $result = mysqli_query($connection, $query);
+    }
+
+    public static function login($userEmail, $password)
+    {
+        global $connection;
+        $query = "SELECT * FROM `admin` WHERE `Admin Email` = '$userEmail'";
+        $result = mysqli_query($connection, $query);
+        $state = 'Empty';
+        if ($result) {
+            $row = $result->fetch_assoc();
+            $adminId = $row["Admin Id"];
+            $passQuery = "SELECT * FROM `admin` WHERE `Admin Id` = '$adminId', `Admin Password` = '$password'";
+            $passResult = mysqli_query($connection, $passQuery);
+            if ($passResult) {
+                $state = "Logged in";
+            }
+        } else {
+            $state = "Wrong email try again with a valid email address";
+        }
+        return $state;
     }
 }
 
