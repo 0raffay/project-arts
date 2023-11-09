@@ -111,35 +111,29 @@ $userZip = $currentCustomer["Customer Zipcode"];
                 <div class="col-md-8 order-md-1 postion-relative">
 
                     <div class="">
-                        <h4 class="mb-3">Billing address</h4>
+                        <h4 class="mb-3">Shipping Details</h4>
                         <div>
                             <div class="list-group-item mb-4">
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
                                         <label for="firstName">Name</label>
-                                        <input type="text"  data-validate-order value="<?php echo $userName; ?>" class="form-control" id="firstName" placeholder="" required>
+                                        <input type="text" data-validate-order value="<?php echo $userName; ?>" class="form-control" id="firstName" placeholder="" required>
                                         <div class="invalid-feedback">
                                             Valid first name is required.
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
-                                        <label for="email">Email</label>
-                                        <input type="email" data-validate-order data-validate-email value="<?php echo $userEmail; ?>" class="form-control" id="email">
+                                        <label for="num">Phone</label>
+                                        <input type="number" data-validate-order data-telephone-field value="<?php echo $userPhone; ?>" class="form-control userPhoneField" id="num">
                                         <div class="invalid-feedback">
-                                            Please enter a valid email address for shipping updates.
+                                            Please enter a valid Phone Number for shipping updates.
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mb-4">
-                                    <label for="num">Phone</label>
-                                    <input type="number" data-validate-order data-telephone-field value="<?php echo $userPhone; ?>" class="form-control userPhoneField" id="num">
-                                    <div class="invalid-feedback">
-                                        Please enter a valid Phone Number for shipping updates.
-                                    </div>
-                                </div>
+
                                 <div class="mb-4">
                                     <label for="address">Address</label>
-                                    <input type="text" value="<?php echo $userAddress; ?>" class="form-control shippingAddress" id="address" required>
+                                    <input type="text" value="<?php echo $userAddress; ?>" class="form-control shippingAddress" data-validate-order="" id="address" required>
                                     <div class="invalid-feedback">
                                         Please enter your shipping address.
                                     </div>
@@ -189,48 +183,48 @@ $userZip = $currentCustomer["Customer Zipcode"];
                         </div>
                         <div class="payment">
                             <div class="card-payment list-group-item">
-                                    <div class="row">
-                                        <div class="form-group col-12 mb-30">
-                                            <div class=" d-flex justify-content-between">
-                                                <strong class="fs-20 fw-500">Payment Amount:</strong>
-                                                <div>
-                                                    <strong><?php echo $currencySymbol; ?></strong>
-                                                    <strong class="amount">0</strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-12 mb-30">
-                                            <label or="NameOnCard">Name on card</label>
-                                            <input id="NameOnCard" class="form-control checkCardInfo" type="text" maxlength="255"></input>
-                                            <div class="invalid-feedback">
-                                                Please add a valid Name here.
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-12 mb-30">
-                                            <label for="cardNum">Card number</label>
-                                            <input id="cardNum" class="checkCardInfo null card-image form-control" type="text"></input>
-                                            <div class="invalid-feedback">
-                                                Please add a valid Card Number.
-                                            </div>
-                                        </div>
-                                        <div class="expiry-date-group form-group col-lg-6 pr-1 mb-30">
-                                            <label for="ExpiryDate">Expiry date</label>
-                                            <input id="ExpiryDate" data-format="card-expiry-date" class="form-control checkCardInfo" type="text" placeholder="MM / YY" maxlength="7"></input>
-                                            <div class="invalid-feedback">
-                                                Please add an Expiry Date.
-                                            </div>
-                                        </div>
-                                        <div class="security-code-group form-group col-lg-6 pl-1 mb-30">
-                                            <label for="cvc checkCardInfo">Security code</label>
-                                            <div class="input-container">
-                                                <input id="cvc" class="checkCardInfo form-control" type="text"></input>
-                                                <div class="invalid-feedback">
-                                                    Please add a valid CVC code.
-                                                </div>
+                                <div class="row">
+                                    <div class="form-group col-12 mb-30">
+                                        <div class=" d-flex justify-content-between">
+                                            <strong class="fs-20 fw-500">Payment Amount:</strong>
+                                            <div>
+                                                <strong><?php echo $currencySymbol; ?></strong>
+                                                <strong class="amount">0</strong>
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="btn btn-secondary btn-lg btn-block payWithCard" placeOrder  data-order>Continue to checkout</button>
+                                    <div class="form-group col-12 mb-30">
+                                        <label or="NameOnCard">Name on card</label>
+                                        <input id="NameOnCard" class="form-control checkCardInfo" type="text" maxlength="255"></input>
+                                        <div class="invalid-feedback">
+                                            Please add a valid Name here.
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12 mb-30">
+                                        <label for="cardNum">Card number</label>
+                                        <input id="cardNum" class="checkCardInfo null card-image form-control" type="text"></input>
+                                        <div class="invalid-feedback">
+                                            Please add a valid Card Number.
+                                        </div>
+                                    </div>
+                                    <div class="expiry-date-group form-group col-lg-6 pr-1 mb-30">
+                                        <label for="ExpiryDate">Expiry date</label>
+                                        <input id="ExpiryDate" data-format="card-expiry-date" class="form-control checkCardInfo" type="text" placeholder="MM / YY" maxlength="7"></input>
+                                        <div class="invalid-feedback">
+                                            Please add an Expiry Date.
+                                        </div>
+                                    </div>
+                                    <div class="security-code-group form-group col-lg-6 pl-1 mb-30">
+                                        <label for="cvc checkCardInfo">Security code</label>
+                                        <div class="input-container">
+                                            <input id="cvc" class="checkCardInfo form-control" type="text"></input>
+                                            <div class="invalid-feedback">
+                                                Please add a valid CVC code.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-secondary btn-lg btn-block payWithCard" placeOrder data-order>Continue to checkout</button>
                             </div>
                         </div>
                         <div class="delivery hidden">
@@ -275,7 +269,7 @@ $userZip = $currentCustomer["Customer Zipcode"];
         $('#NameOnCard').on("change", function() {
             let regex = /^[a-zA-Z]+$/;
             test = regex.test($(this).val())
-            if(test) {
+            if (test) {
                 $(this).removeClass("error");
             } else {
                 $(this).addClass("error");

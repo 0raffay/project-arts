@@ -7,6 +7,10 @@ if (isset($_POST["logout"])) {
     header("location: index.php");
 }
 
+if(!isset($currentCustomer)) {
+    header("location: index.php");
+}
+
 
 $message = ""; // Initialize the message variable
 
@@ -135,19 +139,19 @@ if (isset($_POST["updateCustomerDetails"])) {
                 <div class="tabbingPanel customer-billing-details">
                     <h4 class="fw-300 pb-3 fs-24 text-center fc-secondary">Billing Address</h4>
                     <div class="row g-3 text-left">
-                        <div class="col-md-6 mb-1">
+                        <div class="col-md-12 mb-3">
                             <label for="your-name" class="form-label">Your Address:</label>
                             <input type="text" value="<?php echo $currentCustomer["Customer Address"]; ?>" data-address class="form-control" id="your-name" name="address" required>
                         </div>
-                        <div class="col-md-6 mb-1">
+                        <div class="col-md-12 mb-3">
                             <label for="your-surname" class="form-label">City</label>
                             <input type="text" value="<?php echo $currentCustomer["Customer City"]; ?>" data-city class="form-control" id="your-surname" name="city" required>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <label for="your-email" class="form-label">Zip Code</label>
                             <input type="email" data-zip class="form-control" value="<?php echo $currentCustomer["Customer Zipcode"]; ?>" id="your-email" name="zipcode" required>
                         </div>
-                        <div class="col-md-6 text-right d-flex align-items-center justify-content-between">
+                        <div class="col-md-12 text-right d-flex align-items-center justify-content-between">
                             <button class="btn btn-primary ml-auto mt-4" data-save-billing-details>Save Details</button>
                         </div>
                     </div>

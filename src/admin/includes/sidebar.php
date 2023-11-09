@@ -2,7 +2,7 @@
     <ul class="sidebar-list">
         <li class="d-flex gap-10 text-center">
             <button data-show=".customer-section">Customers</button>
-            <button>Employees</button>
+            <button data-show=".employee-section">Employees</button>
         </li>
         <li>
             <hr>

@@ -2,6 +2,10 @@
 include("../config.php");
 include('../functions.php');
 
+if(!isset($currentAdmin)) {
+    header("location: index.php");
+}
+print_r($currentAdmin);
 //UPLOAD PRODUCT
 $_SESSION['productUploadStatus'] = '';
 $productUploadStatus =  $_SESSION['productUploadStatus'];
@@ -61,6 +65,7 @@ $customerData = Customer::getAllCustomerData($connection);
                     <?php include('sections/customer.php'); ?>
                     <?php include('sections/category.php'); ?>
                     <?php include('sections/orders.php'); ?>
+                    <?php include('sections/employee.php'); ?>
                 </div>
             </div>
             <!-- SECTIONS END -->

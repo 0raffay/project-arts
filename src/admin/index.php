@@ -1,7 +1,13 @@
 <?php
-    include("../config.php");
-    include("../functions.php");
-    
+include("../config.php");
+include("../functions.php");
+
+
+if (isset($currentAdmin)) {
+    header("location: dashboard.php");
+} else {
+    print_r("not logged in");   
+}
 ?>
 
 <!DOCTYPE html>
@@ -37,14 +43,15 @@
                             <form action="POST">
                                 <div class="input__wrap">
                                     <label for="">Email*</label>
-                                    <input type="email">
+                                    <input class="adminEmail" type="email">
                                 </div>
                                 <div class="input__wrap">
                                     <label for="">Password*</label>
-                                    <input type="password">
+                                    <input class="adminPass" type="password">
                                 </div>
+                                <p class="text-danger adminLoginError mb-20"></p>
                                 <div class="button__wrap">
-                                    <button class="btn btn-secondary btn-lg mb-10 fs-20">Login</button>
+                                    <button class="btn btn-secondary btn-lg mb-10 fs-20" data-admin-login>Login</button>
                                     <a href="javascript:;" class="d-block text-center">Forgot Your Passoword?</a>
                                 </div>
                             </form>
@@ -58,6 +65,8 @@
     <!--==== FOOTER START ====-->
     <?php include('../includes/footer-scripts.php') ?>
     <!--==== FOOTER END ====-->
+    <script src="../assets/js/libs.js"></script>
+    <script src="../assets/js/script.js"></script>
 </body>
 
 </html>

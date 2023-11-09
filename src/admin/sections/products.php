@@ -5,12 +5,12 @@
         </div>
         <div class="d-flex border-bottom-hr justify-content-between py-2">
             <div class="d-flex align-items-center gap-10">
-                <form action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+                <!-- <form action="<?php echo $_SERVER["PHP_SELF"]; ?>">
                     <div class="search--bar fw-300 fs-16">
                         <span class="mr-2 addHover"><button type="submit" name="searchProduct">Search</button> <input required style="display: inline; width: auto;" type="text"></span><i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                 </form>
-                <button data-view-all-products class="addHover border-right active">View All</button>
+                <button data-view-all-products class="addHover border-right active">View All</button> -->
                 <p class="fs-16 border-right"><span class="fc-secondary fw-500">Total No.Of Products:</span> <?php echo count(Product::$instances); ?></p>
 
             </div>

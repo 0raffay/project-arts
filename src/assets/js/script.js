@@ -499,7 +499,7 @@ validateForm(
             } else {
                 // Handle other cases if needed
             }
-        }, 1000); 
+        }, 1000);
     }
 );
 validateForm(
@@ -522,7 +522,7 @@ validateForm(
         $(".toBeHidden").hide();
         setTimeout(function () {
             actualPlaceOrder();
-            window.location.href = "thankyou.php"; 
+            window.location.href = "thankyou.php";
         }, 1000);
     }
 );
@@ -792,3 +792,105 @@ function searchBar(searchBarClass, searchButton) {
 
 searchBar("[header-search]", ".searchButton");
 searchBar(".mainSearchBar", ".searchButton");
+
+function loginAdmin(email, pass) {
+    $.ajax({
+        url: "../controllers/admin-login.php",
+        method: "POST",
+        data: {
+            adminEmail: email,
+            adminPass: pass,
+        },
+        success: function (response) {
+            if (response === "1") {
+                window.location.href = "dashboard.php";
+            } else {
+                $(".adminLoginError").html(response);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log(error);
+        },
+    });
+}
+
+let adminLoginButton = $("[data-admin-login]");
+adminLoginButton.click(function (e) {
+    e.preventDefault();
+    let email = $(".adminEmail");
+    let pass = $(".adminPass");
+    email.on("keyup", function () {
+        if (email.val() != "") {
+            email.removeClass("error");
+        }
+    });
+
+    pass.on("keyup", function () {
+        if (pass.val() != "") {
+            pass.removeClass("error");
+            return;
+        }
+    });
+    if (email.val() == "") {
+        email.addClass("error");
+        return;
+    }
+    if (pass.val() == "") {
+        pass.addClass("error");
+        return;
+    }
+    loginAdmin(email.val(), pass.val());
+});
+
+function addEmployee(name, email, password, phone, rights) {
+    $.ajax({
+        url: "../controllers/add-admin.php",
+        method: "POST",
+        data: {
+            adminName: name,
+            adminEmail: email,
+            adminPhone: phone,
+            adminPass: password,
+            adminRights: rights,
+        },
+        success: function (response) {
+            if(response == "1") {
+                showLoader(".employeeModal .loader", ".addEmployeeForm", ".element", 500);
+                setTimeout(function() {
+                    window.location.href = window.location.href;
+                }, 500)
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log(error);
+        },
+    });
+}
+
+let addEmployeeButton = $("[data-add-employee]");
+
+addEmployeeButton.click(function () {
+    let name = $("[em-name]").val();
+    let email = $("[em-email]").val();
+    let password = $("[em-password]").val();
+    let phone = $("[em-phone]").val();
+    let rights = $("[em-rights]").val();
+
+    // let fields = $(name., email, password, phone, rights);
+    // let fieldValues = [];
+    // console.log(fields);
+
+    // fields.each(function () {
+    //     if ($(this).val() === "") {
+    //         $(this).addClass("error");
+    //     } else {
+    //         $(this).removeClass("error");
+    //         fieldValues.push($(this).val());
+    //     }
+    // });
+
+    // if (fields.hasClass("error")) {
+    //     return;
+    // }
+    addEmployee(name, email, password, phone, rights);
+});

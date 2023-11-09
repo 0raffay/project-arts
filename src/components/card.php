@@ -1,4 +1,4 @@
-<div class="col-lg-3 col-md-6 col-sm-12">
+<div class="col-lg-3 col-md-6 col-sm-12 mb-20">
     <div class="product-card">
         <div class="img__wrap" onclick="window.location.href='single-product.php?id=<?php echo $products->SKU; ?>';">
             <img src="assets/images/product-images/<?php echo $products->images ?>"></a>

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2023 at 09:44 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Nov 09, 2023 at 10:03 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,8 +18,32 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `project-arts`
+-- Database: `pr`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `Admin Id` int(11) NOT NULL,
+  `Admin Name` varchar(255) NOT NULL,
+  `Admin Email` varchar(255) NOT NULL,
+  `Admin Password` varchar(255) NOT NULL,
+  `Admin Phone` varchar(255) NOT NULL,
+  `Rights` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`Admin Id`, `Admin Name`, `Admin Email`, `Admin Password`, `Admin Phone`, `Rights`) VALUES
+(1, 'Super Admin', 'sadmin', 'admin', '', '1'),
+(3, 'Abdullah Sheikh', 'abdullah@gmail.com', '123', '1234567890', '2'),
+(4, 'employee', 'employee@gmail.com', '123', '123', '2');
 
 -- --------------------------------------------------------
 
@@ -39,7 +63,8 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`Cart Id`, `Customer Id`, `Products`, `Product Quantity`) VALUES
-(12, 24, '', '');
+(12, 24, '', ''),
+(13, 25, ' G-805307', '1');
 
 -- --------------------------------------------------------
 
@@ -88,7 +113,8 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`Customer Id`, `Customer Name`, `Customer Email`, `Customer Password`, `Customer Phone`, `Customer Address`, `Customer City`, `Customer Zipcode`) VALUES
-(24, '123', '1234@gmail.com', '123', 120371023, 'this is my address', 'karachi', '1237102397');
+(24, '123', '1234@gmail.com', '123', 120371023, 'this is my address', 'karachi', '1237102397'),
+(25, 'test', 'test@gmail.com', '123', 1234567890, 'test address', 'Karachi', '123');
 
 -- --------------------------------------------------------
 
@@ -114,7 +140,8 @@ CREATE TABLE `order` (
 
 INSERT INTO `order` (`Order Id`, `Order Number`, `Customer Id`, `Order Type`, `Order Amount`, `Order Date`, `Order Items`, `Order Items Quantity`, `Order Status`) VALUES
 (17, '273399099712', '24', 'Cash on Delivery', '73', '09-11-23', 'BA-246336,IS-511272, G-805307', '1, 1, 1', 'In Process'),
-(18, '698893554849', '24', 'Cash on Delivery', '44', '09-11-23', ' G-805307,IS-511272', '1, 1', 'In Process');
+(18, '698893554849', '24', 'Cash on Delivery', '44', '09-11-23', ' G-805307,IS-511272', '1, 1', 'In Process'),
+(19, '724545155144', '25', 'Card Payment', '27', '09-11-23', 'BL-860324', '3', 'In Process');
 
 -- --------------------------------------------------------
 
@@ -149,6 +176,12 @@ INSERT INTO `products` (`Product Id`, `Product Name`, `Product Stock`, `Product 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`Admin Id`);
 
 --
 -- Indexes for table `cart`
@@ -186,10 +219,16 @@ ALTER TABLE `products`
 --
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `Admin Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `Cart Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `Cart Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -201,13 +240,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `Customer Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `Customer Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `Order Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `Order Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `products`

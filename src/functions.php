@@ -473,42 +473,92 @@ class Category
 
 class Admin
 {
-    public $userName;
-    public $userEmail;
-    public $userPass;
+    public $adminName;
+    public $adminEmail;
+    public $adminPass;
+    public $adminPhone;
     public $rights;
 
-    public static function Signup($userName, $userEmail, $userPass, $rights)
+    public function __construct($adminName, $adminEmail, $adminPhone, $adminPass, $rights)
+    {
+        $this->adminName = $adminName;
+        $this->adminEmail = $adminEmail;
+        $this->adminPhone = $adminPhone;
+        $this->adminPass = $adminPass;
+        $this->rights = $rights;
+    }
+
+    public static function createAdmin($adminName, $adminEmail, $adminPhone, $adminPass, $rights)
     {
         global $connection;
         //check email before;
-        $query = "SELECT * FROM `admin` WHERE `Admin Email` = '$userEmail'";
+        $query = "SELECT * FROM `admin` WHERE `Admin Email` = '$adminEmail'";
         $result = mysqli_query($connection, $query);
-    }
-
-    public static function login($userEmail, $password)
-    {
-        global $connection;
-        $query = "SELECT * FROM `admin` WHERE `Admin Email` = '$userEmail'";
-        $result = mysqli_query($connection, $query);
-        $state = 'Empty';
-        if ($result) {
-            $row = $result->fetch_assoc();
-            $adminId = $row["Admin Id"];
-            $passQuery = "SELECT * FROM `admin` WHERE `Admin Id` = '$adminId', `Admin Password` = '$password'";
-            $passResult = mysqli_query($connection, $passQuery);
-            if ($passResult) {
-                $state = "Logged in";
-            }
+        $state = 'empty';
+        if ($result->num_rows > 0) {
+            $state = "User Already exists. Try with another Email Address";
         } else {
-            $state = "Wrong email try again with a valid email address";
+            $insertQuery = "INSERT INTO `admin` (`Admin Id`, `Admin Name`, `Admin Email`, `Admin Password`, `Admin Phone`, `Rights`) VALUES (NULL, '$adminName', '$adminEmail', '$adminPass', '$adminPhone', '$rights')";
+
+            $insertQuery = mysqli_query($connection, $insertQuery);
+            if ($insertQuery) {
+                $state = "New Admin was created";
+                // new Admin($adminName, $adminEmail, $adminPhone, $adminPass, $rights);
+            } else {
+                $state = "There was a problem creating new admin";
+            }
         }
         return $state;
+    }
+
+    public static function login($adminEmail, $password)
+    {
+        global $connection;
+        global $currentAdmin;
+        $state = "empty";
+        $passQuery = "SELECT * FROM `admin` WHERE `Admin Email` = '$adminEmail' AND `Admin Password` = '$password'";
+        $passResult = mysqli_query($connection, $passQuery);
+        if ($passResult && $passResult->num_rows > 0) {
+            $row = $passResult->fetch_assoc();
+            $state = "Logged In";
+            Admin::setCurrentAdmin($row);
+        } else {
+            $state = "Couldn't Find User";
+        }
+        return $state;
+    }
+
+    public static function setCurrentAdmin($_this)
+    {
+        global $currentAdmin;
+        $currentAdmin =  $_SESSION["currentAdmin"] = $_this;
+    }
+
+    public static function fetchAllAdmin()
+    {
+        global $connection;
+        $query = "SELECT * FROM `admin` WHERE `Rights` != '1' ";
+        $result = mysqli_query($connection, $query);
+        $admins = array();
+        if($result && $result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $admins[] = $row;
+            }
+        }  else {
+            $admins = "No admins found";
+        }
+        return $admins;
     }
 }
 
 if (isset($_COOKIE["currentCustomer"])) {
     $currentCustomer = json_decode($_COOKIE["currentCustomer"], true);
+} else {
+    $currentCustomer = null;
+}
+
+if (isset($_SESSION["currentAdmin"])) {
+    $currentAdmin = $_SESSION["currentAdmin"];
 } else {
     $currentCustomer = null;
 }

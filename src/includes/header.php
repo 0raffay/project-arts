@@ -25,7 +25,7 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
     <div class="bottom--header  border-bottom-hr">
         <div class="container">
             <div class="d-flex py-3 fw-300 ff-secondary align-items-center justify-content-between">
-                <ul class="d-flex gap-20 list-unstyled">
+                <ul class="d-flex gap-30 list-unstyled">
                     <li><a href="index.php">Home</a></li>
 
                     <li class="li--has-submenu">
@@ -45,9 +45,9 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
                         </div>
                     </li>
 
-
-                    <li><a href="">Sale</a></li>
                     <li><a href="catalogue.php">Catalogue</a></li>
+                    <li><a href="javascript:;">About us</a></li>
+                    <li><a href="contact.php">Contact Us</a></li>
                 </ul>
                 <div class="d-flex align-items-center py-1 fw-300 fs-16">
                     <button data-search-modal class="d-flex gap-5 align-items-center"><i class="fa-solid fa-magnifying-glass"></i></button>
