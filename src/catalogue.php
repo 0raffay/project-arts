@@ -21,35 +21,29 @@
 </head>
 
 <body>
- 
-    
+
+
     <!--==== HEADER START ====-->
     <?php include('includes/header.php') ?>
     <!--==== HEADER END ====-->
 
-    <!--==== BANNER SECITON START ====-->
-    <?php include('sections/banner-section.php') ?>
-    <!--==== BANNER SECITON END ====-->
+    <section class="catalogueSection">
+        <div class="container">
+            <h4 class="section__heading text-center">Our Catalogue</h4>
+            <p class="text-center">View Our Top Selling Products and Brands</p>
+            <hr>
 
-    <!--==== FEATURED PRODUCTS START ====-->
-    <?php include('sections/featured-products.php') ?>
-    <!--==== FEATURED PRODUCTS END ====-->
-
-
-
-    <!--==== FOLLOW US START ====-->
-    <div class="py-4"></div>
-    <?php //include('sections/follow-us-section.php') ?>
-    <!--==== FOLLOW US END ====-->
-
-    <!--==== BRAND SLIDER START ====-->
-    <?php //include('sections/brand-slider.php') ?>
-    <!--==== BRAND SLIDER END ====-->
-
-    <!--==== PROMOTION SLIDER START ====-->
-    <?php include('sections/promotion-slider.php') ?>
-    <!--==== PROMOTION SLIDER END ====-->
-
+            <div class="row py-4">
+                <?php
+                foreach (Product::$instances as $products) {
+                    $productIds = $products->SKU;
+                    checkCurrentProduct($productIds);
+                ?>
+                    <?php include('components/card.php'); ?>
+                <?php } ?>
+            </div>
+        </div>
+    </section>
 
     <!--==== FOOTER START ====-->
     <?php include('includes/footer.php') ?>

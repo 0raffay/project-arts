@@ -176,7 +176,7 @@ if (isset($_POST["updateCustomerDetails"])) {
                                     <th>Total</th>
                                     <th>Payment Method</th>
                                     <th>Order Status</th>
-                                    <th class="text-center">Info:</th>
+                                    <th class="text-center">Manage:</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -217,7 +217,7 @@ if (isset($_POST["updateCustomerDetails"])) {
                                             <?php echo $orderStatus; ?>
                                         </td>
                                         <td class="text-center">
-                                            <a href="" class="addHover">Manage</a>
+                                            <a href="" class="addHover">View</a>
                                         </td>
                                     </tr>
                                 <?php } ?>

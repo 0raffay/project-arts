@@ -499,7 +499,7 @@ validateForm(
             } else {
                 // Handle other cases if needed
             }
-        }, 1000); // Adjust the delay (in milliseconds) as needed
+        }, 1000); 
     }
 );
 validateForm(
@@ -522,7 +522,7 @@ validateForm(
         $(".toBeHidden").hide();
         setTimeout(function () {
             actualPlaceOrder();
-            window.location.href = "thankyou.php"; // Change the URL as needed
+            window.location.href = "thankyou.php"; 
         }, 1000);
     }
 );
@@ -580,17 +580,17 @@ function order(shippingDetails, orderType, total) {
     });
 }
 
-$("[placeOrder]").click(function () {
-    // let userDetails = {
-    //     phone: $(".userPhoneField").val(),
-    //     address: $(".shippingAddress").val(),
-    //     city: $(".userCity").val(),
-    //     zipCode: $(".zipCode").val(),
-    // };
-    // let total = $(".amount").html();
-    // let orderType = $(".paymentMethodInput").val();
-    // order(userDetails, orderType, total);
-});
+// $("[placeOrder]").click(function () {
+//     // let userDetails = {
+//     //     phone: $(".userPhoneField").val(),
+//     //     address: $(".shippingAddress").val(),
+//     //     city: $(".userCity").val(),
+//     //     zipCode: $(".zipCode").val(),
+//     // };
+//     // let total = $(".amount").html();
+//     // let orderType = $(".paymentMethodInput").val();
+//     // order(userDetails, orderType, total);
+// });
 
 function tabbingWithClasses(options) {
     let container = $(options.container);
@@ -764,31 +764,31 @@ let searchInput = $("[header-search]");
 searchInput.on("keyup", function () {
     let keywords = $(this).val();
 
-    // Check if the input is empty
     if (keywords === "") {
         $(".showSearchedProducts").empty();
     } else {
-        // Call sortProducts only if the input is not empty
         sortProducts(keywords);
     }
 });
-
-$(".searchInput").on("keyup", function (e) {
-    if (e.key === "Enter") {
-        redirectToSearchPage();
-    }
-});
-
-// Add a click event listener to the search button
-$(".searchButton").on("click", function () {
-    redirectToSearchPage();
-});
-
-function redirectToSearchPage() {
-    let searchQuery = $(".searchInput").val().trim();
+function redirectToSearchPage(inputName) {
+    let searchQuery = $(inputName).val().trim();
 
     if (searchQuery !== "") {
         window.location.href =
             "search.php?query=" + encodeURIComponent(searchQuery);
     }
 }
+function searchBar(searchBarClass, searchButton) {
+    $(searchBarClass).on("keyup", function (e) {
+        if (e.key === "Enter") {
+            redirectToSearchPage(searchBarClass);
+        }
+    });
+
+    $(searchButton).click(function () {
+        redirectToSearchPage(searchBarClass);
+    });
+}
+
+searchBar("[header-search]", ".searchButton");
+searchBar(".mainSearchBar", ".searchButton");

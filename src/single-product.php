@@ -56,32 +56,34 @@ checkCurrentProduct($productId);
                         <p class="small-product-stock-label fs-13 fw-300 mb-5 fc-secondary pb-2 border-bottom-hr">Hurry Only <?php echo $currentProduct->stock; ?> Left In Stock!</p>
                         <div class="product-policy py-3 pb-4">
                             <a href="policy" class="addHover fc-secondary-400 mr-4"><i class="fa-solid fa-cart-shopping mr-2"></i>Delivery And Return</a>
-                            <a href="message" class="addHover fc-secondary-400"><i class="fa-solid fa-message mr-2"></i> Message</a>
+                            <!-- <a href="message" class="addHover fc-secondary-400"><i class="fa-solid fa-message mr-2"></i> Message</a> -->
                         </div>
 
                         <form action="POST" class="mb-20">
                             <div class="row">
-                                <div class="col-12 mb-30">
-                                    <div class="form__wrap">
+                                <div class="col-12 mb-10">
+                                    <!-- <div class="form__wrap">
                                         <label for="notes">Notes</label>
                                         <textarea class="px-3 py-2 ouline-none" name="notes"></textarea>
-                                    </div>
+                                    </div> -->
+                                    <i class="product-note fw-300 fc-secondary-400 fs-16 mb-20 d-block">* Please note that color may differ slightly from how it appears on your screen
+                                        due to varying monitor</i>
                                 </div>
-                                <div class="col-2">
+
+                                <!-- <div class="col-2">
                                     <div class="d-flex gap-5 counter-btns justify-content-between">
                                         <button data-decrement class="btn btn-primary py-1 fs-22 fw-700 px-3">-</button>
                                         <input type="number" name="quantity" value="3">
                                         <button data-increment class="btn btn-primary py-1 fs-22 fw-700 px-3">+</button>
                                     </div>
-                                </div>
-                                <div class="col-10">
+                                </div> -->
+                                <div class="col-12">
                                     <button type="submit" class="btn btn-secondary btn-lg" data-add-to-cart data-product-id="<?php echo $productId; ?>">ADD TO CART</button>
                                 </div>
                             </div>
                         </form>
 
-                        <i class="product-note fw-300 fc-secondary-400 fs-16 mb-20 d-block">* Please note that color may differ slightly from how it appears on your screen
-                            due to varying monitor</i>
+
                         <p class="fw-300 fc-secondary"><i style="color: #25A799" class="fa-solid fa-shield-halved mr-2"></i>All Payments Are Secured.</p>
                         <div class="product-description pt-3 pb-4">
                             <h6 class="product-description-title fw-300 fs-24 fc-secondary mb-2">Product Description</h6>

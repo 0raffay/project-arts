@@ -31,7 +31,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="input__wrap">
                                 <label for="">Price*</label>
-                                <input required type="number" name="productPrice">
+                                <input required type="text" name="productPrice">
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">

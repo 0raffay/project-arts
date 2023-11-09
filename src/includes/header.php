@@ -39,7 +39,7 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
                                     $categoryName = $category["Category Name"];
                                     $categoryId = $category["Category Id"];
                                 ?>
-                                    <li><a href=""><?php echo $categoryName; ?></a></li>
+                                    <li><a href="search.php?query=<?php echo $categoryName; ?>"><?php echo $categoryName; ?></a></li>
                                 <?php   } ?>
                             </ul>
                         </div>
@@ -47,7 +47,7 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
 
 
                     <li><a href="">Sale</a></li>
-                    <li><a href="">Catalogue</a></li>
+                    <li><a href="catalogue.php">Catalogue</a></li>
                 </ul>
                 <div class="d-flex align-items-center py-1 fw-300 fs-16">
                     <button data-search-modal class="d-flex gap-5 align-items-center"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -104,7 +104,7 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
                                         <img height="130" src="assets/images/product-images/<?php echo $product->images; ?>" alt="">
                                     </div>
                                     <div class="cart-item-text flex-1">
-                                        <h5 class="cart-title mb-1 fs-22 fw-400 fc-black"><?php echo $product->name; ?></h5>
+                                        <h5 class="cart-title mb-1 fs-18 fw-400 fc-black"><?php echo $product->name; ?></h5>
                                         <h6 class="cart-price mb-3 fs-18 fw-400 fc-black"><?php echo $currencySymbol; ?><span class="cart-item-price"><?php echo $product->price; ?></span> </h6>
 
 

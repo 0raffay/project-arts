@@ -5,10 +5,10 @@ $query;
 
 if (isset($_GET["query"])) {
     $query = $_GET["query"];
+    $matchingProducts = json_decode(Product::sortProducts($query));
 } else {
     $query = '';
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -40,11 +40,29 @@ if (isset($_GET["query"])) {
     <section class="searchMain">
         <div class="container">
             <div class="searchbarContainer d-flex jusify-content-between py-2 px-3 w-75 mx-auto border ">
-                <input type="text"  value="<?php echo $query; ?>" class="fs-20 w-100 d-block searchInput" placeholder="Type Something...">
-                <button class="searchButton" type="button"><i class=" fa-solid fa-magnifying-glass"></i></button>
+                <input type="text" value="<?php echo $query; ?>" class="fs-20 w-100 d-block mainSearchBar" placeholder="Type Something...">
+                <button class="searchButton"><i class=" fa-solid fa-magnifying-glass"></i></button>
+            </div>
+
+            <div class="row py-5 ">
+                <div class="col-12 mb-3">
+                    <h4 class="section__heading text-center fs-20">Showing Results (<?php echo count($matchingProducts); ?>)</h4>
+                </div>
+                <?php
+                if (count($matchingProducts) != 0) {
+                    foreach ($matchingProducts as $products) {
+                ?>
+                        <?php include('components/card.php'); ?>
+                <?php  }
+                } else {
+                    echo "0 results found.";
+                }
+                ?>
+
             </div>
         </div>
     </section>
+
 
     <!--==== FOOTER START ====-->
     <?php include('includes/footer.php') ?>
