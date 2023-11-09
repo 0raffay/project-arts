@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2023 at 10:03 PM
+-- Generation Time: Nov 09, 2023 at 11:34 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -41,9 +41,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`Admin Id`, `Admin Name`, `Admin Email`, `Admin Password`, `Admin Phone`, `Rights`) VALUES
-(1, 'Super Admin', 'sadmin', 'admin', '', '1'),
-(3, 'Abdullah Sheikh', 'abdullah@gmail.com', '123', '1234567890', '2'),
-(4, 'employee', 'employee@gmail.com', '123', '123', '2');
+(1, 'Super Admin', 'sadmin', 'admin', '', '1');
 
 -- --------------------------------------------------------
 
@@ -222,7 +220,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `Admin Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Admin Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `cart`

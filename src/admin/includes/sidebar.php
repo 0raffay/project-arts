@@ -8,7 +8,7 @@
             <hr>
         </li>
         <li><button data-show=".product-section" class="active">Products</button></li>
-        <li><button data-show=".orders-section">Orders / Sales</button></li>
+        <li><button data-show=".orders-section">Orders </button></li>
         <li><button data-show=".category-section">Categories</button></li>
     </ul>
 </aside>

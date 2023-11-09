@@ -6,7 +6,7 @@ include("../functions.php");
 if (isset($currentAdmin)) {
     header("location: dashboard.php");
 } else {
-    print_r("not logged in");   
+    // print_r("not logged in");   
 }
 ?>
 

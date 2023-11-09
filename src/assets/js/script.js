@@ -894,3 +894,28 @@ addEmployeeButton.click(function () {
     // }
     addEmployee(name, email, password, phone, rights);
 });
+
+
+function deleteAdmin(id) {
+    $.ajax({
+        url: "../controllers/delete-admin.php",
+        method: "POST",
+        data: {
+            adminId: id,
+        }, 
+
+        success: function  (response){ 
+            window.location.href = window.location.href;
+        },
+        error: function (xhr, status,error) {
+        console.log(error);
+    }
+    })
+}
+
+let deleteAdminButton = $("[data-delete-admin]")
+
+deleteAdminButton.click(function() {
+    let id = $(this).attr("data-id");
+    deleteAdmin(id);
+})

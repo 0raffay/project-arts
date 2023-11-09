@@ -537,7 +537,7 @@ class Admin
     public static function fetchAllAdmin()
     {
         global $connection;
-        $query = "SELECT * FROM `admin` WHERE `Rights` != '1' ";
+        $query = "SELECT * FROM `admin` ";
         $result = mysqli_query($connection, $query);
         $admins = array();
         if($result && $result->num_rows > 0) {
@@ -548,6 +548,16 @@ class Admin
             $admins = "No admins found";
         }
         return $admins;
+    }
+
+
+    public static function deleteAdmin($adminId) {
+        global $connection;
+        $query = "DELETE FROM `admin` WHERE `Admin Id` = '$adminId'";
+        $result = mysqli_query($connection, $query);
+        if($result) {
+            echo "User Deleted";
+        }
     }
 }
 

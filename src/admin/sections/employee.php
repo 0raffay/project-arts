@@ -1,8 +1,12 @@
-<?php
-$admins = Admin::fetchAllAdmin();
-?>
-
 <div class="employee-section">
+    <?php
+    if ($employee) {
+        include("includes/locked.php");
+        return;
+    }
+
+    $admins = Admin::fetchAllAdmin();
+    ?>
     <div class="text-center">
         <h4 class="fs-30 py-4 border-bottom-hr mb-0 fc-secondary-300 fw-300">Employees</h4>
     </div>
@@ -32,10 +36,10 @@ $admins = Admin::fetchAllAdmin();
                             Employee Email:
                         </div>
                         <div class="table-cell flex-1">
-                            Employee Phone:
+                            Employee Password:
                         </div>
                         <div class="table-cell flex-1">
-                            Employee Password:
+                            Employee Phone:
                         </div>
                         <div class="table-cell flex-1">
                             Employee Rights:
@@ -56,19 +60,25 @@ $admins = Admin::fetchAllAdmin();
                                 <?php echo $admin['Admin Email']; ?>
                             </div>
                             <div class="table-cell flex-1">
-                                <?php echo $admin['Admin Phone']; ?>
-                            </div>
-                            <div class="table-cell flex-1">
                                 <?php echo $admin['Admin Password']; ?>
                             </div>
                             <div class="table-cell flex-1">
-                                <?php echo $admin['Rights']; ?>
+                                <?php echo $admin['Admin Phone']; ?>
+                            </div>
+                            <div class="table-cell flex-1">
+                                <?php
+                                if ($admin["Rights"] == "2") {
+                                    echo "Employee Level Access";
+                                } else {
+                                    echo "<strong>Super Admin</strong>";
+                                }
+                                ?>
                             </div>
                             <div class="table-cell flex-1">
                                 <button class="addHover border-right">
                                     Edit User
                                 </button>
-                                <button class="text-danger addHover">
+                                <button class="text-danger addHover" data-id="<?php echo $admin['Admin Id']?>" data-delete-admin>
                                     Delete User
                                 </button>
                             </div>
@@ -96,10 +106,6 @@ $admins = Admin::fetchAllAdmin();
             </div>
             <div class="modal-body employeeModal position-relative">
                 <div class="loader center">
-
-
-
-
                 </div>
 
                 <div class="addEmployeeForm py-3">

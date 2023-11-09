@@ -5,7 +5,6 @@ include('../functions.php');
 if(!isset($currentAdmin)) {
     header("location: index.php");
 }
-print_r($currentAdmin);
 //UPLOAD PRODUCT
 $_SESSION['productUploadStatus'] = '';
 $productUploadStatus =  $_SESSION['productUploadStatus'];
