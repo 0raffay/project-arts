@@ -11,7 +11,7 @@
                     </div>
                 </form>
                 <button data-view-all-products class="addHover border-right active">View All</button>
-                <p class="fs-16 border-right"><span class="fc-secondary fw-500">Total No. Of Orders:</span> <?php echo count(Product::$instances); ?></p>
+                <p class="fs-16 border-right"><span class="fc-secondary fw-500">Total No. Of Orders:</span> <?php echo count(Customer::fetchAllOrders()); ?></p>
             </div>
         </div>
 
@@ -37,7 +37,7 @@
                 </div>
                 <?php if ($orderCount <= 0) { ?>
                     <div class="orderHistory d-flex">
-                        <p class="text-center pt-5 fs-20 fw-400 fc-secondary-400">No orders are placed on the website yet.</p>
+                        <p class="text-center pt-5 fs-20 fw-400 fc-secondary-400">No Orders are shipped yet.</p>
                     </div>
                 <?php } else { ?>
 

@@ -123,10 +123,10 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <h6 class="fc-secondary fw-400 fs-24 mb-2">Title: <?php echo $product->name; ?></h6>
-                            <p class="fc-secondary fw-400 fs-20 mb-5"><strong>Price:</strong> $<?php echo $product->price; ?></p>
-                            <h6 class="fc-secondary fw-300 fs-18 mb-2"><strong>SKU: </strong><?php echo $product->SKU; ?> </h6>
-                            <h6 class="fc-secondary fw-300 fs-18 mb-2"><strong>Category: </strong><?php echo $product->category; ?></h6>
+                            <h6 class="fc-secondary fw-400 fs-20 mb-2 product-title">Title: <?php echo $product->name; ?></h6>
+                            <p class="fc-secondary fw-400 fs-16 mb-5"><strong>Price:</strong> $<?php echo $product->price; ?></p>
+                            <h6 class="fc-secondary fw-300 fs-16 mb-2"><strong>SKU: </strong><?php echo $product->SKU; ?> </h6>
+                            <h6 class="fc-secondary fw-300 fs-16 mb-2"><strong>Category: </strong><?php echo $product->category; ?></h6>
                             <h6 class="fc-secondary fw-300 fs-16 mb-2"><strong>Units: </strong><?php echo $product->stock; ?></h6>
                             <h6 class="fc-secondary fw-300 fs-16 mb-2"><strong>Warrnaty Info: </strong><?php echo $product->warranty; ?></h6>
                         </div>

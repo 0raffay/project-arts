@@ -10,7 +10,7 @@
                 </div>
             </form>
             <button data-view-all-products class="addHover border-right active">View All</button>
-            <p class="fs-16 border-right"><span class="fc-secondary fw-500">Total No. Of Customers:</span> <?php echo count(Product::$instances); ?></p>
+            <p class="fs-16 border-right"><span class="fc-secondary fw-500">Total No. Of Customers:</span> <?php echo count(Customer::$instances); ?></p>
         </div>
     </div>
 
@@ -62,7 +62,7 @@
                                 <button class="addHover border-right">
                                     Edit User
                                 </button>
-                                <button class="text-danger">
+                                <button class="text-danger addHover">
                                     Delete User
                                 </button>
                             </div>

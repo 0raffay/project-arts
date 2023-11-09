@@ -644,6 +644,20 @@ input {
     font-weight: 400;
     line-height: normal;
     margin-bottom: 15px;
+    position: relative;
+    width: max-content;
+    margin: 0 auto 30px;
+}
+
+.section__heading::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    height: 2px;
+    background: #000;
+    border-radius: 5px;
+    width: 40px;
 }
 
 .section__text .section__label {
