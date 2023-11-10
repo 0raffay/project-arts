@@ -209,6 +209,23 @@ class Product
         }
         return json_encode($matchingProducts);
     }
+
+
+    public static function fetchSpecificProducts($column, $value)
+    {
+        global $connection;
+        $query = "SELECT * FROM `products` WHERE `$column` = '$value'";
+        $result = mysqli_query($connection, $query);
+        if ($result) {
+            $rows = array();
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            return $rows;
+        } else {
+            return " RESULT NOT FOUND;";
+        }
+    }
 }
 // CREATING INITIAL PRODUCT BASE:
 Product::createInstancesOfProduct($connection);
@@ -540,22 +557,23 @@ class Admin
         $query = "SELECT * FROM `admin` ";
         $result = mysqli_query($connection, $query);
         $admins = array();
-        if($result && $result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
                 $admins[] = $row;
             }
-        }  else {
+        } else {
             $admins = "No admins found";
         }
         return $admins;
     }
 
 
-    public static function deleteAdmin($adminId) {
+    public static function deleteAdmin($adminId)
+    {
         global $connection;
         $query = "DELETE FROM `admin` WHERE `Admin Id` = '$adminId'";
         $result = mysqli_query($connection, $query);
-        if($result) {
+        if ($result) {
             echo "User Deleted";
         }
     }
