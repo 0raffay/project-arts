@@ -1,5 +1,13 @@
 <div class="col-lg-3 col-md-6 col-sm-12 mb-20">
-    <div class="product-card">
+    <div class="product-card position-relative">
+        <?php
+        if ($products->stock <= 0) {
+        ?>
+            <div class="product-stock-label bg-danger danger mb-10 fs-13 fc-white fw-400">
+                Out of stock
+            </div>
+        <?php  }
+        ?>
         <div class="img__wrap" onclick="window.location.href='single-product.php?id=<?php echo $products->SKU; ?>';">
             <img src="assets/images/product-images/<?php echo $products->images ?>"></a>
         </div>
@@ -12,10 +20,17 @@
         </div>
         <div class="product-card-footer">
             <div class="d-flex align-items-center justify-content-between pr-1">
-                <a class="btn btn-primary" href="single-product.php?id=<?php echo $products->SKU; ?>">Buy Now</a>
+                <?php if ($products->stock == "0") { ?>
+                    <a class="btn bg-danger fc-white " style="color: #fff;">Out of Stock !</a>
+                <?php  } else { ?>
+                    <a class="btn btn-primary" href="single-product.php?id=<?php echo $products->SKU; ?>">Buy Now</a>
+                <?php } ?>
                 <button class="addToWishList"><span class="icon__wrap fs-20"><i class="ri-heart-line"></i></span></button>
             </div>
             <div class="product-stars">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 100 100">
+                    <polygon points="50,10 61.803,43.301 96.602,43.301 68.398,66.699 80.201,100 50,77.601 19.799,100 31.602,66.699 3.398,43.301 38.197,43.301" fill="#000" />
+                </svg>
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 100 100">
                     <polygon points="50,10 61.803,43.301 96.602,43.301 68.398,66.699 80.201,100 50,77.601 19.799,100 31.602,66.699 3.398,43.301 38.197,43.301" fill="#000" />
                 </svg>

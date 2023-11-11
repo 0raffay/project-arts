@@ -1244,7 +1244,13 @@ i {
     width: 10px;
     border: 1px solid #000;
 }
-
+.product-card .product-stock-label {
+    position: absolute;
+    top: 0;
+    border-radius: 5px;
+    left: 0;
+    z-index: 2;
+}
 /* about page start */
 
 .evenColumns {
@@ -1276,39 +1282,6 @@ i {
 
 /* section about card start */
 
-.aboutCardSection .evenColumns {
-    justify-content: center;
-    gap: 70px;
-}
-
-.aboutCard {
-    margin-bottom: 80px;
-}
-
-.aboutCardMainContent {
-    max-width: 560px;
-    width: 100%;
-}
-
-.aboutCard h4 {
-    font-size: 45px;
-    font-weight: 500;
-    color: #000;
-    margin-bottom: 20px;
-}
-
-.aboutCard p {
-    font-size: 16px;
-    font-weight: 400;
-    color: #000;
-}
-
-.aboutCardMainImg img {
-    height: 333px;
-    width: 333px;
-    object-fit: cover;
-    object-position: center;
-}
 
 /* section about card end */
 

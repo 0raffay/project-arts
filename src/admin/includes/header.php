@@ -47,7 +47,7 @@ $employee = $currentAdmin["Rights"] === "2";
                 </div>
 
                 <div class="d-flex align-items-center justify-content-end gap-10">
-                    <a href="../../index.php" class="addHover fs-16">Visit Site</a>
+                    <a href="../index.php" class="addHover fs-16">Visit Site</a>
 
                     <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post" class="w-25">
                         <button name="logoutAdmin" class=" btn btn-primary btn-lg" href="../index.php">Logout</button>

@@ -38,31 +38,37 @@
 
     <section class="aboutCardSection">
         <div class="container">
-            <div class="aboutCard evenColumns align-items">
-                <div class="aboutCardMainContent">
-                    <h4>How Long We Have Been in the Industry</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eveniet temporibus vitae mollitia at quod suscipit, iste illum alias sequi tempora cupiditate architecto nobis quibusdam labore quas ut animi in debitis nihil, tenetur similique. Atque hic ipsam voluptatum voluptates nostrum. Sapiente fuga, minus vel libero tenetur maxime doloremque omnis eveniet ullam doloribus, temporibus vero est sit autem, minima id? Quasi corrupti, sunt ut, labore dolore dolor pariatur obcaecati consequuntur laboriosam, ratione ex a. Sequi architecto libero dignissimos praesentium deleniti porro tempore nihil quasi, voluptas repellat excepturi rem, odit doloribus dolor aliquam hic. Ipsam consectetur natus vel! Alias vel earum qui?</p>
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div>
+                        <h4>How Long We Have Been in the Industry</h4>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eveniet temporibus vitae mollitia at quod suscipit, iste illum alias sequi tempora cupiditate architecto nobis quibusdam labore quas ut animi in debitis nihil, tenetur similique. Atque hic ipsam voluptatum voluptates nostrum. Sapiente fuga, minus vel libero tenetur maxime doloremque omnis eveniet ullam doloribus, temporibus vero est sit autem, minima id? Quasi corrupti, sunt ut, labore dolore dolor pariatur obcaecati consequuntur laboriosam, ratione ex a. Sequi architecto libero dignissimos praesentium deleniti porro tempore nihil quasi, voluptas repellat excepturi rem, odit doloribus dolor aliquam hic. Ipsam consectetur natus vel! Alias vel earum qui?</p>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <img src="https://images.unsplash.com/photo-1699669888768-871c5f7cad86?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHx8" alt="Reload Page">
+                    </div>
                 </div>
-                <div class="aboutCardMainImg">
-                    <img src="https://images.unsplash.com/photo-1699669888768-871c5f7cad86?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHx8" alt="Reload Page">
-                </div>
-            </div>
-            <div class="aboutCard evenColumns align-items">
-                <div class="aboutCardMainImg">
-                    <img src="https://images.unsplash.com/photo-1683674755326-e197218c2625?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNHx8fGVufDB8fHx8fA%3D%3D" alt="Reload Page">
-                </div>
-                <div class="aboutCardMainContent">
-                    <h4>Achievements</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eveniet temporibus vitae mollitia at quod suscipit, iste illum alias sequi tempora cupiditate architecto nobis quibusdam labore quas ut animi in debitis nihil, tenetur similique. Atque hic ipsam voluptatum voluptates nostrum. Sapiente fuga, minus vel libero tenetur maxime doloremque omnis eveniet ullam doloribus, temporibus vero est sit autem, minima id? Quasi corrupti, sunt ut, labore dolore dolor pariatur obcaecati consequuntur laboriosam, ratione ex a. Sequi architecto libero dignissimos praesentium deleniti porro tempore nihil quasi, voluptas repellat excepturi rem, odit doloribus dolor aliquam hic. Ipsam consectetur natus vel! Alias vel earum qui?</p>
-                </div>
-            </div>
-            <div class="aboutCard evenColumns align-items">
-                <div class="aboutCardMainContent">
-                    <h4>Testimonails</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eveniet temporibus vitae mollitia at quod suscipit, iste illum alias sequi tempora cupiditate architecto nobis quibusdam labore quas ut animi in debitis nihil, tenetur similique. Atque hic ipsam voluptatum voluptates nostrum. Sapiente fuga, minus vel libero tenetur maxime doloremque omnis eveniet ullam doloribus, temporibus vero est sit autem, minima id? Quasi corrupti, sunt ut, labore dolore dolor pariatur obcaecati consequuntur laboriosam, ratione ex a. Sequi architecto libero dignissimos praesentium deleniti porro tempore nihil quasi, voluptas repellat excepturi rem, odit doloribus dolor aliquam hic. Ipsam consectetur natus vel! Alias vel earum qui?</p>
-                </div>
-                <div class="aboutCardMainImg">
-                    <img src="https://images.unsplash.com/photo-1699565979651-7fd87e4d38d7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4Mnx8fGVufDB8fHx8fA%3D%3D" alt="Reload Page">
+                <div class="row">
+                    <div class="col-md-6 col-12">
+                        <div>
+                            <h4>How Long We Have Been in the Industry</h4>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eveniet temporibus vitae mollitia at quod suscipit, iste illum alias sequi tempora cupiditate architecto nobis quibusdam labore quas ut animi in debitis nihil, tenetur similique. Atque hic ipsam voluptatum voluptates nostrum. Sapiente fuga, minus vel libero tenetur maxime doloremque omnis eveniet ullam doloribus, temporibus vero est sit autem, minima id? Quasi corrupti, sunt ut, labore dolore dolor pariatur obcaecati consequuntur laboriosam, ratione ex a. Sequi architecto libero dignissimos praesentium deleniti porro tempore nihil quasi, voluptas repellat excepturi rem, odit doloribus dolor aliquam hic. Ipsam consectetur natus vel! Alias vel earum qui?</p>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <img src="https://images.unsplash.com/photo-1699669888768-871c5f7cad86?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHx8" alt="Reload Page">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <div>
+                                <h4>How Long We Have Been in the Industry</h4>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eveniet temporibus vitae mollitia at quod suscipit, iste illum alias sequi tempora cupiditate architecto nobis quibusdam labore quas ut animi in debitis nihil, tenetur similique. Atque hic ipsam voluptatum voluptates nostrum. Sapiente fuga, minus vel libero tenetur maxime doloremque omnis eveniet ullam doloribus, temporibus vero est sit autem, minima id? Quasi corrupti, sunt ut, labore dolore dolor pariatur obcaecati consequuntur laboriosam, ratione ex a. Sequi architecto libero dignissimos praesentium deleniti porro tempore nihil quasi, voluptas repellat excepturi rem, odit doloribus dolor aliquam hic. Ipsam consectetur natus vel! Alias vel earum qui?</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <img src="https://images.unsplash.com/photo-1699669888768-871c5f7cad86?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHx8" alt="Reload Page">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -4,18 +4,25 @@
             <h4 class="section__heading">Featured Products</h4>
         </div>
         <div class="row">
-
             <?php
+            function compareProductUploadDates($a, $b)
+            {
+                return strtotime($b->uploadDate) - strtotime($a->uploadDate);
+            }
+
+            // Assuming Product::$instances is an array of product objects
+            usort(Product::$instances, 'compareProductUploadDates');
+
+            // Display the three most recent products
             $count = 0;
             foreach (Product::$instances as $products) {
                 $productIds = $products->SKU;
                 checkCurrentProduct($productIds);
-                // print_r($currentProduct);
-                if ($count < 6) {
-            ?>
-                    <?php include('components/card.php'); ?>
-            <?php
+
+                if ($count < 8) {
+                    include('components/card.php');
                 }
+
                 $count++;
             }
             ?>

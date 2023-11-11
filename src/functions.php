@@ -26,9 +26,10 @@ class Product
     public $description;
     public $warranty;
     public $brand;
+    public $uploadDate;
 
     // CREATES PRODUCT OBJECT -- RUNNING IN createInstancesOfProduct();
-    public function __construct($name, $SKU, $category, $stock, $img, $productKeywords, $price, $description, $warranty, $brand)
+    public function __construct($name, $SKU, $category, $stock, $img, $productKeywords, $price, $description, $warranty, $brand, $uploadDate)
     {
         $this->price = $price;
         $this->name = $name;
@@ -40,6 +41,7 @@ class Product
         $this->description = $description;
         $this->warranty = $warranty;
         $this->brand = $brand ? $brand : "Brand";
+        $this->uploadDate = $uploadDate;
 
         self::$instances[] = $this;
     }
@@ -55,8 +57,12 @@ class Product
             //PRODUCT NAME:
             $productName = $_POST['productTitle'];
 
+            //PRODUCT CATEGROY:
+            $productCategory = $_POST["productCategory"];
+
+
             //PRODUCT SKU GENERATION:
-            $initials = $productName[0] . $productName[1];
+            $initials = $productCategory[0] . $productCategory[1];
             $initials = strtoupper($initials);
             $productSKU = $initials . "-" . random_int(100000, 999999);
             $checkSKU = "SELECT `Product SKU` FROM products WHERE `Product SKU` = '$productSKU'";
@@ -72,8 +78,6 @@ class Product
             //PRODUCT STOCK:
             $productStock = $_POST["productQuantity"];
 
-            //PRODUCT CATEGROY:
-            $productCategory = $_POST["productCategory"];
 
             //PRODUCT DESCRIPTION:
             $productDescription = $_POST["productDescription"];
@@ -171,8 +175,9 @@ class Product
                 $description = $eachRow["Product Description"];
                 $warranty = $eachRow["Warranty"];
                 $brand = $eachRow["Product Brand"];
+                $uploadDate = $eachRow["upload_date"];
 
-                new Product($name, $SKU, $category, $stock, $imagePaths, $keywords, $price, $description, $warranty, $brand);
+                new Product($name, $SKU, $category, $stock, $imagePaths, $keywords, $price, $description, $warranty, $brand, $uploadDate);
             }
         }
     }
@@ -196,6 +201,9 @@ class Product
     {
         $lowerCaseKeywords = strtolower($keyword);
         $keywordsArray = explode(" ", $lowerCaseKeywords);
+        foreach($keywordsArray as $keyword) {
+            $keywordsArray[] = $keyword . "s";
+        }
         $matchingProducts = [];
 
         $products = Product::$instances;
@@ -203,6 +211,9 @@ class Product
         foreach ($products as $product) {
             $keys = strtolower($product->keywords);
             $keyArray = explode(",", $keys);
+            foreach($keyArray as $key) {
+                $keyArray[] = $key . "s";
+            }
 
             // Check if any of the keywords are present in the product's title
             if (array_intersect($keywordsArray, $keyArray)) {
@@ -410,7 +421,7 @@ class Customer
         global $connection;
         global $currentCustomer;
         $customerID = $currentCustomer["Customer Id"];
-        $query = "SELECT * FROM `order` WHERE `Customer Id` = '$customerID'";
+        $query = "SELECT * FROM `order` WHERE `Customer Id` = '$customerID' ORDER BY `order_date` DESC";
         $result = mysqli_query($connection, $query);
         if ($result) {
             $rows = array();
@@ -427,7 +438,7 @@ class Customer
     public static function fetchAllOrders()
     {
         global $connection;
-        $query = "SELECT * FROM `order`";
+        $query = "SELECT * FROM `order` ORDER BY `order_date` DESC";
         $result = mysqli_query($connection, $query);
         if ($result) {
             $rows = array();
