@@ -37,7 +37,7 @@ $query = "INSERT INTO `order` (`Order Id`, `Order Number`, `Customer Id`, `Order
 $result = mysqli_query($connection, $query);
 
 if ($result) {
-
+    
 
     $query = "UPDATE `cart` SET `Products` = '', `Product Quantity` = '' WHERE `Customer Id` = '$customerId'";
     $result = mysqli_query($connection, $query);
@@ -57,5 +57,5 @@ if ($result) {
         $_SESSION["recentOrder"] = $recentProduct;
     }
 } else {
-    echo "Nahi yar";
+    echo "Couldn't place order at this moment. Please try again.";
 }

@@ -7,6 +7,8 @@ $dbConfig = array(
     'database' => 'pr'
 );
 
+global $connection;
+
 $connection = new mysqli(
     $dbConfig['host'],
     $dbConfig['username'],
@@ -16,5 +18,5 @@ $connection = new mysqli(
 
 if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
-}  
+} 
 ?>

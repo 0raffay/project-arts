@@ -30,7 +30,7 @@ a {
 html,
 body {
     overflow-x: hidden;
-    scroll-behavior: smooth;
+    /* scroll-behavior: smooth; */
 }
 
 @media only screen and (min-width: 1450px) {
@@ -1227,3 +1227,4 @@ button.disabled {
     transform: translate(-50%, -50%);
     text-align: center;
 }
+
