@@ -741,7 +741,7 @@ function showSearchedProducts(products) {
 
     if (products.length === 0) {
         productsContainer.empty();
-        productsContainer.html("No Products with these keywords");
+        productsContainer.html("No results found.");
     } else {
         productsContainer.empty();
 

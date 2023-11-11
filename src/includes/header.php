@@ -46,7 +46,7 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
                     </li>
 
                     <li><a href="catalogue.php">Catalogue</a></li>
-                    <li><a href="javascript:;">About us</a></li>
+                    <li><a href="about.php">About us</a></li>
                     <li><a href="contact.php">Contact Us</a></li>
                 </ul>
                 <div class="d-flex align-items-center py-1 fw-300 fs-16">
@@ -161,13 +161,13 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
                 <button class="close" data-search-modal><i class="ri-close-line"></i></button>
             </div>
             <div class="d-flex pb-2 justify-content-between border-bottom-hr fs-24">
-                <input class="fc-secondary fw-400 searchInput" type="text" header-search placeholder="Search Products...">
+                <input class="fc-secondary fw-400 searchInput px-1" type="text" header-search placeholder="Search Products...">
                 <button class="searchButton" type="button"><i class=" fa-solid fa-magnifying-glass"></i></button>
             </div>
 
 
             <!-- //SHOW PRODUCTS HERE: -->
-            <div class="showSearchedProducts row py-2">
+            <div class="showSearchedProducts row px-3 py-2">
                 <p class="searchError"></p>
             </div>
 
