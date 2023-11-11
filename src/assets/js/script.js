@@ -57,9 +57,23 @@ $(document).ready(function () {
     let quantityInputs = $(".cart-item-quantity");
 
     quantityInputs.change(function () {
+        let product = $(this).attr("data-product");
         let index = $(this).attr("data-product-index");
         let value = $(this).val();
-        updateProductQuantity(index, value);
+        let _this = $(this);
+
+        // Pass a callback function to handle the result
+        updateProductQuantity(product, index, value, function (errorLevel) {
+            if (errorLevel == 0) {
+                $(".totalCart a").addClass("disabled");
+                _this.next().show();
+                $(".d-me").addClass("disabled");
+            } else {
+                $(".totalCart a").removeClass("disabled");
+                _this.next().hide();
+                $(".d-me").removeClass("disabled");
+            }
+        });
     });
 });
 
@@ -236,11 +250,11 @@ function addToCart(_thisId) {
         data: { _thisId },
         success: function (response) {
             console.log("Success:", response);
-            if (window.location.href.indexOf(_thisId) !== -1) {
-                window.location.href = window.location.href + "&cartOpen";
-            } else {
-                window.location.href = window.location.href + "?cartOpen";
-            }
+            // if (window.location.href.indexOf(_thisId) !== -1) {
+            //     window.location.href = window.location.href + "&cartOpen";
+            // } else {
+            window.location.href = window.location.href + "&cartOpen";
+            // }
         },
         error: function (xhr, status, error) {
             console.log("Error:", error);
@@ -547,21 +561,23 @@ $(".checkCardInfo").change(function () {
         $(this).addClass("error");
     }
 });
-
-function updateProductQuantity(index, value) {
+function updateProductQuantity(product, index, value, callback) {
     $.ajax({
         url: "controllers/edit-cart-quantity.php",
         method: "POST",
-        data: { index: index, value: value },
+        data: { product: product, index: index, value: value },
         success: function (response) {
             console.log(response);
+            let res = JSON.parse(response);
+            console.log(res);
+            console.log(res.errorLevel);
+            callback(res.errorLevel); // Execute the callback with the result
         },
         error: function (xhr, status, error) {
             console.log(error);
         },
     });
 }
-
 function order(shippingDetails, orderType, total) {
     $.ajax({
         url: "controllers/place-order.php",
@@ -854,11 +870,16 @@ function addEmployee(name, email, password, phone, rights) {
             adminRights: rights,
         },
         success: function (response) {
-            if(response == "1") {
-                showLoader(".employeeModal .loader", ".addEmployeeForm", ".element", 500);
-                setTimeout(function() {
+            if (response == "1") {
+                showLoader(
+                    ".employeeModal .loader",
+                    ".addEmployeeForm",
+                    ".element",
+                    500
+                );
+                setTimeout(function () {
                     window.location.href = window.location.href;
-                }, 500)
+                }, 500);
             }
         },
         error: function (xhr, status, error) {
@@ -895,27 +916,26 @@ addEmployeeButton.click(function () {
     addEmployee(name, email, password, phone, rights);
 });
 
-
 function deleteAdmin(id) {
     $.ajax({
         url: "../controllers/delete-admin.php",
         method: "POST",
         data: {
             adminId: id,
-        }, 
+        },
 
-        success: function  (response){ 
+        success: function (response) {
             window.location.href = window.location.href;
         },
-        error: function (xhr, status,error) {
-        console.log(error);
-    }
-    })
+        error: function (xhr, status, error) {
+            console.log(error);
+        },
+    });
 }
 
-let deleteAdminButton = $("[data-delete-admin]")
+let deleteAdminButton = $("[data-delete-admin]");
 
-deleteAdminButton.click(function() {
+deleteAdminButton.click(function () {
     let id = $(this).attr("data-id");
     deleteAdmin(id);
-})
+});

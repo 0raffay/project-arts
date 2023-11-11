@@ -35,7 +35,7 @@ checkCurrentProduct($productId);
     <!--==== HEADER END ====-->
 
 
-    <main id="single-product-main" class="py-5">
+    <main id="single-product-main" class="py-5 pb-4">
         <div class="container">
             <div class="row">
                 <div class="col-6 ">
@@ -45,40 +45,48 @@ checkCurrentProduct($productId);
                 </div>
                 <div class="col-6">
                     <div class="product-info">
-                        <div class="product-stock-label mb-10 fs-13 fc-white fw-400">
-                            In Stock
-                        </div>
+
+                        <?php
+                        if ($currentProduct->stock == "0") { ?>
+
+                            <div class="product-stock-label bg-danger danger mb-10 fs-13 fc-white fw-400">
+                                Out of stock
+                            </div>
+                        <?php  } else { ?>
+                            <div class="product-stock-label mb-10 fs-13 fc-white fw-400">
+                                In Stock
+                            </div>
+                        <?php } ?>
+
                         <h6 class="product-title fs-24 mb-10 fw-300 fc-secondary">
                             <!-- Forest Green Pullover Sweatshirt -->
                             <?php echo $currentProduct->name; ?>
                         </h6>
                         <p class="product-price fs-24 mb-10 fw-300 fc-secondary"><?php echo $currencySymbol . $currentProduct->price; ?></p>
-                        <p class="small-product-stock-label fs-13 fw-300 mb-5 fc-secondary pb-2 border-bottom-hr">Hurry Only <?php echo $currentProduct->stock; ?> Left In Stock!</p>
+                        <?php
+                        if (!$currentProduct->stock == "0") { ?>
+                            <p class="small-product-stock-label fs-13 fw-300 mb-5 fc-secondary pb-2 border-bottom-hr">Hurry Only <?php echo $currentProduct->stock; ?> Left In Stock!</p>
+                        <?php } ?>
                         <div class="product-policy py-3 pb-4">
                             <a href="policy" class="addHover fc-secondary-400 mr-4"><i class="fa-solid fa-cart-shopping mr-2"></i>Delivery And Return</a>
-                            <!-- <a href="message" class="addHover fc-secondary-400"><i class="fa-solid fa-message mr-2"></i> Message</a> -->
                         </div>
 
                         <form action="POST" class="mb-20">
                             <div class="row">
                                 <div class="col-12 mb-10">
-                                    <!-- <div class="form__wrap">
-                                        <label for="notes">Notes</label>
-                                        <textarea class="px-3 py-2 ouline-none" name="notes"></textarea>
-                                    </div> -->
-                                    <i class="product-note fw-300 fc-secondary-400 fs-16 mb-20 d-block">* Please note that color may differ slightly from how it appears on your screen
+                                    <i class="product-note fw-300 fc-secondary-400 fs-16 d-block">* Please note that color may differ slightly from how it appears on your screen
                                         due to varying monitor</i>
                                 </div>
-
-                                <!-- <div class="col-2">
-                                    <div class="d-flex gap-5 counter-btns justify-content-between">
-                                        <button data-decrement class="btn btn-primary py-1 fs-22 fw-700 px-3">-</button>
-                                        <input type="number" name="quantity" value="3">
-                                        <button data-increment class="btn btn-primary py-1 fs-22 fw-700 px-3">+</button>
-                                    </div>
-                                </div> -->
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-secondary btn-lg" data-add-to-cart data-product-id="<?php echo $productId; ?>">ADD TO CART</button>
+
+                                    <?php
+                                    if ($currentProduct->stock == "0") { ?>
+                                        <p class="text-danger pb-3">This product is out of stock. Sorry for the inconvenience</p>
+                                        <button class="btn bg-danger fc-white btn-lg disabled">Out of Stock !</button>
+                                    <?php  } else { ?>
+                                        <button type="submit" class="btn btn-secondary btn-lg" data-add-to-cart data-product-id="<?php echo $productId; ?>">ADD TO CART</button>
+                                    <?php } ?>
+
                                 </div>
                             </div>
                         </form>

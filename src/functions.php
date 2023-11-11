@@ -344,38 +344,63 @@ class Customer
         }
     }
 
-
     // EDIT CART QUANTITY:
-    public static function editProductQuantityInCart($connection, $productIndex, $updatedQuantity)
+    public static function editProductQuantityInCart($connection, $productSKU, $productIndex, $updatedQuantity)
     {
         global $currentCustomer;
         $customerId = $currentCustomer["Customer Id"];
+        $error = array(
+            "errorLevel" => 1,
+            "error" => 1,
+        );
 
         $query = "SELECT * FROM `cart` WHERE `Customer Id` = '$customerId'";
         $result = mysqli_query($connection, $query);
         if ($result && $result->num_rows > 0) {
-            $resultArray = $result->fetch_assoc();
-            $previousProductsQuantity = $resultArray["Product Quantity"];
-            $previousProductsQuantityArray = explode(",", $previousProductsQuantity);
+            $checkQuery = "SELECT * FROM `products` WHERE `Product SKU`='$productSKU'";
+            $checkResult = mysqli_query($connection, $checkQuery);
+            if ($checkResult) {
+                $row = $checkResult->fetch_assoc();
+                $quantity = $row["Product Stock"];
+                if ($updatedQuantity > $quantity) {
+                    // $error = array(
+                    //     "errorLevel" => 0,
+                    //     "error" => "There is not enough quantity in stock",
+                    // );
+                    $error["errorLevel"] = 0;
+                    $error["error"] = "There is not enough quantity in stock";
+                    // print_r(json_encode($error));
+                } else {
+                    $resultArray = $result->fetch_assoc();
 
-            $previousProductsQuantityArray[$productIndex] = $updatedQuantity;
-            $previousProductsQuantityArray = array_values($previousProductsQuantityArray);
-            $newQuantity = implode(",", $previousProductsQuantityArray);
+                    $previousProductsQuantity = $resultArray["Product Quantity"];
+                    $previousProductsQuantityArray = explode(",", $previousProductsQuantity);
 
-            // Update the Product Quantity with the new value
-            $updateQuery = "UPDATE `cart` SET `Product Quantity` = '$newQuantity' WHERE `Customer Id` = '$customerId'";
-            $updateResult = mysqli_query($connection, $updateQuery);
-            if ($updateResult) {
-                // Quantity updated successfully
-                return true;
+
+                    $previousProductsQuantityArray[$productIndex] = $updatedQuantity;
+                    $previousProductsQuantityArray = array_values($previousProductsQuantityArray);
+                    $newQuantity = implode(",", $previousProductsQuantityArray);
+
+                    // Update the Product Quantity with the new value
+                    $updateQuery = "UPDATE `cart` SET `Product Quantity` = '$newQuantity' WHERE `Customer Id` = '$customerId'";
+                    $updateResult = mysqli_query($connection, $updateQuery);
+                    if ($updateResult) {
+                        // echo "product quanitity was updated";
+                        // echo json_decode($error);
+                    } else {
+                        // echo "something went wrong could'nt update quantity";
+                        // echo json_decode($error);
+                    }
+                }
             } else {
-                // Failed to update quantity
-                return false;
+                // echo "Product Not found";
+                // echo json_decode($error);
             }
         } else {
-            // Handle the case where the customer's cart data doesn't exist.
-            return false;
+            // echo " cart doesn't exist";
+            // echo json_decode($error);
         }
+        echo json_encode($error);
     }
 
     public static function fetchOrders()

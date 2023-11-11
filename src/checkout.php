@@ -76,7 +76,7 @@ $userZip = $currentCustomer["Customer Zipcode"];
                                 $productQuantity = $productsInCartQuantity[$productIndex];
                         ?>
 
-                                <div class="lh-condensed checkout-cart-item align-items-center list-group-item  d-flex gap-10 border-bottom-hr">
+                                <div class="lh-condensed py-4 checkout-cart-item align-items-center list-group-item  d-flex gap-10 border-bottom-hr">
                                     <div class="img__wrap">
                                         <img height="130" src="assets/images/product-images/<?php echo $product->images; ?>" alt="">
                                     </div>
@@ -88,7 +88,8 @@ $userZip = $currentCustomer["Customer Zipcode"];
                                         <div class="d-flex justify-content-between align-items-end">
                                             <div>
                                                 <label for="cart-quantity<?php echo $product->SKU; ?>" class="fw-300 mb-1 addHover fs-14 fc-secondary-400">Item Quantity:</label>
-                                                <input id="cart-quantity<?php echo $product->SKU; ?>" value="<?php echo $productQuantity; ?>" class="cart-item-quantity">
+                                                <input id="cart-quantity<?php echo $product->SKU; ?>" data-product="<?php echo $product->SKU; ?>" data-product-index="<?php echo $productIndex; ?>" value="<?php echo $productQuantity; ?>" class="cart-item-quantity">
+                                                <p class="text-danger position-absolute" style="padding: 5px 0; display: none; font-size: 12px;">Not enough units in stock.</p>
                                             </div>
                                             <div>
                                                 <button data-remove-from-cart data-id="<?php echo $productIndex; ?>" class="text-danger remove-cart-item fw-300 fs-14">Remove Item</button>
@@ -224,7 +225,7 @@ $userZip = $currentCustomer["Customer Zipcode"];
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-secondary btn-lg btn-block payWithCard" placeOrder data-order>Continue to checkout</button>
+                                <button class="btn btn-secondary btn-lg btn-block payWithCard d-me" placeOrder data-order>Continue to checkout</button>
                             </div>
                         </div>
                         <div class="delivery hidden">
@@ -238,7 +239,7 @@ $userZip = $currentCustomer["Customer Zipcode"];
                                 </div>
                                 <p class="pt-4  pb-3 text-center"> You have selected Cash On Delivery as your payment Option.</p>
                                 <p class="pb-4 text-center"> You will have to pay <strong><?php echo $currencySymbol; ?></strong><strong class="amount"></strong> when the product arrives at your door step.</p>
-                                <button class="btn btn-secondary btn-lg" placeOrder data-delivery-order>Place Your Order.</button>
+                                <button class="btn btn-secondary btn-lg d-me" placeOrder data-delivery-order>Place Your Order.</button>
                             </div>
                         </div>
                     </div>

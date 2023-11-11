@@ -1228,3 +1228,10 @@ button.disabled {
     text-align: center;
 }
 
+.btn.bg-danger {
+    pointer-events: none;
+}
+
+.btn.disabled, .btn:disabled, a.disabled {
+    pointer-events: none;
+}

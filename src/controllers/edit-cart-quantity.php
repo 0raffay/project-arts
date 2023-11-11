@@ -5,7 +5,9 @@ include "../functions.php";
 
 $index = $_POST["index"];
 $value = $_POST["value"];
+$product = $_POST["product"];
 
-Customer::editProductQuantityInCart($connection, $index, $value)
+Customer::editProductQuantityInCart($connection,$product, $index, $value);
+
 
 ?>

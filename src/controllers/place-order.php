@@ -37,24 +37,60 @@ $query = "INSERT INTO `order` (`Order Id`, `Order Number`, `Customer Id`, `Order
 $result = mysqli_query($connection, $query);
 
 if ($result) {
-    
+    $products = explode(",", $orderItems);
+    $productQuantity = explode(",", $orderQuantity);
 
-    $query = "UPDATE `cart` SET `Products` = '', `Product Quantity` = '' WHERE `Customer Id` = '$customerId'";
-    $result = mysqli_query($connection, $query);
-    if (!$result) {
-        echo "Couldn't Update Cart";
-    } else {
-        echo "CART WAS UPDATED";
+    foreach ($products as $product) {
+        $productIndex = array_search($product, $products);
+        print_r($productIndex);
+        $thisProductQuantity = $productQuantity[$productIndex];
 
-        $recentProduct = array(
-            "OrderNum" => "$orderNumber",
-            "OrderDate" => "$date",
-            "deliveryDate" => "24.24.24",
-            "orderAmount" => $cartTotal,
-            "paymentMethod" => $orderType,
-        );
+        // Fetch the current quantity from the database
+        $currentQuantityQuery = "SELECT `Product Stock` FROM `products` WHERE `Product SKU` = '$product'";
+        $currentQuantityResult = mysqli_query($connection, $currentQuantityQuery);
 
-        $_SESSION["recentOrder"] = $recentProduct;
+        if ($currentQuantityResult) {
+            $currentQuantityRow = mysqli_fetch_assoc($currentQuantityResult);
+            $currentQuantity = $currentQuantityRow['Product Stock'];
+
+            // Check if there is enough stock
+            if ($thisProductQuantity <= $currentQuantity) {
+                // Subtract the new quantity from the current quantity
+                $updatedQuantity = $currentQuantity - $thisProductQuantity;
+
+                // Update the database with the new quantity
+                $quantityUpdateQuery = "UPDATE `products` SET `Product Stock`='$updatedQuantity' WHERE `Product SKU` = '$product'";
+                $quantityUpdateResult = mysqli_query($connection, $quantityUpdateQuery);
+
+                if ($quantityUpdateResult) {
+
+
+                    $query = "UPDATE `cart` SET `Products` = '', `Product Quantity` = '' WHERE `Customer Id` = '$customerId'";
+                    $result = mysqli_query($connection, $query);
+                    if (!$result) {
+                        echo "Couldn't Update Cart";
+                    } else {
+                        echo "CART WAS UPDATED";
+
+                        $recentProduct = array(
+                            "OrderNum" => "$orderNumber",
+                            "OrderDate" => "$date",
+                            "deliveryDate" => "24.24.24",
+                            "orderAmount" => $cartTotal,
+                            "paymentMethod" => $orderType,
+                        );
+
+                        $_SESSION["recentOrder"] = $recentProduct;
+                    }
+                } else {
+                    echo "couldn't update";
+                }
+            } else {
+                echo "Not enough stock for product: $product";
+            }
+        } else {
+            echo "couldn't fetch current quantity";
+        }
     }
 } else {
     echo "Couldn't place order at this moment. Please try again.";

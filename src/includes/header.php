@@ -111,7 +111,8 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
                                         <div class="d-flex justify-content-between align-items-end">
                                             <div>
                                                 <label for="cart-quantity<?php echo $product->SKU; ?>" class="fw-300 mb-1 addHover fs-14 fc-secondary-400">Edit Quantity:</label>
-                                                <input id="cart-quantity<?php echo $product->SKU; ?>" data-product-index="<?php echo $productIndex; ?>" value="<?php echo $productQuantity; ?>" class="cart-item-quantity">
+                                                <input id="cart-quantity<?php echo $product->SKU; ?>" data-product="<?php echo $product->SKU; ?>" data-product-index="<?php echo $productIndex; ?>" value="<?php echo $productQuantity; ?>" class="cart-item-quantity">
+                                                <p class="text-danger position-absolute" style="padding: 5px 0; display: none; font-size: 12px;">Not enough units in stock.</p>
                                             </div>
                                             <div>
                                                 <button data-remove-from-cart data-id="<?php echo $productIndex; ?>" class="text-danger remove-cart-item fw-300 fs-14">Remove Item</button>
@@ -160,14 +161,14 @@ $promotionTitle = "FINAL CLEARANCE: Take 20% off ‘Sale Must-Haves'";
                 <button class="close" data-search-modal><i class="ri-close-line"></i></button>
             </div>
             <div class="d-flex pb-2 justify-content-between border-bottom-hr fs-24">
-                <input class="fc-secondary fw-400 searchInput" type="text"  header-search placeholder="Search Products...">
+                <input class="fc-secondary fw-400 searchInput" type="text" header-search placeholder="Search Products...">
                 <button class="searchButton" type="button"><i class=" fa-solid fa-magnifying-glass"></i></button>
             </div>
 
 
             <!-- //SHOW PRODUCTS HERE: -->
             <div class="showSearchedProducts row py-2">
-                    <p class="searchError"></p>
+                <p class="searchError"></p>
             </div>
 
         </div>
