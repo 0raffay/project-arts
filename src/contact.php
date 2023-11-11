@@ -32,18 +32,12 @@
                 <h1 class="section__heading fs-30">Contact us</h1>
             </div>
 
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <h6 class="section__heading fs-20 fc-white">Fill the details</h6>
-                    <div class=" px-4 py-4 map h-100 bg-subbed border w-100">
-                map
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
+            <div class="row center">
+                <div class="col-md-6 col-sm-12 center">
                     <div class="contactForm">
-                        <h6 class="section__heading fs-20">Fill the details</h6>
+                        <h6 class="section__heading fs-20 mb-50">Fill the details</h6>
                         <div class="form__wrap">
-                            <div class="util__panel gap-10">
+                            <div class="util__panel gap-10 mb-20">
                                 <div class="w-100">
                                     <label for="">Name</label>
                                     <input type="text">
@@ -52,6 +46,22 @@
                                     <label for="">Name</label>
                                     <input type="text">
                                 </div>
+                            </div>
+                            <div class="util__panel gap-10 mb-20">
+                                <div class="w-100">
+                                    <label for="">Email</label>
+                                    <input type="email">
+                                </div>
+                                <div class="w-100">
+                                    <label for="">Phone.No</label>
+                                    <input type="number">
+                                </div>
+                            </div>
+                            <div class="messageField mb-20">
+                                <textarea id="messageMe" placeholder="Message"></textarea>
+                            </div>
+                            <div class="contactFormButton">
+                                <button>Submit</button>
                             </div>
                         </div>
                     </div>

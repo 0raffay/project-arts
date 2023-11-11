@@ -736,8 +736,8 @@ function sortProducts(keywords) {
         },
     });
 }
-function showSearchedProducts(products) {
     var productsContainer = $(".showSearchedProducts");
+function showSearchedProducts(products) {
 
     if (products.length === 0) {
         productsContainer.empty();

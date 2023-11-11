@@ -7,6 +7,7 @@ global $currentProduct;
 global $productsInCart;
 global $productsInCartQuantity;
 global $currentAdmin;
+global $connection;
 
 //CLASSES:
 class Product
@@ -150,8 +151,9 @@ class Product
     }
 
     // CREATE INSTANCES OF PRODUCTS IN CLASS ON PAGE LOAD
-    public static function createInstancesOfProduct($connection)
+    public static function createInstancesOfProduct()
     {
+        global $connection;
         $showSQL = "SELECT * FROM `products`";
         $showQueryResult = mysqli_query($connection, $showSQL);
 
@@ -651,4 +653,4 @@ function fetchCartProducts($connection, $currentCustomer)
 fetchCartProducts($connection, $currentCustomer);
 
 // CREATING INITIAL PRODUCT BASE:
-Product::createInstancesOfProduct($connection);
+Product::createInstancesOfProduct();
