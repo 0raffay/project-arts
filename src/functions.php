@@ -613,7 +613,7 @@ if (isset($_COOKIE["currentCustomer"])) {
 if (isset($_SESSION["currentAdmin"])) {
     $currentAdmin = $_SESSION["currentAdmin"];
 } else {
-    $currentCustomer = null;
+    $currentAdmin = null;
 }
 
 function checkCurrentProduct($productId)
