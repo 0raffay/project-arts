@@ -103,25 +103,67 @@ checkCurrentProduct($productId);
                 </div>
             </div>
         </div>
-    </main>
 
-    <div class="product-feedback">
-        <div class="container">
-            <button class="pb-1 fc-secondary fs-24 fw-400 border-bottom-hr">Product Feedback</button>
-            <div class="product-feedback-head d-flex align-items-center justify-content-between fs-23 fw-300 fc-secondary py-3">
-                Customer Reviews
-                <button class="btn btn-primary">Write A Review</button>
+        <div class="product-feedback">
+            <div class="container">
+                <button class="pb-1 fc-secondary fs-24 fw-400 border-bottom-hr">Product Feedback</button>
+                <div class="product-feedback-head d-flex align-items-center justify-content-between fs-23 fw-300 fc-secondary py-3">
+                    <?php
+                    $reviews = Feedback::showReviews($productId);
+                    ?>
+                    Customer Reviews (<?php echo count($reviews); ?>)
+                    <button class="btn btn-primary" data-review>Write A Review</button>
+                </div>
+                <div class="feedback-content py-5 mb-4 border-bottom-hr">
+                    <?php
+                    if (empty($reviews)) {
+                    ?>
+                        <p>No reviews yet.</p>
+                    <?php } else { ?>
+                        <div class="reviews-container">
+                            <?php foreach ($reviews as $review) {
+                                $customerName = $review["customer_name"];
+                                $message = $review["feedback_message"];
+                                $time = $review["feedback_date_time"];
+                                $formattedDate = date('jS, M Y', strtotime($time));
+                            ?>
+                                <div class="review ff-secondary py-3 border-bottom-hr">
+                                    <div class="d-flex pb-2  justify-content-between align-items-center">
+                                        <h6 class="fw-500 fs-20 "><?php echo $customerName; ?></h6>
+                                        <p class="fs-16 fw-300 "><?php echo $formattedDate; ?></p>
+                                    </div>
+                                    <p class="message"><?php echo $message; ?></p>
+                                </div>
+                            <?php } ?>
+                        </div>
+
+
+                    <?php } ?>
+
+                </div>
             </div>
-            <div class="feedback-content py-5 mb-4 border-bottom-hr">
-                <p>No reviews yet.</p>
+        </div>
+
+    </main> 
+    <div class="feedbackModal border">
+        <div class="feedbackModalMain py-5 bg-white">
+            <div class="container">
+                <div class="d-flex justify-content-between mb-0">
+                    <label for="review" class="text-upper fw-400 fc-secondary-400 fs-16">Write a Review</label>
+                    <button class="close" data-review><i class="ri-close-line"></i></button>
+                </div>
+                <div class="d-flex pb-2 justify-content-between border-bottom-hr fs-24">
+                    <textarea name="" data-name="<?php echo $currentCustomer["Customer Name"]; ?>" data-id="<?php echo $productId ?>" class="addReview border-0 border-none d-block w-100" id="review" cols="30" rows="10" style="outline: none;"></textarea>
+                </div>
             </div>
         </div>
     </div>
-
-
     <!--==== FOOTER START ====-->
     <?php include('includes/footer.php') ?>
     <!--==== FOOTER END ====-->
+
+
+
 </body>
 
 </html>

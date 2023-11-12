@@ -3,60 +3,106 @@ $promotionTitle = "Free Shipping on orders. All over Pakistan.";
 ?>
 
 
-<header>
+<header class="web__header">
     <div class="top--header bg-secondary py-2">
         <h6 class="fw-300 mb-0 fs-16 fc-primary text-center"><?php echo $promotionTitle; ?></h6>
     </div>
-    <div class="middle--header border-bottom-hr d-flex justify-content-between">
+    <div class="middle--header border-bottom-hr d-flex justify-content-between position-relative">
         <div class="container">
             <div class="d-md-flex py-1 align-items-center justify-content-between">
                 <div class="logo">
                     <a href="index.php"><img src="assets/images/logos/logo-white.png" alt="Logo"></a>
                 </div>
                 <ul class="header--buttons list-unstyled d-md-flex gap-20">
-                    <li><a class="fs-24" href=""><i class="ri-question-line"></i></a></li>
+                    <li><a class="fs-24" href="about.php"><i class="ri-question-line"></i></a></li>
                     <li><a class="fs-24" href="login.php"><i class="ri-user-3-line"></i></a></li>
                     <!-- <li><a class="fs-24" href=""><i class="ri-heart-line"></i></a></li> -->
                     <li><a class="fs-24" href="javascript:;" data-cart-button><i class="ri-shopping-cart-line"></i></a></li>
+                    <li class="hidden searchHeader">
+                        <button data-search-modal class="d-flex gap-5 align-items-center"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </li>
                 </ul>
+            </div>
+            <div class="burgerButton">
+                <div></div>
+                <div></div>
+                <div></div>
             </div>
         </div>
     </div>
-    <div class="bottom--header  border-bottom-hr">
-        <div class="container">
-            <div class="d-flex py-3 fw-300 ff-secondary align-items-center justify-content-between">
-                <ul class="d-flex gap-30 list-unstyled">
-                    <li><a href="index.php">Home</a></li>
-
-                    <li class="li--has-submenu">
-                        <a href="javscript:;">Shop By Categories <span class="icon__wrap"><i class="ri-arrow-drop-down-fill"></i></span></a>
-
-                        <div class="submenu--wrapper">
-                            <ul class="submenu">
-                                <?php
-                                $categories = Category::fetchAllCategory();
-                                foreach ($categories as $category) {
-                                    $categoryName = $category["Category Name"];
-                                    $categoryId = $category["Category Id"];
-                                ?>
-                                    <li><a href="search.php?query=<?php echo $categoryName; ?>"><?php echo $categoryName; ?></a></li>
-                                <?php   } ?>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li><a href="catalogue.php">Catalogue</a></li>
-                    <li><a href="about.php">About us</a></li>
-                    <li><a href="contact.php">Contact Us</a></li>
-                </ul>
-                <div class="d-flex align-items-center py-1 fw-300 fs-16">
-                    <button data-search-modal class="d-flex gap-5 align-items-center"><i class="fa-solid fa-magnifying-glass"></i></button>
+    <div class="sticky">
+        <div class="bottom--header  border-bottom-hr">
+            <div class="container">
+                <div class="d-flex py-3 fw-300 ff-secondary align-items-center justify-content-between">
+                    <ul class="d-flex gap-30 list-unstyled">
+                        <li><a href="index.php">Home</a></li>
+                        <li class="li--has-submenu">
+                            <a href="javscript:;">Shop By Categories <span class="icon__wrap"><i class="ri-arrow-drop-down-fill"></i></span></a>
+                            <div class="submenu--wrapper">
+                                <ul class="submenu">
+                                    <?php
+                                    $categories = Category::fetchAllCategory();
+                                    foreach ($categories as $category) {
+                                        $categoryName = $category["Category Name"];
+                                        $categoryId = $category["Category Id"];
+                                    ?>
+                                        <li><a href="search.php?query=<?php echo $categoryName; ?>"><?php echo $categoryName; ?></a></li>
+                                    <?php   } ?>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a href="catalogue.php">Catalogue</a></li>
+                        <li><a href="about.php">About us</a></li>
+                        <li><a href="contact.php">Contact Us</a></li>
+                    </ul>
+                    <div class="d-flex align-items-center py-1 fw-300 fs-16">
+                        <button data-search-modal class="d-flex gap-5 align-items-center"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </header>
+<div class="mobileMenu">
+    <div class="mobileMenuHeader">
+        <div class="logo">
+            <a href="index.php"><img src="assets/images/logos/logo-white.png" alt="Logo"></a>
+        </div>
+        <div class="mobileMenuClose">
+            <button><i class="ri-close-line"></i></button>
+        </div>
+    </div>
 
+    <ul class="mobile__list">
+        <li><a href="index.php">Home</a></li>
+        <li class="li--has-submenu position-relative">
+
+            <div class="position-absolute  right-0" style="right: 0;">
+            <span class=" closeIcon">
+                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                </span>
+                <span class="openIcon">
+                    <i class="fa fa-angle-up" aria-hidden="true"></i>
+                </span>
+            </div>
+
+            <a href="javascript:;">Search By Category</a>
+            <ul class="mobile--submenu">
+                <?php
+                $categories = Category::fetchAllCategory();
+                foreach ($categories as $category) {
+                    $categoryName = $category["Category Name"];
+                    $categoryId = $category["Category Id"];
+                ?>
+                    <li><a href="search.php?query=<?php echo $categoryName; ?>"><?php echo $categoryName; ?></a></li>
+                <?php   } ?>
+            </ul>
+        </li>
+        <li><a href="catalogue.php">Catalogue</a></li>
+        <li><a href="about.php">About us</a></li>
+        <li><a href="contact.php">Contact Us</a></li>
+    </ul>
+</div>
 
 
 

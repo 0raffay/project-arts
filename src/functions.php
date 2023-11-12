@@ -183,9 +183,10 @@ class Product
     }
 
     // TO DELETE THE PRODUCT FROM THE DB AND FROM THE INSTANCES
-    function deleteProduct($connection)
+    public static function deleteProduct($sku)
     {
-        $deleteSQL = "DELETE FROM `products` WHERE `Product SKU` = '$this->SKU'";
+        global $connection;
+        $deleteSQL = "DELETE FROM `products` WHERE `Product SKU` = '$sku'";
         $deleteResult = mysqli_query($connection, $deleteSQL);
 
         if (!$deleteResult) {
@@ -802,5 +803,80 @@ class Returns
         } else {
             return 0;
         }
+    }
+}
+
+
+
+class Messages
+{
+    public static function createMessage($name, $email, $phone, $message)
+    {
+        global $connection;
+        $query = "INSERT INTO `messages` (`id`, `name`, `email`, `phone_number`, `message`) VALUES (NULL, '$name', '$email', '$phone', '$message')";
+
+        $result = mysqli_query($connection, $query);
+        if ($result) {
+            echo 1;
+        } else {
+            echo 0;
+        }
+    }
+
+
+    public static function fetchMessages()
+    {
+        global $connection;
+        $query = "SELECT * FROM `messages` ORDER BY `message_time` ASC ";
+
+        $messages = array();
+        $result = mysqli_query($connection, $query);
+
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $messages[] = $row;
+            }
+            $result->close(); // Close the result set
+        }
+
+        return $messages;
+    }
+}
+
+
+class Feedback
+{
+    public static function createReview($productId, $customerName, $feedbackMessage)
+    {
+        global $connection;
+
+        $customerName = mysqli_real_escape_string($connection, $customerName);
+        $feedbackMessage = mysqli_real_escape_string($connection, $feedbackMessage);
+
+        $query = "INSERT INTO feedback (product_id, customer_name, feedback_message) VALUES ('$productId', '$customerName', '$feedbackMessage')";
+
+        if (mysqli_query($connection, $query)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function showReviews($productId)
+    {
+        global $connection;
+
+        $productId = mysqli_real_escape_string($connection, $productId);
+
+        $query = "SELECT * FROM feedback WHERE product_id = '$productId' ORDER BY feedback_date_time DESC";
+        $result = mysqli_query($connection, $query);
+
+        $reviews = array();
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            $reviews[] = $row;
+        }
+
+        return $reviews;
     }
 }

@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    header();
     sliders();
     addToWishList();
     dashboard();
@@ -77,12 +78,85 @@ $(document).ready(function () {
     });
 });
 
+function header() {
+    var stickyOffset = $(".sticky").offset().top;
+
+    $(window).scroll(function () {
+        var sticky = $(".sticky"),
+            scroll = $(window).scrollTop();
+
+        if (scroll >= stickyOffset) sticky.addClass("fixed");
+        else sticky.removeClass("fixed");
+    });
+
+    let burgerButton = $(".burgerButton");
+    let mobileMenu = $(".mobileMenu");
+
+    let closeButton = $(".mobileMenuClose");
+
+    burgerButton.click(function () {
+        mobileMenu.toggleClass("active");
+    });
+
+    closeButton.click(function () {
+        mobileMenu.removeClass("active");
+    });
+
+    let mobileSubmenuButton = $(".li--has-submenu");
+    let mobileSubmenu = ".mobile--submenu";
+    $(mobileSubmenu).slideUp();
+
+    mobileSubmenuButton.click(function (e) {
+        e.preventDefault();
+
+        $(this).toggleClass("active");
+        $(this).find(mobileSubmenu).slideToggle();
+    });
+}
+
 function sliders() {
     $(".banner-section-slider").slick({
         autoplay: true,
         autoplaySpeed: 3000,
         speed: 500,
         cssEase: "linear",
+    });
+
+    $(".trendingSlider").slick({
+        slidesToShow: 4,
+        slidesToScroll: 2,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        speed: 700,
+        arrows: true,
+        nextArrow: $(".tren .next"),
+        prevArrow: $(".tren .prev"),
+        dots: false,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true,
+                },
+            },
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                },
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+        ],
     });
 }
 
@@ -1139,6 +1213,157 @@ $(document).ready(function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
+    // Check if the URL contains "openProductModal"
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("openProductModal")) {
+        // Show the product modal
+        $("#editProductModal").modal("show");
+
+        // Track changes in form fields
+        let formChanged = false;
+        $("form :input").change(function () {
+            formChanged = true;
+        });
+
+        // Show or hide the "Update" button based on form changes
+        $("#editProductModal").on("shown.bs.modal", function () {
+            $(".updateOrderStatusButton").toggleClass("hidden", !formChanged);
+        });
+
+        // Reset the formChanged flag when the form is submitted
+        $("form").submit(function () {
+            formChanged = false;
+        });
+    }
+});
+
+function updateProduct(id) {
+    $.ajax({
+        method: "POST",
+        url: "../controllers/update-product.php",
+        data: {
+            sku: id,
+            price: $(".edit-productPrice").val(),
+            name: $(".edit-productName").val(),
+            brand: $(".edit-productBrand").val(),
+            category: $(".edit-productCat").val(),
+            stock: $(".edit-productStock").val(),
+            description: $(".edit-productDesc").val(),
+            keywords: $(".edit-productKeywords").val(),
+            warranty: $(".edit-productWarranty").val(),
+        },
+        success: function (response) {
+            // Handle the response from the server
+            window.location.href = "dashboard.php";
+        },
+        error: function (xhr, status, error) {
+            // Handle errors
+            console.error(xhr.responseText);
+        },
+    });
+}
+
+$(".updateProductButton").click(function () {
+    let productSKU = $(this).attr("data-id");
+
+    updateProduct(productSKU);
+});
+
+function deleteProduct(id) {
+    $.ajax({
+        method: "POST",
+        url: "../controllers/delete-product.php",
+        data: {
+            id: id,
+        },
+        success: function (response) {
+            window.location.href = "dashboard.php";
+            console.log(response);
+        },
+        error: function (xhr, status, error) {
+            console.error(xhr.responseText);
+        },
+    });
+}
+
+$(".deleteProductButton").click(function () {
+    let productSKU = $(this).attr("data-id");
+
+    deleteProduct(productSKU);
+});
+
+function submitMessage(name, email, phone, message) {
+    $.ajax({
+        method: "POST",
+        url: "controllers/submit-message.php",
+        data: {
+            name: name,
+            email: email,
+            phone: phone,
+            message: message,
+        },
+        success: function (response) {
+            console.log(response);
+
+            if (response == 1) {
+                $(".ct_name").val("");
+                $(".ct_email").val("");
+                $(".ct_phone").val("");
+                $(".cta_message").val("");
+
+                $("#formSubmit").text("Thank you for your submission.");
+                $("#formSubmit").show();
+                $("#formSubmit").addClass("text-success");
+            } else {
+                $("#formSubmit").text(
+                    "Something went wrong please try again after reloading page."
+                );
+                $("#formSubmit").show();
+                $("#formSubmit").addClass("text-danger");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error(xhr.responseText);
+        },
+    });
+}
+
+validateForm(
+    {
+        button: "[data-msg]",
+        inputs: "[data-validate-msg]",
+        email: {
+            selector: "[data-validate-msg-email]",
+            regex: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+        },
+        telephone: {
+            selector: "[data-telephone-msg-field]",
+            regex: /^\d{9,}$/,
+        },
+        errorClass: "error",
+        disableClass: "disabled",
+    },
+    function () {
+        let name = $(".ct_name").val();
+        let email = $(".ct_email").val();
+        let phone = $(".ct_phone").val();
+        let message = $(".cta_message").val();
+
+        submitMessage(name, email, phone, message);
+    }
+);
+
+$("#editProductModal").on("hidden.bs.modal", function () {
+    // Redirect to the dashboard.php page
+    window.location.href = "dashboard.php";
+});
+
+toggler({
+    button: "[data-review]",
+    actionContainer: ".feedbackModal",
+});
+
+document.addEventListener("DOMContentLoaded", function () {
     var originalData = {
         name: document.getElementById("name").value,
         email: document.getElementById("email").value,
@@ -1216,28 +1441,34 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+let addReviewInput = $(".addReview");
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Check if the URL contains "openProductModal"
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has("openProductModal")) {
-        // Show the product modal
-        $("#editProductModal").modal("show");
+function addReview(id, name, message) {
+    $.ajax({
+        method: "POST",
+        url: "controllers/addFeedback.php",
+        data: {
+            id: id,
+            name: name,
+            message: message,
+        },
+        success: function (response) {
+            console.log(response);
+        },
+        error: function (xhr, status, error) {
+            console.error(xhr.responseText);
+        },
+    });
+}
 
-        // Track changes in form fields
-        let formChanged = false;
-        $("form :input").change(function () {
-            formChanged = true;
-        });
+addReviewInput.on("keyup", function (e) {
+    if (e.key === "Enter") {
+        // Use triple equals to check both value and type
+        let id = $(this).attr("data-id");
+        let name = $(this).attr("data-name");
+        let message = $(this).val();
 
-        // Show or hide the "Update" button based on form changes
-        $("#editProductModal").on("shown.bs.modal", function () {
-            $(".updateOrderStatusButton").toggleClass("hidden", !formChanged);
-        });
-
-        // Reset the formChanged flag when the form is submitted
-        $("form").submit(function () {
-            formChanged = false;
-        });
+        addReview(id, name, message);
+        window.location.href = window.location.href;
     }
 });

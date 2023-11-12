@@ -10,11 +10,11 @@ $employee = $currentAdmin["Rights"] == 2;
 
 ?>
 
-<header class="dashboard--header">
-    <div class="container-fluid py-3 border-bottom-hr px-5">
+<header class="dashboard--header ">
+    <div class="container-fluid py-3 border-bottom-hr px-5 ">
         <div class="row align-items-center justify-content-between">
             <div class="logo col-1">
-                <a href="dashboard.php"><img src="../assets/images/logos/logo-black.png" alt="Logo"></a>
+                <a href="dashboard.php" ><img src="../assets/images/logos/logo-black.png" alt="Logo"></a>
             </div>
 
             <?php

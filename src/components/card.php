@@ -1,4 +1,4 @@
-<div class="col-lg-3 col-md-6 col-sm-12 mb-20">
+<div class="col-lg-4 col-md-6 col-sm-12 mb-20">
     <div class="product-card position-relative">
         <?php
         if ($products->stock <= 0) {

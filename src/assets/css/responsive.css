@@ -21,12 +21,22 @@
     gap: 10px;
 }
 
-header .logo {
-    /* text-align: center; */
+.banner-section-slider_ .item img {
+    min-height: 560px;
+    object-fit: cover;
 }
 
 .bottom--header   {
     display: none;
+}
+
+.searchHeader {
+    display: block;
+}
+
+.categoryCard {
+    min-height: 200px;
+    margin-bottom: 20px;
 }
 }
 

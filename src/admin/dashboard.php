@@ -25,6 +25,8 @@ $customerData = Customer::getAllCustomerData($connection);
 <html lang="en">
 
 <head>
+
+<div class="sticky"></div>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -40,7 +42,7 @@ $customerData = Customer::getAllCustomerData($connection);
     <title>Dashboard | <?php echo $site__name . " Admin"; ?></title>
 </head>
 
-<body class="dashboard-body">
+<body class="dashboard-body ">
 
     <!-- DASHBOARD HEADER START -->
     <?php include('includes/header.php'); ?>
@@ -67,6 +69,7 @@ $customerData = Customer::getAllCustomerData($connection);
                     <?php include('sections/employee.php'); ?>
                     <?php include('sections/returns.php'); ?>
                     <?php include('sections/admin-profile.php'); ?>
+                    <?php include('sections/messages.php'); ?>
                 </div>
             </div>
             <!-- SECTIONS END -->

@@ -11,5 +11,6 @@
         <li><button data-show=".orders-section">Orders </button></li>
         <li><button data-show=".returns-section">Returns</button></li>
         <li><button data-show=".category-section">Categories</button></li>
+        <li><button data-show=".messages-section">Messages</button></li>
     </ul>
 </aside>

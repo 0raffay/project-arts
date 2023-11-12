@@ -70,242 +70,243 @@ if (isset($_POST["updateCustomerDetails"])) {
     <!--==== HEADER END ====-->
 
 
+    <main>
 
-    <section class="userProfileSection">
-        <div class="container text-right">
-            <h1 class="fw-400 text-center fs-45 mb-30">Account Details</h1>
+        <section class="userProfileSection">
+            <div class="container text-right">
+                <h1 class="fw-400 text-center fs-45 mb-30">Account Details</h1>
 
-            <div class="d-flex justify-content-between border-bottom-hr align-items-end">
-                <div class="tabbingButtons userProfileTabbingButtons">
-                    <button class="active">Details</button>
-                    <button>Billing Details</button>
-                    <button>Order History</button>
-                    <button>Returns</button>
-                </div>
-                <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
-                    <button class="btn btn-primary" type="submit" name="logout">Logout</button>
-                </form>
-            </div>
-            <div class="tabbingPanels py-5">
-                <div class="tabbingPanel customer-details">
-                    <h4 class="fw-300 pb-3 fs-24 text-center fc-secondary">Details</h4>
-                    <div class="customer-details-container">
-                        <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
-                            <div class="wrap fs-20 mb-10 d-flex justify-content-between border-bottom-hr">
-                                <div class="d-flex">
-                                    <label class="mr-4 mb-0">Name:</label>
-                                    <input name="updatedName" type="text" readonly value="<?php echo $currentCustomer["Customer Name"]; ?>">
-                                </div>
-                                <div>
-                                    <button data-edit-details class="btn btn-secondary">Edit</button>
-                                </div>
-                            </div>
-                            <div class="wrap fs-20 mb-10 d-flex justify-content-between border-bottom-hr">
-                                <div class="d-flex">
-                                    <label class="mr-4 mb-0">Email:</label>
-                                    <input name="updatedEmail" type="email" readonly value="<?php echo $currentCustomer["Customer Email"]; ?>">
-                                </div>
-                                <div>
-                                    <button data-edit-details class="btn btn-secondary">Edit</button>
-                                </div>
-                            </div>
-                            <div class="wrap fs-20 mb-10 d-flex justify-content-between border-bottom-hr">
-                                <div class="d-flex">
-                                    <label class="mr-4 mb-0">Password:</label>
-                                    <input name="updatedPassword" type="password" readonly value="<?php echo $currentCustomer["Customer Password"]; ?>">
-                                </div>
-                                <div>
-                                    <button data-edit-details class="btn btn-secondary">Edit</button>
-                                </div>
-                            </div>
-                            <div class="wrap fs-20 mb-10 d-flex justify-content-between">
-                                <div class="d-flex">
-                                    <label class="mr-4 mb-0">Phone:</label>
-                                    <input name="updatedPhone" type="number" inputmode="numeric" readonly value="<?php echo $currentCustomer["Customer Phone"]; ?>">
-                                </div>
-                                <div>
-                                    <button data-edit-details class="btn btn-secondary">Edit</button>
-                                </div>
-                            </div>
-
-                            <p class="error-messages py-2 text-left"><?php echo $message; ?></p>
-                            <div class="py-3 saveButton hidden">
-                                <div class="text-right d-flex justify-content-between">
-                                    <button class="btn btn-primary ml-auto" type="submit" name="updateCustomerDetails">Save Changes</button>
-                                </div>
-                            </div>
-                        </form>
+                <div class="d-flex justify-content-between border-bottom-hr align-items-end">
+                    <div class="tabbingButtons userProfileTabbingButtons">
+                        <button class="active">Details</button>
+                        <button>Billing Details</button>
+                        <button>Order History</button>
+                        <button>Returns</button>
                     </div>
+                    <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+                        <button class="btn btn-primary" type="submit" name="logout">Logout</button>
+                    </form>
                 </div>
-                <div class="tabbingPanel customer-billing-details">
-                    <h4 class="fw-300 pb-3 fs-24 text-center fc-secondary">Billing Address</h4>
-                    <div class="row g-3 text-left">
-                        <div class="col-md-12 mb-3">
-                            <label for="your-name" class="form-label">Your Address:</label>
-                            <input type="text" value="<?php echo $currentCustomer["Customer Address"]; ?>" data-address class="form-control" id="your-name" name="address" required>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label for="your-surname" class="form-label">City</label>
-                            <input type="text" value="<?php echo $currentCustomer["Customer City"]; ?>" data-city class="form-control" id="your-surname" name="city" required>
-                        </div>
-                        <div class="col-md-12">
-                            <label for="your-email" class="form-label">Zip Code</label>
-                            <input type="email" data-zip class="form-control" value="<?php echo $currentCustomer["Customer Zipcode"]; ?>" id="your-email" name="zipcode" required>
-                        </div>
-                        <div class="col-md-12 text-right d-flex align-items-center justify-content-between">
-                            <button class="btn btn-primary ml-auto mt-4" data-save-billing-details>Save Details</button>
+                <div class="tabbingPanels py-5">
+                    <div class="tabbingPanel customer-details">
+                        <h4 class="fw-300 pb-3 fs-24 text-center fc-secondary">Details</h4>
+                        <div class="customer-details-container">
+                            <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+                                <div class="wrap fs-20 mb-10 d-flex justify-content-between border-bottom-hr">
+                                    <div class="d-flex">
+                                        <label class="mr-4 mb-0">Name:</label>
+                                        <input name="updatedName" type="text" readonly value="<?php echo $currentCustomer["Customer Name"]; ?>">
+                                    </div>
+                                    <div>
+                                        <button data-edit-details class="btn btn-secondary">Edit</button>
+                                    </div>
+                                </div>
+                                <div class="wrap fs-20 mb-10 d-flex justify-content-between border-bottom-hr">
+                                    <div class="d-flex">
+                                        <label class="mr-4 mb-0">Email:</label>
+                                        <input name="updatedEmail" type="email" readonly value="<?php echo $currentCustomer["Customer Email"]; ?>">
+                                    </div>
+                                    <div>
+                                        <button data-edit-details class="btn btn-secondary">Edit</button>
+                                    </div>
+                                </div>
+                                <div class="wrap fs-20 mb-10 d-flex justify-content-between border-bottom-hr">
+                                    <div class="d-flex">
+                                        <label class="mr-4 mb-0">Password:</label>
+                                        <input name="updatedPassword" type="password" readonly value="<?php echo $currentCustomer["Customer Password"]; ?>">
+                                    </div>
+                                    <div>
+                                        <button data-edit-details class="btn btn-secondary">Edit</button>
+                                    </div>
+                                </div>
+                                <div class="wrap fs-20 mb-10 d-flex justify-content-between">
+                                    <div class="d-flex">
+                                        <label class="mr-4 mb-0">Phone:</label>
+                                        <input name="updatedPhone" type="number" inputmode="numeric" readonly value="<?php echo $currentCustomer["Customer Phone"]; ?>">
+                                    </div>
+                                    <div>
+                                        <button data-edit-details class="btn btn-secondary">Edit</button>
+                                    </div>
+                                </div>
+
+                                <p class="error-messages py-2 text-left"><?php echo $message; ?></p>
+                                <div class="py-3 saveButton hidden">
+                                    <div class="text-right d-flex justify-content-between">
+                                        <button class="btn btn-primary ml-auto" type="submit" name="updateCustomerDetails">Save Changes</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                </div>
-                <div class="tabbingPanel order-history">
-                    <h4 class="fw-300 pb-3 fs-24 text-center fc-secondary">Order History</h4>
-                    <?php
-                    $orders = Customer::fetchOrders();
-                    $orderCount = count($orders);
-                    ?>
-                    <div class="d-flex mb-10">
-                        <p class="fs-16">No of Orders: <?php echo $orderCount; ?></p>
-                    </div>
-
-                    <?php if ($orderCount <= 0) { ?>
-                        <div class="orderHistory">
-                            <p class="text-center pt-5 fs-20 fw-400 fc-secondary-400">You have no orders.</p>
+                    <div class="tabbingPanel customer-billing-details">
+                        <h4 class="fw-300 pb-3 fs-24 text-center fc-secondary">Billing Address</h4>
+                        <div class="row g-3 text-left">
+                            <div class="col-md-12 mb-3">
+                                <label for="your-name" class="form-label">Your Address:</label>
+                                <input type="text" value="<?php echo $currentCustomer["Customer Address"]; ?>" data-address class="form-control" id="your-name" name="address" required>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="your-surname" class="form-label">City</label>
+                                <input type="text" value="<?php echo $currentCustomer["Customer City"]; ?>" data-city class="form-control" id="your-surname" name="city" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="your-email" class="form-label">Zip Code</label>
+                                <input type="email" data-zip class="form-control" value="<?php echo $currentCustomer["Customer Zipcode"]; ?>" id="your-email" name="zipcode" required>
+                            </div>
+                            <div class="col-md-12 text-right d-flex align-items-center justify-content-between">
+                                <button class="btn btn-primary ml-auto mt-4" data-save-billing-details>Save Details</button>
+                            </div>
                         </div>
-                    <?php } else { ?>
-                        <table class="table text-left">
-                            <thead>
-                                <tr>
-                                    <th>Order #</th>
-                                    <th>Placed On</th>
-                                    <th>Items</th>
-                                    <th>Total</th>
-                                    <th>Payment Method</th>
-                                    <th>Order Status</th>
-                                    <th class="text-center">Manage:</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                foreach ($orders as $order) {
-                                    $orderId = $order["Order Id"];
-                                    $orderNum = $order["Order Number"];
-                                    $orderType = $order["Order Type"];
-                                    $orderAmount = $order["Order Amount"];
-                                    $orderDate = $order["Order Date"];
-                                    $orderItems = explode(",", $order["Order Items"]);
-                                    $orderStatus = $order["Order Status"];
-                                ?>
+                    </div>
+                    <div class="tabbingPanel order-history">
+                        <h4 class="fw-300 pb-3 fs-24 text-center fc-secondary">Order History</h4>
+                        <?php
+                        $orders = Customer::fetchOrders();
+                        $orderCount = count($orders);
+                        ?>
+                        <div class="d-flex mb-10">
+                            <p class="fs-16">No of Orders: <?php echo $orderCount; ?></p>
+                        </div>
+
+                        <?php if ($orderCount <= 0) { ?>
+                            <div class="orderHistory">
+                                <p class="text-center pt-5 fs-20 fw-400 fc-secondary-400">You have no orders.</p>
+                            </div>
+                        <?php } else { ?>
+                            <table class="table text-left">
+                                <thead>
                                     <tr>
-                                        <td>
-                                            <?php echo "#" . $orderNum; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $orderDate; ?>
-                                        </td>
-                                        <td>
-                                            <?php
-                                            $productArray = array();
-                                            foreach ($orderItems as $item) {
-                                                $productArray[] = checkCurrentProduct($item);
-                                            }
+                                        <th>Order #</th>
+                                        <th>Placed On</th>
+                                        <th>Items</th>
+                                        <th>Total</th>
+                                        <th>Payment Method</th>
+                                        <th>Order Status</th>
+                                        <th class="text-center">Manage:</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    foreach ($orders as $order) {
+                                        $orderId = $order["Order Id"];
+                                        $orderNum = $order["Order Number"];
+                                        $orderType = $order["Order Type"];
+                                        $orderAmount = $order["Order Amount"];
+                                        $orderDate = $order["Order Date"];
+                                        $orderItems = explode(",", $order["Order Items"]);
+                                        $orderStatus = $order["Order Status"];
+                                    ?>
+                                        <tr>
+                                            <td>
+                                                <?php echo "#" . $orderNum; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $orderDate; ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                $productArray = array();
+                                                foreach ($orderItems as $item) {
+                                                    $productArray[] = checkCurrentProduct($item);
+                                                }
 
-                                            foreach ($productArray as $product) { ?>
+                                                foreach ($productArray as $product) { ?>
+                                                    <img class="orderImg" src="assets/images/product-images/<?php echo $product->images ?>">
+                                                <?php } ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $currencySymbol; ?><?php echo $orderAmount; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $orderType; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $orderStatus; ?>
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="order-status.php?order_id=<?php echo $orderId ?>&order_num=<?php echo $orderNum; ?>" class="addHover">View</a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+
+                                </tbody>
+                            </table>
+                        <?php } ?>
+                    </div>
+                    <div class="tabbingPanel order-returns">
+                        <h4 class="fw-300 pb-3 fs-24 text-center fc-secondary">Returns</h4>
+                        <?php
+                        $customerId = $currentCustomer["Customer Id"];
+                        $returns = Returns::fetchReturns('customer_id', $customerId,);
+                        $returnCount = count($returns);
+                        ?>
+                        <div class="d-flex mb-10">
+                            <p class="fs-16">No of returns: <?php echo $returnCount; ?></p>
+                        </div>
+
+                        <?php if ($returnCount <= 0) { ?>
+                            <div class="orderHistory">
+                                <p class="text-center pt-5 fs-20 fw-400 fc-secondary-400">You have no returns.</p>
+                            </div>
+                        <?php } else { ?>
+                            <table class="table text-left">
+                                <thead>
+                                    <tr>
+                                        <th>Order #</th>
+                                        <th>Return Date</th>
+                                        <th>Item</th>
+                                        <th>Item Quantity</th>
+                                        <th>Item Amount</th>
+                                        <th>Return Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    foreach ($returns as $return) {
+                                        $returnId = $return["return_id"];
+                                        $orderNum = $return["order_num"];
+                                        $returnDate = $return["return_date"];
+                                        $returnItems = $return["return_item"];
+                                        $returnItemsQuantity = $return["return_item_quantity"];
+                                        $returnStatus = $return["return_status"];
+                                    ?>
+                                        <tr>
+                                            <td>
+                                                <?php echo "#" . $orderNum; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $returnDate; ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                $product = checkCurrentProduct($returnItems);
+                                                $returnAmount = $product->price * $returnItemsQuantity;
+                                                ?>
                                                 <img class="orderImg" src="assets/images/product-images/<?php echo $product->images ?>">
-                                            <?php } ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $currencySymbol; ?><?php echo $orderAmount; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $orderType; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $orderStatus; ?>
-                                        </td>
-                                        <td class="text-center">
-                                            <a href="order-status.php?order_id=<?php echo $orderId ?>&order_num=<?php echo $orderNum; ?>" class="addHover">View</a>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $returnItemsQuantity; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $currencySymbol . $returnAmount; ?>
+                                            </td>
+                                            <td class="text-capitilize">
+                                                <?php echo $returnStatus; ?>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
 
-                            </tbody>
-                        </table>
-                    <?php } ?>
-                </div>
-                <div class="tabbingPanel order-returns">
-                    <h4 class="fw-300 pb-3 fs-24 text-center fc-secondary">Returns</h4>
-                    <?php
-                    $customerId = $currentCustomer["Customer Id"];
-                    $returns = Returns::fetchReturns('customer_id', $customerId,);
-                    $returnCount = count($returns);
-                    ?>
-                    <div class="d-flex mb-10">
-                        <p class="fs-16">No of returns: <?php echo $returnCount; ?></p>
+                                </tbody>
+                            </table>
+                        <?php } ?>
                     </div>
-
-                    <?php if ($returnCount <= 0) { ?>
-                        <div class="orderHistory">
-                            <p class="text-center pt-5 fs-20 fw-400 fc-secondary-400">You have no returns.</p>
-                        </div>
-                    <?php } else { ?>
-                        <table class="table text-left">
-                            <thead>
-                                <tr>
-                                    <th>Order #</th>
-                                    <th>Return Date</th>
-                                    <th>Item</th>
-                                    <th>Item Quantity</th>
-                                    <th>Item Amount</th>
-                                    <th>Return Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                foreach ($returns as $return) {
-                                    $returnId = $return["return_id"];
-                                    $orderNum = $return["order_num"];
-                                    $returnDate = $return["return_date"];
-                                    $returnItems = $return["return_item"];
-                                    $returnItemsQuantity = $return["return_item_quantity"];
-                                    $returnStatus = $return["return_status"];
-                                ?>
-                                    <tr>
-                                        <td>
-                                            <?php echo "#" . $orderNum; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $returnDate; ?>
-                                        </td>
-                                        <td>
-                                            <?php
-                                            $product = checkCurrentProduct($returnItems);
-                                            $returnAmount = $product->price * $returnItemsQuantity;
-                                            ?>
-                                            <img class="orderImg" src="assets/images/product-images/<?php echo $product->images ?>">
-                                        </td>
-                                        <td>
-                                            <?php echo $returnItemsQuantity; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $currencySymbol . $returnAmount; ?>
-                                        </td>
-                                        <td class="text-capitilize">
-                                            <?php echo $returnStatus; ?>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
-
-                            </tbody>
-                        </table>
-                    <?php } ?>
                 </div>
+
             </div>
 
-        </div>
 
-
-    </section>
-
+        </section>
+    </main>
     <!--==== FOOTER START ====-->
     <?php include('includes/footer.php') ?>
     <!--==== FOOTER END ====-->

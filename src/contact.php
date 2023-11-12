@@ -17,7 +17,7 @@
     <!--==== HEADER STYLES START ====-->
     <?php include('includes/header-styles.php') ?>
     <!--==== HEADER STYLES END ====-->
-    <title>Home | <?php echo $site__name; ?></title>
+    <title>Contact | <?php echo $site__name; ?></title>
 </head>
 
 <body>
@@ -25,52 +25,55 @@
     <!--==== HEADER START ====-->
     <?php include('includes/header.php') ?>
     <!--==== HEADER END ====-->
+    <main>
+        <section class="contactSection py-5 my-5">
+            <div class="container">
+                <div class="row center">
+                    <div class="col-md-5 col-12 map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d462118.02491053584!2d67.15546194999999!3d25.193202399999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33e06651d4bbf%3A0x9cf92f44555a0c23!2sKarachi%2C%20Karachi%20City%2C%20Sindh!5e0!3m2!1sen!2s!4v1699813015816!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div class="col-md-7 col-12">
+                        <div class="contactForm">
+                            <h4 class="text-left fs-24 fw-300 ff-secondary mb-15">Drop Us A Line
+                            </h4>
+                            <p class="fs-15 fc-secondary-400 fw-300 ff-secondary mb-15">We’re happy to answer any questions you have or provide you with an estimate. Just send us a message in the form below with any questions you may have.
 
-    <section class="contactSection">
-        <div class="container">
-            <div>
-                <h1 class="section__heading fs-30">Contact us</h1>
-            </div>
-
-            <div class="row center">
-                <div class="col-md-6 col-sm-12 center">
-                    <div class="contactForm">
-                        <h6 class="section__heading fs-20 mb-50">Fill the details</h6>
-                        <div class="form__wrap">
-                            <div class="util__panel gap-10 mb-20">
-                                <div class="w-100">
-                                    <label for="">Name</label>
-                                    <input type="text">
-                                </div>
-                                <div class="w-100">
-                                    <label for="">Name</label>
-                                    <input type="text">
-                                </div>
-                            </div>
-                            <div class="util__panel gap-10 mb-20">
-                                <div class="w-100">
-                                    <label for="">Email</label>
-                                    <input type="email">
-                                </div>
-                                <div class="w-100">
-                                    <label for="">Phone.No</label>
-                                    <input type="number">
-                                </div>
-                            </div>
-                            <div class="messageField mb-20">
-                                <textarea id="messageMe" placeholder="Message"></textarea>
-                            </div>
-                            <div class="contactFormButton">
-                                <button>Submit</button>
+                            </p>
+                            <div class="form_wrap">
+                                <form action="">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label for="" class="fs-14 fw-300 ff-secondary mb-1">Name
+                                            </label>
+                                            <input data-validate-msg type="text" class="ct_name fs-14  border py-2 px-2 mb-2">
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="" class="fs-14 fw-300 ff-secondary mb-1">Email
+                                            </label>
+                                            <input data-validate-msg data-validate-msg-email type="email" class="ct_email fs-14  border py-2 px-2 mb-2">
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="" class="fs-14 fw-300 ff-secondary mb-1">Phone
+                                            </label>
+                                            <input data-telephone-msg-field data-validate-msg type="tel" class="ct_phone fs-14  border py-2 px-2 mb-2">
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="" class="fs-14 fw-300 ff-secondary mb-1">Message
+                                            </label>
+                                            <textarea data-validate-msg class="cta_message fs-14 w-100 d-block mb-2 border py-2 px-2 outline-none" name="" id="" cols="30" rows="10" placeholder="Enter your message" style="outline: none !important;"></textarea>
+                                        </div>
+                                    </div>
+                                    <button data-msg class=" btn btn-secondary d-block mt-3 w-100 mw-100">Submit</button>
+                                    <p id="formSubmit" class="py-4" style="display: none;"></p>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-    </section>
-
+        </section>
+    </main>
     <!--==== FOOTER START ====-->
     <?php include('includes/footer.php') ?>
     <!--==== FOOTER END ====-->

@@ -1,5 +1,5 @@
 <?php include 'config.php'; ?>
-<?php include 'functions.php'; 
+<?php include 'functions.php';
 ?>
 
 
@@ -23,36 +23,37 @@
 </head>
 
 <body>
- 
-    
+
+
     <!--==== HEADER START ====-->
     <?php include('includes/header.php') ?>
     <!--==== HEADER END ====-->
 
-    <!--==== BANNER SECITON START ====-->
-    <?php include('sections/banner-section.php') ?>
-    <!--==== BANNER SECITON END ====-->
+    <main>
 
-    <!--==== FEATURED PRODUCTS START ====-->
-    <?php include('sections/featured-products.php') ?>
-    <!--==== FEATURED PRODUCTS END ====-->
+        <!--==== BANNER SECITON START ====-->
+        <?php include('sections/banner-section.php') ?>
+        <!--==== BANNER SECITON END ====-->
 
-
-
-    <!--==== FOLLOW US START ====-->
-    <div class="py-4"></div>
-    <?php //include('sections/follow-us-section.php') ?>
-    <!--==== FOLLOW US END ====-->
-
-    <!--==== BRAND SLIDER START ====-->
-    <?php //include('sections/brand-slider.php') ?>
-    <!--==== BRAND SLIDER END ====-->
-
-    <!--==== PROMOTION SLIDER START ====-->
-    <?php include('sections/promotion-slider.php') ?>
-    <!--==== PROMOTION SLIDER END ====-->
+        <!--==== FEATURED PRODUCTS START ====-->
+        <?php include('sections/featured-products.php') ?>
+        <!--==== FEATURED PRODUCTS END ====-->
 
 
+
+        <!--==== FOLLOW US START ====-->
+        <?php include('sections/category-slider.php') ?>
+        <!--==== FOLLOW US END ====-->
+
+        <!--==== BRAND SLIDER START ====-->
+        <?php include('sections/trending-products.php') ?>
+        <!--==== BRAND SLIDER END ====-->
+
+        <!--==== PROMOTION SLIDER START ====-->
+        <?php include('sections/promotion-slider.php') ?>
+        <!--==== PROMOTION SLIDER END ====-->
+
+    </main>
     <!--==== FOOTER START ====-->
     <?php include('includes/footer.php') ?>
     <!--==== FOOTER END ====-->
