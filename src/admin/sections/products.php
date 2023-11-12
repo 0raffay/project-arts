@@ -23,7 +23,9 @@ if ($employee) {
                         <span class="mr-2 addHover"><button type="submit" name="searchProduct">Search</button> <input required style="display: inline; width: auto;" type="text"></span><i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                 </form>
-                <button data-view-all-products class="addHover border-right active">View All</button> -->
+                <
+                 -->
+                    <button data-view-all-products class="addHover border-right active">View All</button>
                     <p class="fs-16 border-right"><span class="fc-secondary fw-500">Total No.Of Products:</span> <?php echo count(Product::$instances); ?></p>
 
                 </div>
@@ -62,7 +64,7 @@ if ($employee) {
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="input__wrap">
                                     <label for="">Product Category*</label>
-                                    <select required name="productCategory" id="">
+                                    <select class="border py-2 px-2 w-100 d-block" required name="productCategory" id="">
                                         <option value="" selected></option>
                                         <?php
                                         $categories = Category::fetchAllCategory();
@@ -137,14 +139,14 @@ if ($employee) {
                             </div>
                             <div class="col-lg-6">
                                 <h6 class="fc-secondary fw-400 fs-20 mb-2 product-title">Title: <?php echo $product->name; ?></h6>
-                                <p class="fc-secondary fw-400 fs-16 mb-5"><strong>Price:</strong> $<?php echo $product->price; ?></p>
+                                <p class="fc-secondary fw-400 fs-16 mb-5"><strong>Price:</strong> PKR.  <?php echo $product->price; ?></p>
                                 <h6 class="fc-secondary fw-300 fs-16 mb-2"><strong>SKU: </strong><?php echo $product->SKU; ?> </h6>
                                 <h6 class="fc-secondary fw-300 fs-16 mb-2"><strong>Category: </strong><?php echo $product->category; ?></h6>
                                 <h6 class="fc-secondary fw-300 fs-16 mb-2"><strong>Units: </strong><?php echo $product->stock; ?></h6>
                                 <h6 class="fc-secondary fw-300 fs-16 mb-2"><strong>Warrnaty Info: </strong><?php echo $product->warranty; ?></h6>
                             </div>
                             <div class="col-lg-3">
-                                <button class="addHover mx-auto d-block">Edit</button>
+                                <a class="addHover mx-auto d-block" href="?openProductModal&productId=<?php echo "$product->SKU" ?>">Edit</a>
                             </div>
                         </div>
                     <?php } ?>
@@ -154,6 +156,97 @@ if ($employee) {
 
 
 
+        </div>
+    </div>
+
+    <?php
+        if(isset($_GET["productId"])) {
+            $productId = $_GET["productId"];
+           $thisProduct = checkCurrentProduct($productId);
+        }  else {
+            return;
+        }
+    ?>
+
+    <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="openProductModal" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-24" id="openProductModal">Edit Product Details</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?php  print_r($productId);?>
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="row py-4">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="input__wrap">
+                                    <label for="">Product Title</label>
+                                    <input value="<?php echo $thisProduct->name;?>" class="border py-2 px-2 w-100 d-block" required type="text" >
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="input__wrap">
+                                    <label for="">Price</label>
+                                    <input value="<?php echo $thisProduct->price;?>" class="border py-2 px-2 w-100 d-block" required type="text" >
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="input__wrap">
+                                    <label for="">Brand / Store</label>
+                                    <input value="<?php echo $thisProduct->brand;?>" class="border py-2 px-2 w-100 d-block" required type="text" >
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="input__wrap">
+                                    <label for="">Product Category</label>
+                                    <select class="border py-2 px-2 w-100 d-block" required  id="">
+                                        <option value="<?php $thisProduct->category?>" selected><?php echo $thisProduct->category?></option>
+                                        <?php
+                                        $categories = Category::fetchAllCategory();
+                                        foreach ($categories as $category) {
+                                            $categoryName = $category["Category Name"];
+                                            $categoryId = $category["Category Id"];
+                                        ?>
+                                            <option value="<?php echo $categoryName; ?>"><?php echo $categoryName; ?></option>
+                                        <?php   } ?>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="input__wrap">
+                                    <label for="">Units Available</label>
+                                    <input value="<?php echo $thisProduct->stock;?>" class="border py-2 px-2 w-100 d-block" required >
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="input__wrap">
+                                    <label for="">Description</label>
+                                    <textarea  class="border px-2 py-2 w-100 d-block"  id="" cols="30" rows="10">
+                                    <?php echo $thisProduct->description;?>"
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="input__wrap">
+                                    <label for="">Add Search Keywords</label>
+                                    <input value="<?php echo $thisProduct->keywords;?>" class="border py-2 px-2 w-100 d-block" required >
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="input__wrap">
+                                    <label for="">Edit Warranty</label>
+                                    <input value="<?php echo $thisProduct->warranty;?>" class="border py-2 px-2 w-100 d-block" required >
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer d-flex justify-content-between" style="min-height: 70px">
+                     <button type="button" class="btn btn-secondary hidden updateProductButton" data-id="<?php echo $thisproduct->SKU;?>" data-dismiss="modal">Update Product</button>
+                </div>
+            </div>
         </div>
     </div>
 

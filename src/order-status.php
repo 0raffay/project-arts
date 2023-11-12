@@ -204,7 +204,7 @@ $orderEstDate =  $returned["est_delivery_date"];
                                                     <?php
                                                     if ($orderStatus == "processing" || $orderStatus == "shipped") {
                                                     ?>
-                                                        <a href="" class="btn btn-primary mb-10 w-100 mb-2">Buy It Again</a>
+                                                        <a href="single-product.php?id=<?php echo $product->SKU; ?>" class="btn btn-primary mb-10 w-100 mb-2">Buy It Again</a>
                                                     <?php }
                                                     if ($product->warranty != "" && $orderStatus == "delivered") {
                                                     ?>

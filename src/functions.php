@@ -224,21 +224,21 @@ class Product
     }
 
 
-    // public static function fetchSpecificProducts($column, $value)
-    // {
-    //     global $connection;
-    //     $query = "SELECT * FROM `products` WHERE `$column` = '$value'";
-    //     $result = mysqli_query($connection, $query);
-    //     if ($result) {
-    //         $rows = array();
-    //         while ($row = $result->fetch_assoc()) {
-    //             $rows[] = $row;
-    //         }
-    //         return $rows;
-    //     } else {
-    //         return " RESULT NOT FOUND;";
-    //     }
-    // }
+    public static function fetchSpecificProducts($column, $value)
+    {
+        global $connection;
+        $query = "SELECT * FROM `products` WHERE `$column` = '$value'";
+        $result = mysqli_query($connection, $query);
+        if ($result) {
+            $rows = array();
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            return $rows;
+        } else {
+            return " RESULT NOT FOUND;";
+        }
+    }
 }
 
 

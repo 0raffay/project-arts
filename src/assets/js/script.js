@@ -1215,3 +1215,29 @@ document.addEventListener("DOMContentLoaded", function () {
         xhr.send(formData);
     });
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Check if the URL contains "openProductModal"
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("openProductModal")) {
+        // Show the product modal
+        $("#editProductModal").modal("show");
+
+        // Track changes in form fields
+        let formChanged = false;
+        $("form :input").change(function () {
+            formChanged = true;
+        });
+
+        // Show or hide the "Update" button based on form changes
+        $("#editProductModal").on("shown.bs.modal", function () {
+            $(".updateOrderStatusButton").toggleClass("hidden", !formChanged);
+        });
+
+        // Reset the formChanged flag when the form is submitted
+        $("form").submit(function () {
+            formChanged = false;
+        });
+    }
+});

@@ -887,6 +887,7 @@ main#main {
     transition: all 250ms ease;
 }
 
+.dashboard--profile button.active,
 .dashboard--profile button:hover {
     background-color: #000;
     color: #fff;
@@ -1317,10 +1318,10 @@ a.disabled {
 .ordersAreaButton button.active{
     opacity: 1 !important;
 }
-/* 
+
 i {
     display: block;
     height: 10px;
     width: 10px;
     border: 1px solid #000;
-} */
+}
