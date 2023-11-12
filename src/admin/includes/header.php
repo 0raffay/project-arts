@@ -6,7 +6,7 @@ if (isset($_POST["logoutAdmin"])) {
     header("location: index.php");
 }
 
-$employee = $currentAdmin["Rights"] === "2";
+$employee = $currentAdmin["Rights"] == 2;
 
 ?>
 
@@ -22,7 +22,10 @@ $employee = $currentAdmin["Rights"] === "2";
                 $orderData = Customer::fetchAllOrders();
                 $totalSales = 0;
                 foreach($orderData as $order) {
-                    $totalSales+= $order["Order Amount"];
+                    $orderStatus =  $order["Order Status"];
+                    if($orderStatus != "cancelled") {
+                        $totalSales+= $order["Order Amount"];
+                    } 
                 }
 
             ?>
@@ -42,7 +45,7 @@ $employee = $currentAdmin["Rights"] === "2";
 
                 <div class="headerOptions d-flex align-items-center justify-content-end gap-5">
                     <div class="dashboard--profile mluto">
-                        <button><i class="ri-user-3-line"></i></button>
+                        <button data-show=".admin-profile"><i class="ri-user-3-line"></i></button>
                     </div>
                 </div>
 

@@ -14,7 +14,20 @@
 }
 
 @media only screen and (max-width: 767px) {
+.header--buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
 
+header .logo {
+    /* text-align: center; */
+}
+
+.bottom--header   {
+    display: none;
+}
 }
 
 @media only screen and (max-width: 480px) {

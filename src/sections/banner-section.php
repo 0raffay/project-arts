@@ -14,8 +14,8 @@
                 <h1  class="mb-5 ff-primary fw-300 fc-primary text-uppercase">Sale At Arts</h1>
                 <p class="fs-14 mb-30 ff-primary fw-300 fc-primary">Take 20% Off Sale Must-Haves</p>
                 <div class="d-md-flex gap-10">
-                    <a href="" class="btn btn-secondary">SHOP NOW!</a>
-                    <a href="" class="btn btn-primary">LEARN MORE</a>
+                    <a href="catalogue.php" class="btn btn-secondary">SHOP NOW!</a>
+                    <a href="about.php" class="btn btn-primary">LEARN MORE</a>
                 </div>
             </div>
         </div>

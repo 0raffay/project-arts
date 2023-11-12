@@ -1238,12 +1238,7 @@ a.disabled {
     pointer-events: none;
 }
 
-i {
-    display: block;
-    height: 10px;
-    width: 10px;
-    border: 1px solid #000;
-}
+
 .product-card .product-stock-label {
     position: absolute;
     top: 0;
@@ -1322,3 +1317,10 @@ i {
 .ordersAreaButton button.active{
     opacity: 1 !important;
 }
+/* 
+i {
+    display: block;
+    height: 10px;
+    width: 10px;
+    border: 1px solid #000;
+} */

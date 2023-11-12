@@ -65,6 +65,8 @@ $customerData = Customer::getAllCustomerData($connection);
                     <?php include('sections/category.php'); ?>
                     <?php include('sections/orders.php'); ?>
                     <?php include('sections/employee.php'); ?>
+                    <?php include('sections/returns.php'); ?>
+                    <?php include('sections/admin-profile.php'); ?>
                 </div>
             </div>
             <!-- SECTIONS END -->

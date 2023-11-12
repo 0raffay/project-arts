@@ -16,7 +16,7 @@ $promotionTitle = "Free Shipping on orders. All over Pakistan.";
                 <ul class="header--buttons list-unstyled d-md-flex gap-20">
                     <li><a class="fs-24" href=""><i class="ri-question-line"></i></a></li>
                     <li><a class="fs-24" href="login.php"><i class="ri-user-3-line"></i></a></li>
-                    <li><a class="fs-24" href=""><i class="ri-heart-line"></i></a></li>
+                    <!-- <li><a class="fs-24" href=""><i class="ri-heart-line"></i></a></li> -->
                     <li><a class="fs-24" href="javascript:;" data-cart-button><i class="ri-shopping-cart-line"></i></a></li>
                 </ul>
             </div>

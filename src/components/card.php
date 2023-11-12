@@ -25,7 +25,7 @@
                 <?php  } else { ?>
                     <a class="btn btn-primary" href="single-product.php?id=<?php echo $products->SKU; ?>">Buy Now</a>
                 <?php } ?>
-                <button class="addToWishList"><span class="icon__wrap fs-20"><i class="ri-heart-line"></i></span></button>
+                <!-- <button class="addToWishList"><span class="icon__wrap fs-20"><i class="ri-heart-line"></i></span></button> -->
             </div>
             <div class="product-stars">
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 100 100">

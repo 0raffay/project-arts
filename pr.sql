@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2023 at 02:00 AM
+-- Generation Time: Nov 12, 2023 at 02:39 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -41,7 +41,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`Admin Id`, `Admin Name`, `Admin Email`, `Admin Password`, `Admin Phone`, `Rights`) VALUES
-(1, 'Super Admin', 'sadmin', 'admin', '', '1');
+(1, 'Super Admin', 'sadmin', '123', '1234567890', '1'),
+(9, 'Babar ', 'babar@gmail.com', '1234', '1234567812', '2');
 
 -- --------------------------------------------------------
 
@@ -153,10 +154,9 @@ CREATE TABLE `order` (
 --
 
 INSERT INTO `order` (`Order Id`, `Order Number`, `Customer Id`, `Order Type`, `Order Amount`, `Order Date`, `Order Items`, `Order Items Quantity`, `Order Status`, `Order Address`, `Order City`, `Order Phone`, `reason`, `est_delivery_date`, `delivery_date`, `cancel_by`, `order_date`) VALUES
-(38, '088782582861', '24', 'Cash on Delivery', '19.5', '11-11-23', 'BA-308884', '1', 'shipped', 'this is my address', 'karachi', '120371023', '', '', '', '', '2023-11-11 19:16:01'),
-(39, '971952403776', '24', 'Cash on Delivery', '63.5', '11-11-23', 'BA-308884, G-805307,IS-511272', '1, 1, 1', 'shipped', 'this is my address', 'karachi', '120371023', '', '2023-11-16', '', '', '2023-11-11 21:27:36'),
-(40, '823172714717', '24', 'Cash on Delivery', '22', '12-11-23', ' G-805307', '1', 'delivered', 'this is my address', 'karachi', '120371023', '', '', '', 'admin', '2023-11-11 23:40:02'),
-(41, '426925979829', '24', 'Cash on Delivery', '81', '12-11-23', 'BL-860324', '9', 'cancelled', 'this is my address', 'karachi', '120371023', '', '', '', 'Customer', '2023-11-12 00:45:15');
+(39, '971952403776', '24', 'Cash on Delivery', '63.5', '11-11-23', 'BA-308884, G-805307,IS-511272', '1, 1, 1', 'delivered', 'this is my address', 'karachi', '120371023', '', '2023-11-16', '2023-11-12', '', '2023-11-11 21:27:36'),
+(46, 'C_03272046901910', '24', 'Cash on Delivery', '19.5', '12-11-23', 'BA-308884', '1', 'cancelled', 'this is my address', 'karachi', '120371023', '', '', '', 'admin', '2023-11-12 09:57:56'),
+(47, 'E_25227223278559', '24', 'Ejuhp', '22', '12-11-23', ' G-805307', '1', 'shipped', '4413 Beverly Dr', 'bhills_4413@mailinator.com', '4413123123123', '', '2023-11-16', '', '', '2023-11-12 12:19:32');
 
 -- --------------------------------------------------------
 
@@ -184,11 +184,36 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`Product Id`, `Product Name`, `Product Stock`, `Product Category`, `Product SKU`, `Images`, `Keywords`, `Warranty`, `Product Price`, `Product Description`, `Product Brand`, `upload_date`) VALUES
-(47, 'Istanbul Wallet', 24, 'Wallets', 'IS-511272', 'IMG-654be451cca2b3.89862110.jpg', 'wallets,wallet,instanbul', 'W-392480', '22', 'DETAILS:\r\nJust like the city from which it draws its name, this wallet is traditional in appearance despite its sleek and modern design.\r\nFEATURES:\r\nOne Cash compartment\r\nSix credit card slots\r\nTwo pockets for receipts\r\nDIMENSIONS:\r\n110mm x 85mm', 'jafferees', '2023-11-11 18:12:35'),
-(48, ' Greeting Card in a Mini Envelope', 23, 'Greeting Cards', ' G-805307', 'IMG-654be906a9fb26.35473431.jpg', 'card,cards', 'W-873703', '22', 'Package Dimensions ‏ : ‎ 5 x 3.11 x 0.28 inches; 0.32 Ounces\r\nItem model number ‏ : ‎ VariableDenomination', 'Amazon', '2023-11-11 18:12:35'),
+(47, 'Istanbul Wallet', 21, 'Wallets', 'IS-511272', 'IMG-654be451cca2b3.89862110.jpg', 'wallets,wallet,instanbul', 'W-392480', '22', 'DETAILS:\r\nJust like the city from which it draws its name, this wallet is traditional in appearance despite its sleek and modern design.\r\nFEATURES:\r\nOne Cash compartment\r\nSix credit card slots\r\nTwo pockets for receipts\r\nDIMENSIONS:\r\n110mm x 85mm', 'jafferees', '2023-11-11 18:12:35'),
+(48, ' Greeting Card in a Mini Envelope', 22, 'Greeting Cards', ' G-805307', 'IMG-654be906a9fb26.35473431.jpg', 'card,cards', 'W-873703', '22', 'Package Dimensions ‏ : ‎ 5 x 3.11 x 0.28 inches; 0.32 Ounces\r\nItem model number ‏ : ‎ VariableDenomination', 'Amazon', '2023-11-11 18:12:35'),
 (49, 'Barbie Dreamtopia Doll with Removable Unicorn Headband & Tail, Blue & Purple Fantasy Hair & Cloudy Star-Print Skirt, Unicorn Toy', 24, 'Dolls', 'BA-246336', 'IMG-654bec942975c8.46179078.jpg', 'barbie, best barbie, new barbie, barbie pink, pink, pink barbie,barbie,dreamtopia,doll,with,removable,unicorn,headband,&,tail,,blue,&,purple,fantasy,hair,&,cloudy,star-print,skirt,,unicorn,toy,dolls,barbie', 'W-953113', '29', 'Unicorn dolls from Barbie Dreamtopia bring fairytale dreams to life with fantastical looks and a magical transformation!\r\nThis Barbie doll wears a sparkly bodice and a removable skirt with a cloud and star print.\r\nKids can add a unicorn headband and clip-', 'Barbie', '2023-11-11 18:12:35'),
 (51, 'Black Leather wallets for men/women unisex - best wallet for women and men', 0, 'Wallets', 'BL-860324', 'IMG-654c8b30e5a399.08493357.png', 'wallet for man, women, man, men, woman, wallets, wallet,black,leather,wallets,for,men/women,unisex,-,best,wallet,for,women,and,men,wallets,stride', 'W-934079', '9', 'Classic retro design wallet features a stylized dual color stripe in the middle, ample storage space and sophisticated stitch work. Crafted and sewn using luxurious Imitated leather and designed with thoughtful space and storage.\r\n\r\n•Crafted with premium ', 'STRIDE', '2023-11-11 18:12:35'),
 (52, 'Basics 1/3-Cut Tab, Assorted Positions File Folders, Letter Size, Manila - Pack of 100', 23, 'Files', 'BA-308884', 'IMG-654fc6ab1d8565.05831252.jpg', 'filers, registers, sorting, managing, management, best files,basics,1/3-cut,tab,,assorted,positions,file,folders,,letter,size,,manila,-,pack,of,100,files,basics', 'W-618774', '19.5', '100 manila letter-size file folders; ideal for 8-1/2 x 11-inch documents\r\n1/3 cut reinforced tabs in assorted positions (left, middle, right) for easy labeling and readability\r\n11-point stock expands up to 3/4 inch while remaining sturdy\r\nMade of 10% recy', 'Basics', '2023-11-11 18:23:39');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `returns`
+--
+
+CREATE TABLE `returns` (
+  `return_id` int(11) NOT NULL,
+  `order_id` varchar(255) NOT NULL,
+  `order_num` varchar(255) NOT NULL,
+  `customer_id` varchar(255) NOT NULL,
+  `return_item` varchar(255) NOT NULL,
+  `return_item_quantity` varchar(255) NOT NULL,
+  `return_details` varchar(255) NOT NULL,
+  `return_status` varchar(255) NOT NULL,
+  `return_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `returns`
+--
+
+INSERT INTO `returns` (`return_id`, `order_id`, `order_num`, `customer_id`, `return_item`, `return_item_quantity`, `return_details`, `return_status`, `return_date`) VALUES
+(4, '39', '971952403776', '24', ' G-805307', ' 1', '', 'returned', '2023-11-12 11:28:11');
 
 --
 -- Indexes for dumped tables
@@ -232,6 +257,12 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`Product Id`);
 
 --
+-- Indexes for table `returns`
+--
+ALTER TABLE `returns`
+  ADD PRIMARY KEY (`return_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -239,7 +270,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `Admin Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Admin Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `cart`
@@ -263,13 +294,19 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `Order Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `Order Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `Product Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
+--
+-- AUTO_INCREMENT for table `returns`
+--
+ALTER TABLE `returns`
+  MODIFY `return_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables

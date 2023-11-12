@@ -30,7 +30,7 @@
       <div class="inProcessOrders">
         <?php
         $orders = Customer::fetchSpecificProducts('Order Status', 'processing');
-                $orderCount = count($orders);
+        $orderCount = count($orders);
         ?>
         <div class="d-flex mb-10 justify-content-between">
           <p class="fs-16">No of Orders: <?php echo $orderCount; ?></p>
@@ -120,12 +120,12 @@
               <tr>
                 <th>Order #</th>
                 <th>Order Date</th>
-                <th>Delivery Date:</th>
+                <th>Estimated Delivery Date:</th>
                 <th>Items</th>
                 <th>Total</th>
                 <th>Payment Method</th>
                 <th>Order Status</th>
-                <!-- <th class="text-center">Info:</th> -->
+                <th class="text-center">Update Delivery Status:</th>
               </tr>
             </thead>
             <tbody>
@@ -138,6 +138,7 @@
                 $orderDate = $order["Order Date"];
                 $orderItems = explode(",", $order["Order Items"]);
                 $orderStatus = $order["Order Status"];
+                $orderEstiDelivery = $order["est_delivery_date"];
               ?>
                 <tr>
                   <td>
@@ -147,7 +148,7 @@
                     <?php echo $orderDate; ?>
                   </td>
                   <td>
-                    <?php echo '24.24.24    '; ?>
+                    <?php echo $orderEstiDelivery; ?>
                   </td>
                   <td>
                     <?php
@@ -168,9 +169,9 @@
                   <td class="text-primary">
                     <?php echo $orderStatus; ?>
                   </td>
-                  <!-- <td class="text-center">
-                    <button class="addHover manageOrder" data-toggle="modal" data-target="#manageOrderModal" data-id="<?php echo $orderId ?>">Manage</button>
-                  </td> -->
+                  <td class="text-center">
+                    <button class="addHover btn btn-success" data-delivery-order data-id="<?php echo $orderId ?>">Set Delivered</button>
+                  </td>
                 </tr>
               <?php } ?>
             </tbody>
@@ -202,7 +203,7 @@
                 <th>Total</th>
                 <th>Payment Method</th>
                 <th>Order Status</th>
-                <!-- <th class="text-center">Info:</th> -->
+
               </tr>
             </thead>
             <tbody>
@@ -245,9 +246,7 @@
                   <td class="text-success">
                     <?php echo $orderStatus; ?>
                   </td>
-                  <!-- <td class="text-center">
-                    <button class="addHover manageOrder" data-toggle="modal" data-target="#manageOrderModal" data-id="<?php echo $orderId ?>">Manage</button>
-                  </td> -->
+
                 </tr>
               <?php } ?>
             </tbody>
@@ -394,7 +393,7 @@
         </div>
       </div>
       <div class="modal-footer d-flex justify-content-between" style="min-height: 70px">
-        <button type="button" class="btn btn-danger" data-cancel-order data-id="" data-cancel-by="admin" >Cancel Order</button>
+        <button type="button" class="btn btn-danger" data-cancel-order data-id="" data-cancel-by="admin">Cancel Order</button>
         <button type="button" class="btn btn-secondary hidden updateOrderStatusButton" data-update-order-status data-id="" data-dismiss="modal">Update Order Status</button>
       </div>
     </div>

@@ -1050,7 +1050,7 @@ function updateOrderStatus(id, value) {
         },
 
         success: function (response) {
-            console.log(response)
+            console.log(response);
             window.location.href = window.location.href;
         },
         error: function (xhr, status, error) {
@@ -1059,10 +1059,159 @@ function updateOrderStatus(id, value) {
     });
 }
 
-
 $("[data-update-order-status]").click(function () {
     var orderId = $(this).attr("data-id");
     var value = $(".order_status").val();
     console.log(value);
-updateOrderStatus(orderId, value);
+    updateOrderStatus(orderId, value);
+});
+
+function deliverOrder(id) {
+    $.ajax({
+        url: "../controllers/deliver-order.php",
+        method: "POST",
+        data: {
+            id: id,
+        },
+
+        success: function (response) {
+            console.log(response);
+            window.location.href = window.location.href;
+        },
+        error: function (xhr, status, error) {
+            console.log(error);
+        },
+    });
+}
+
+$("[data-delivery-order]").click(function () {
+    var orderId = $(this).attr("data-id");
+    deliverOrder(orderId);
+});
+
+$(".returnButton").click(function () {
+    let quan = $(this).attr("item-quan");
+    let item = $(this).attr("data-item");
+
+    $(".returnItem").val(item);
+    $(".returnItemQuantity").val(quan);
+
+    console.log("working");
+});
+
+$(document).ready(function () {
+    $("#confirmReturnBtn").click(function () {
+        // Get the data attributes from the button
+        var customerId = $(this).attr("data-customer-id");
+        var orderNum = $(this).attr("data-order-num");
+        var orderId = $(this).attr("data-order-id");
+
+        // Get the tracking details and return details from the input fields
+        var trackingDetails = $("#trackingDetails").val();
+        var returnDetails = $("#returnDetails").val();
+        var item = $(".returnItem").val();
+        var itemQuan = $(".returnItemQuantity").val();
+        // Make an AJAX request
+        $.ajax({
+            url: "controllers/return-item.php",
+            type: "POST",
+            data: {
+                customerId: customerId,
+                orderNum: orderNum,
+                orderId: orderId,
+                trackingDetails: trackingDetails,
+                returnDetails: returnDetails,
+                returnItem: item,
+                orderItemQuan: itemQuan,
+            },
+            success: function (response) {
+                // Handle the response from the server if needed
+                console.log(response);
+
+                window.location.href = "index.php";
+            },
+            error: function (xhr, status, error) {
+                // Handle errors if any
+                console.error(xhr.responseText, error);
+            },
+        });
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    var originalData = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        password: document.getElementById("password").value,
+    };
+
+    function checkForChanges() {
+        var currentData = {
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            phone: document.getElementById("phone").value,
+            password: document.getElementById("password").value,
+        };
+
+        var hasChanges =
+            currentData.name !== originalData.name ||
+            currentData.email !== originalData.email ||
+            currentData.phone !== originalData.phone ||
+            currentData.password !== originalData.password;
+
+        var updateBtn = document.getElementById("updateBtn");
+        var errorContainer = document.getElementById("errorContainer");
+
+        // Check for empty inputs
+        var isEmpty = Object.values(currentData).some(
+            (value) => value.trim() === ""
+        );
+
+        if (isEmpty) {
+            errorContainer.innerHtml = "All fields are required.";
+            updateBtn.style.display = "none";
+        } else {
+            errorContainer.innerHtml = "";
+            updateBtn.style.display = hasChanges ? "block" : "none";
+        }
+    }
+
+    // Attach the checkForChanges function to the input events
+    var formInputs = document.querySelectorAll(".admin-profile input");
+    formInputs.forEach(function (input) {
+        input.addEventListener("input", checkForChanges);
+    });
+
+    // Attach the AJAX request to the "Update" button click event
+    var updateBtn = document.getElementById("updateBtn");
+    updateBtn.addEventListener("click", function () {
+        // Implement your AJAX request here
+        var formData = new FormData();
+        formData.append("name", document.getElementById("name").value);
+        formData.append("email", document.getElementById("email").value);
+        formData.append("phone", document.getElementById("phone").value);
+        formData.append("password", document.getElementById("password").value);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "../controllers/update-admin.php", true);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        alert("Update successful");
+                    } else {
+                        document.getElementById("errorContainer").innerText =
+                            response.error;
+                    }
+                } else {
+                    console.error("Error updating admin");
+                }
+            }
+        };
+
+        xhr.send(formData);
+    });
 });

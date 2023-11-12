@@ -7,7 +7,7 @@ if (isset($_POST["logout"])) {
     header("location: index.php");
 }
 
-if(!isset($currentCustomer)) {
+if (!isset($currentCustomer)) {
     header("location: index.php");
 }
 
@@ -80,6 +80,7 @@ if (isset($_POST["updateCustomerDetails"])) {
                     <button class="active">Details</button>
                     <button>Billing Details</button>
                     <button>Order History</button>
+                    <button>Returns</button>
                 </div>
                 <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
                     <button class="btn btn-primary" type="submit" name="logout">Logout</button>
@@ -196,7 +197,7 @@ if (isset($_POST["updateCustomerDetails"])) {
                                 ?>
                                     <tr>
                                         <td>
-                                            <?php echo "#".$orderNum; ?>
+                                            <?php echo "#" . $orderNum; ?>
                                         </td>
                                         <td>
                                             <?php echo $orderDate; ?>
@@ -222,7 +223,74 @@ if (isset($_POST["updateCustomerDetails"])) {
                                             <?php echo $orderStatus; ?>
                                         </td>
                                         <td class="text-center">
-                                            <a href="order-status.php?order_id=<?php echo $orderId?>&order_num=<?php echo $orderNum;?>" class="addHover">View</a>
+                                            <a href="order-status.php?order_id=<?php echo $orderId ?>&order_num=<?php echo $orderNum; ?>" class="addHover">View</a>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+
+                            </tbody>
+                        </table>
+                    <?php } ?>
+                </div>
+                <div class="tabbingPanel order-returns">
+                    <h4 class="fw-300 pb-3 fs-24 text-center fc-secondary">Returns</h4>
+                    <?php
+                    $customerId = $currentCustomer["Customer Id"];
+                    $returns = Returns::fetchReturns('customer_id', $customerId,);
+                    $returnCount = count($returns);
+                    ?>
+                    <div class="d-flex mb-10">
+                        <p class="fs-16">No of returns: <?php echo $returnCount; ?></p>
+                    </div>
+
+                    <?php if ($returnCount <= 0) { ?>
+                        <div class="orderHistory">
+                            <p class="text-center pt-5 fs-20 fw-400 fc-secondary-400">You have no returns.</p>
+                        </div>
+                    <?php } else { ?>
+                        <table class="table text-left">
+                            <thead>
+                                <tr>
+                                    <th>Order #</th>
+                                    <th>Return Date</th>
+                                    <th>Item</th>
+                                    <th>Item Quantity</th>
+                                    <th>Item Amount</th>
+                                    <th>Return Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach ($returns as $return) {
+                                    $returnId = $return["return_id"];
+                                    $orderNum = $return["order_num"];
+                                    $returnDate = $return["return_date"];
+                                    $returnItems = $return["return_item"];
+                                    $returnItemsQuantity = $return["return_item_quantity"];
+                                    $returnStatus = $return["return_status"];
+                                ?>
+                                    <tr>
+                                        <td>
+                                            <?php echo "#" . $orderNum; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $returnDate; ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            $product = checkCurrentProduct($returnItems);
+                                            $returnAmount = $product->price * $returnItemsQuantity;
+                                            ?>
+                                            <img class="orderImg" src="assets/images/product-images/<?php echo $product->images ?>">
+                                        </td>
+                                        <td>
+                                            <?php echo $returnItemsQuantity; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $currencySymbol . $returnAmount; ?>
+                                        </td>
+                                        <td class="text-capitilize">
+                                            <?php echo $returnStatus; ?>
                                         </td>
                                     </tr>
                                 <?php } ?>

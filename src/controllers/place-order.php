@@ -14,12 +14,15 @@ $customerId = $currentCustomer["Customer Id"];
 function generateRandomOrderNumber()
 {
     $orderNumber = '';
-    for ($i = 0; $i < 12; $i++) {
+    for ($i = 0; $i < 14; $i++) {
         $orderNumber .= rand(0, 9);
     }
     return $orderNumber;
 }
-$orderNumber = generateRandomOrderNumber();
+$_orderNumber = generateRandomOrderNumber();
+
+$orderNumber = $orderType[0] . "_" . $_orderNumber;
+
 $cartQuery = "SELECT *  FROM `cart` WHERE `Customer Id` = '$customerId'";
 $cartResult = mysqli_query($connection, $cartQuery);
 

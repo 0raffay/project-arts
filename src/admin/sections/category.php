@@ -1,3 +1,17 @@
+
+<?php
+if ($employee) {
+?>
+    <div class="category-section">
+        <?php
+        include("includes/locked.php");
+        ?>
+    </div>
+
+<?php return;
+} else { ?>
+
+
 <?php
 
 $categories = Category::fetchAllCategory();
@@ -77,3 +91,5 @@ $categories = Category::fetchAllCategory();
         </div>
     </div>
 </div>
+
+<?php } ?>

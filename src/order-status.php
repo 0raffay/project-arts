@@ -18,7 +18,7 @@ if (!isset($currentCustomer)) {
 $query = "SELECT * FROM `order` WHERE `Customer Id` = '$customerId' AND `Order Id` = $orderId";
 $returned = returnerBySqlQuery($query);
 
-print_r($returned);
+// print_r($returned);
 if ($returned == "0") {
     header("location: index.php");
 }
@@ -84,10 +84,10 @@ $orderEstDate =  $returned["est_delivery_date"];
                             <div class="row w-100 no-gutters">
                                 <div class="col-6 col-md">
                                     <h6 class="text-charcoal mb-0 w-100">Order Number</h6>
-                                    <a href="" class="text-pebble mb-0 w-100 mb-2 mb-md-0">#<?php echo $orderNum; ?></a>
+                                    <p class="text-pebble mb-0 w-100 mb-2 mb-md-0">#<?php echo $orderNum; ?></p>
                                 </div>
                                 <div class="col-6 col-md">
-                                    <h6 class="text-charcoal mb-0 w-100">Date</h6>
+                                    <h6 class="text-charcoal mb-0 w-100">Order Date</h6>
                                     <p class="text-pebble mb-0 w-100 mb-2 mb-md-0"><?php echo $outputDate; ?></p>
                                 </div>
                                 <div class="col-6 col-md">
@@ -208,7 +208,12 @@ $orderEstDate =  $returned["est_delivery_date"];
                                                     <?php }
                                                     if ($product->warranty != "" && $orderStatus == "delivered") {
                                                     ?>
-                                                        <button href="" class="btn btn-primary mb-10 w-100">Claim Warranty</button>
+                                                        <button data-toggle="modal" item-quan="<?php echo $productQuantity;?>" data-item="<?php echo $product->SKU;?>" data-target="#returnModal" class="returnButton btn btn-primary mb-10 w-100">Claim Warranty</button>
+                                                    <?php }
+                                                    if ($orderStatus == "delivered") { ?>
+                                                        <button item-quan="<?php echo $productQuantity;?>" data-item="<?php echo $product->SKU;?>" data-toggle="modal" data-target="#returnModal" class="returnButton btn btn-primary mb-10 w-100">
+                                                            Return Item
+                                                        </button>
                                                     <?php } ?>
                                                 </div>
                                             </div>
@@ -225,7 +230,7 @@ $orderEstDate =  $returned["est_delivery_date"];
                         if ($orderStatus == "processing") {
                         ?>
                             <div class="list-group-item">
-                                <button class="btn d-block ml-auto  btn-outline-danger" data-cancel-order data-id="<?php echo $orderId;?>" data-cancel-by="Customer">Cancel Order</button>
+                                <button class="btn d-block ml-auto  btn-outline-danger" data-cancel-order data-id="<?php echo $orderId; ?>" data-cancel-by="Customer">Cancel Order</button>
                             </div>
                         <?php } ?>
                     </div>
@@ -237,5 +242,41 @@ $orderEstDate =  $returned["est_delivery_date"];
     <?php include('includes/footer.php') ?>
     <!--==== FOOTER END ====-->
 </body>
+
+<div class="modal fade" id="returnModal" tabindex="-1" aria-labelledby="returnModal" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-24" id="returnModal">Submit Return</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <input class="returnItem" hidden>
+                    <input class="returnItemQuantity" hidden>
+                    <div class="col-12 d-none">
+                        <div class="input__wrap">
+                            <label for="">Add a tracking No. (required)</label>
+                            <input type="text" class="border py-2 px-2" id="trackingDetails">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="">
+                            Write Reason for your return</label>
+                        <textarea class="border py-2 px-2 d-block w-100" id="returnDetails"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-between" style="min-height: 70px">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" id="confirmReturnBtn" data-customer-id="<?php echo $customerId; ?>" data-order-num="<?php echo $orderNum; ?>" data-order-id="<?php echo $orderId; ?>">
+                    Confirm Return
+                </button>
+
+
+            </div>
+        </div>
+    </div>
+</div>
 
 </html>

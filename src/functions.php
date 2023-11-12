@@ -613,6 +613,51 @@ class Admin
             echo "User Deleted";
         }
     }
+
+    public static function updateDetails($adminName, $adminEmail, $adminPhone, $adminPass)
+    {
+        global $connection;
+
+        // You may want to add validation for inputs here
+
+        // Check for duplicate entries
+        $emailQuery = "SELECT * FROM `admin` WHERE `Admin Email` = '$adminEmail' AND `Admin Id` != " . $_SESSION["currentAdmin"]["Admin Id"];
+        $emailResult = mysqli_query($connection, $emailQuery);
+
+        if ($emailResult->num_rows > 0) {
+            return "Email already in use. Please choose a different one.";
+        }
+
+        $phoneQuery = "SELECT * FROM `admin` WHERE `Admin Phone` = '$adminPhone' AND `Admin Id` != " . $_SESSION["currentAdmin"]["Admin Id"];
+        $phoneResult = mysqli_query($connection, $phoneQuery);
+
+        if ($phoneResult->num_rows > 0) {
+            return "Phone number already in use. Please choose a different one.";
+        }
+
+        // Update details in the database
+        $currentAdminId = $_SESSION["currentAdmin"]["Admin Id"];
+        $updateQuery = "UPDATE `admin` SET
+                        `Admin Name` = '$adminName',
+                        `Admin Email` = '$adminEmail',
+                        `Admin Phone` = '$adminPhone',
+                        `Admin Password` = '$adminPass'
+                        WHERE `Admin Id` = $currentAdminId";
+
+        $updateResult = mysqli_query($connection, $updateQuery);
+
+        if ($updateResult) {
+            // Update the current admin session variable
+            $_SESSION["currentAdmin"]["Admin Name"] = $adminName;
+            $_SESSION["currentAdmin"]["Admin Email"] = $adminEmail;
+            $_SESSION["currentAdmin"]["Admin Phone"] = $adminPhone;
+            $_SESSION["currentAdmin"]["Admin Password"] = $adminPass;
+
+            return true; // Success
+        } else {
+            return "Error updating details. Please try again.";
+        }
+    }
 }
 
 if (isset($_COOKIE["currentCustomer"])) {
@@ -696,7 +741,66 @@ function deliverOrders()
     $result = mysqli_query($connection, $query);
     if ($result) {
         echo "";
-    } 
+    }
 }
 
 deliverOrders();
+
+class Returns
+{
+
+    public static function fetchReturns($column, $value)
+    {
+        global $connection;
+        $query = "SELECT * FROM `returns` WHERE `$column` = '$value'";
+        $result = mysqli_query($connection, $query);
+        if ($result) {
+            $rows = array();
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            return $rows;
+        } else {
+            return "RESULT NOT FOUND";
+        }
+    }
+
+    public static function fetchAll()
+    {
+        global $connection;
+        $query = "SELECT * FROM `returns` ORDER BY `return_date` ASC ";
+        $result = mysqli_query($connection, $query);
+        if ($result) {
+            $rows = array();
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            return $rows;
+        } else {
+            return "RESULT NOT FOUND";
+        }
+    }
+
+    public static function createReturn($orderId, $orderNum, $customerId, $returnItem, $returnItemQuantity, $returnDetails, $returnStatus)
+    {
+        global $connection;
+        $insert = "INSERT INTO `returns` (`return_id`, `order_id`, `order_num`, `customer_id`, `return_item`, `return_item_quantity`, `return_details`, `return_status`, `return_date`) VALUES (NULL, '$orderId', '$orderNum', '$customerId', '$returnItem', '$returnItemQuantity', '$returnDetails', '$returnStatus', current_timestamp())";
+        $query = mysqli_query($connection, $insert);
+        if ($query) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public static function updateReturn($query)
+    {
+        global $connection;
+        $result = mysqli_query($connection, $query);
+        if ($result) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
