@@ -5,7 +5,9 @@ include "../functions.php";
 $address = $_POST["shipping_detail"]["address"];
 $city = $_POST["shipping_detail"]["city"];
 $phone = $_POST["shipping_detail"]["phone"];
+
 $orderType = $_POST["order_type"];
+
 $cartTotal = $_POST["order_total"];
 $cart;
 $customerId = $currentCustomer["Customer Id"];
@@ -32,7 +34,7 @@ $orderQuantity = $cart["Product Quantity"];
 
 $date = date("d-m-y");
 
-$query = "INSERT INTO `order` (`Order Id`, `Order Number`, `Customer Id`, `Order Type`, `Order Amount`, `Order Date`, `Order Items`, `Order Items Quantity`, `Order Status`) VALUES (NULL, '$orderNumber', '$customerId', '$orderType', '$cartTotal', '$date', '$orderItems', '$orderQuantity', 'In Process')";
+$query = "INSERT INTO `order` (`Order Id`, `Order Number`, `Customer Id`, `Order Type`, `Order Amount`, `Order Date`, `Order Items`, `Order Items Quantity`, `Order Status`, `Order Address`, `Order City`, `Order Phone`) VALUES (NULL, '$orderNumber', '$customerId', '$orderType', '$cartTotal', '$date', '$orderItems', '$orderQuantity', 'processing', '$address', '$city', '$phone')";
 
 $result = mysqli_query($connection, $query);
 

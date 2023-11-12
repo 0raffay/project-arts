@@ -5,11 +5,12 @@
 
 <!--==== OFINFO START ====-->
 <?php
-$currencySymbol = "$";
+$currencySymbol = "Rs.";
 
 $site__email = 'info@arts.com';
 $site__phone = '+92 3201 3212';
 
+$site__address = " Sector 15 Korangi Industrial Area, Karachi, Sindh, PK";
 
 $site__name = 'Arts';
 $site__url = 'arts.com';
@@ -53,6 +54,7 @@ $og__filePath =  "/assets/images/og.png";
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <!--==== FONTS END END ====-->
 
 

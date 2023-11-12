@@ -105,7 +105,7 @@ class Product
             if ($productWarrantyStatus == "1") {
                 $productWarranty = "W-" . random_int(100000, 999999);
             } else {
-                $productWarranty = "No Warranty";
+                $productWarranty = "0";
             }
 
 
@@ -201,7 +201,7 @@ class Product
     {
         $lowerCaseKeywords = strtolower($keyword);
         $keywordsArray = explode(" ", $lowerCaseKeywords);
-        foreach($keywordsArray as $keyword) {
+        foreach ($keywordsArray as $keyword) {
             $keywordsArray[] = $keyword . "s";
         }
         $matchingProducts = [];
@@ -211,7 +211,7 @@ class Product
         foreach ($products as $product) {
             $keys = strtolower($product->keywords);
             $keyArray = explode(",", $keys);
-            foreach($keyArray as $key) {
+            foreach ($keyArray as $key) {
                 $keyArray[] = $key . "s";
             }
 
@@ -662,6 +662,41 @@ function fetchCartProducts($connection, $currentCustomer)
 }
 
 fetchCartProducts($connection, $currentCustomer);
+function returnerBySqlQuery($query)
+{
+    global $connection;
+    $result = mysqli_query($connection, $query);
+    $_returned = array();
+
+    if (!$result) {
+        return "0";
+    } else {
+        if (mysqli_num_rows($result) < 2) {
+            $_returned = $result->fetch_assoc();
+        } else {
+            while ($row = $result->fetch_assoc()) {
+                $_returned[] = $row;
+            }
+        }
+        return $_returned;
+    }
+}
+
 
 // CREATING INITIAL PRODUCT BASE:
 Product::createInstancesOfProduct();
+
+
+function deliverOrders()
+{
+    global $connection;
+    $currentDate = date('Y-m-d');
+    $query = "UPDATE `order` SET `Order Status` = 'delivered' WHERE `est_delivery_date` = '$currentDate'";
+
+    $result = mysqli_query($connection, $query);
+    if ($result) {
+        echo "";
+    } 
+}
+
+deliverOrders();

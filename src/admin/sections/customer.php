@@ -41,12 +41,12 @@ if ($employee) {
                             <div class="table-cell flex-1">
                                 Customer Address:
                             </div>
-                            <div class="table-cell flex-1">
+                            <!-- <div class="table-cell flex-1">
                                 Customer Password:
-                            </div>
-                            <div class="table-cell flex-1">
+                            </div> -->
+                            <!-- <div class="table-cell flex-1">
                                 Actions
-                            </div>
+                            </div> -->
                         </div>
 
                         <?php
@@ -65,17 +65,17 @@ if ($employee) {
                                 <div class="table-cell flex-1">
                                     <?php echo $customer['Customer Address']; ?>
                                 </div>
-                                <div class="table-cell flex-1">
+                                <!-- <div class="table-cell flex-1">
                                     <?php echo $customer['Customer Password']; ?>
-                                </div>
-                                <div class="table-cell flex-1">
-                                    <button class="addHover border-right">
+                                </div> -->
+                                <!-- <div class="table-cell flex-1"> -->
+                                    <!-- <button class="addHover border-right">
                                         Edit User
-                                    </button>
-                                    <button class="text-danger addHover">
+                                    </button> -->
+                                    <!-- <button class="text-danger addHover">
                                         Delete User
-                                    </button>
-                                </div>
+                                    </button> -->
+                                <!-- </div> -->
                             </div>
                         <?php } ?>
                     <?php } else {

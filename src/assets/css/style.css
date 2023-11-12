@@ -606,7 +606,7 @@ input {
 
 
 
-.btn.active,
+.btn.active:not(.ordersAreaButton button),
 .btn.btn-primary:focus,
 .btn.btn-secondary:focus,
 .btn-primary:hover,
@@ -1313,4 +1313,12 @@ i {
 
 .center {
     justify-content: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.ordersAreaButton button.active{
+    opacity: 1 !important;
 }

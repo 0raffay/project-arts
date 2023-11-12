@@ -186,6 +186,7 @@ if (isset($_POST["updateCustomerDetails"])) {
                             <tbody>
                                 <?php
                                 foreach ($orders as $order) {
+                                    $orderId = $order["Order Id"];
                                     $orderNum = $order["Order Number"];
                                     $orderType = $order["Order Type"];
                                     $orderAmount = $order["Order Amount"];
@@ -195,7 +196,7 @@ if (isset($_POST["updateCustomerDetails"])) {
                                 ?>
                                     <tr>
                                         <td>
-                                            <?php echo $orderNum; ?>
+                                            <?php echo "#".$orderNum; ?>
                                         </td>
                                         <td>
                                             <?php echo $orderDate; ?>
@@ -221,7 +222,7 @@ if (isset($_POST["updateCustomerDetails"])) {
                                             <?php echo $orderStatus; ?>
                                         </td>
                                         <td class="text-center">
-                                            <a href="" class="addHover">View</a>
+                                            <a href="order-status.php?order_id=<?php echo $orderId?>&order_num=<?php echo $orderNum;?>" class="addHover">View</a>
                                         </td>
                                     </tr>
                                 <?php } ?>

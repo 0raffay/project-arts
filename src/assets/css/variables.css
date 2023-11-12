@@ -1,7 +1,9 @@
 
 :root {
-    --ff-primary: 'Roboto', sans-serif;
-    --ff-secondary: 'Poppins', sans-serif;
+    --ff-primary: 'Open Sans', sans-serif;
+    /* --ff-primary: 'Roboto', sans-serif; */
+    --ff-secondary: 'Roboto', sans-serif;;
+    /* --ff-secondary: 'Poppins', sans-serif; */
 
     --clr-primary: #ffffff;
     --clr-secondary: #141414;

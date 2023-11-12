@@ -35,12 +35,16 @@
 
             <div class="row py-4">
                 <?php
-                foreach (Product::$instances as $products) {
+                $shuffledProducts = Product::$instances;
+                shuffle($shuffledProducts);
+
+                foreach ($shuffledProducts as $products) {
                     $productIds = $products->SKU;
                     checkCurrentProduct($productIds);
+                    include('components/card.php');
+                }
                 ?>
-                    <?php include('components/card.php'); ?>
-                <?php } ?>
+
             </div>
         </div>
     </section>

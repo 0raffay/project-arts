@@ -292,7 +292,7 @@ function cartTotalAmount() {
 
     allProductPrices.each(function () {
         let inputNearItValue = $(this).parent().next().find("input").val();
-        let price = parseInt($(this).text()) * parseInt(inputNearItValue);
+        let price = parseFloat($(this).text()) * parseFloat(inputNearItValue);
         total += price;
     });
 
@@ -736,9 +736,8 @@ function sortProducts(keywords) {
         },
     });
 }
-    var productsContainer = $(".showSearchedProducts");
+var productsContainer = $(".showSearchedProducts");
 function showSearchedProducts(products) {
-
     if (products.length === 0) {
         productsContainer.empty();
         productsContainer.html("No results found.");
@@ -938,4 +937,132 @@ let deleteAdminButton = $("[data-delete-admin]");
 deleteAdminButton.click(function () {
     let id = $(this).attr("data-id");
     deleteAdmin(id);
+});
+
+function getOrderDetails(id) {
+    $.ajax({
+        url: "../controllers/get-order-detail.php",
+        method: "POST",
+        data: {
+            id: id,
+        },
+        success: function (response) {
+            console.log(response);
+            let order = JSON.parse(response);
+            console.log(order);
+
+            let listItems = $("#manageOrderModal .manageOrderItems");
+
+            // Clear existing content in the listItems container
+            listItems.empty();
+
+            order.orderItems.forEach((element, index) => {
+                // Create a new list group item for each order item
+                let listItem = $("<div class='list-group-item'></div>");
+
+                // Display item and quantity information
+                listItem.text(`${element}: ${order.orderItemsQuantity[index]}`);
+
+                // Append the new list group item to the container
+                listItems.append(listItem);
+            });
+
+            // Update other modal fields
+            // Update other modal fields
+            $("#manageOrderModal .customer_name").val(order.customerName);
+            $("#manageOrderModal .customer_address").val(order.customerAddress);
+            $("#manageOrderModal .customer_city").val(order.customerCity);
+            $("#manageOrderModal .customer_phone").val(order.customerPhone);
+            $("#manageOrderModal .manageOrderNo").text(order.orderNum); // Use .text() for spans
+            $("#manageOrderModal .manageOrderDate").text(order.orderDate); // Use .text() for spans
+            $("#manageOrderModal .order_total").val(order.orderTotal);
+            $("#manageOrderModal [data-cancel-order]").attr(
+                "data-id",
+                order.orderId
+            );
+            $("#manageOrderModal .updateOrderStatusButton").attr(
+                "data-id",
+                order.orderId
+            );
+
+            $(".order_status").val(order.orderStatus);
+            console.log($(".order_status").val());
+            // This should be fine if you want to set a value for a select element
+            $("#manageOrderModal .manageOrderType").text(order.orderType); // This should be fine if you want to set a value for a select element
+
+            console.log(order.orderStatus);
+        },
+        error: function (xhr, status, error) {
+            console.log(error);
+        },
+    });
+}
+
+$(".manageOrder").on("click", function () {
+    let id = $(this).attr("data-id");
+    getOrderDetails(id);
+});
+
+$(".order_status").change(function () {
+    if ($(this).val() !== "processing") {
+        $("[data-update-order-status]").removeClass("hidden");
+    } else {
+        $("[data-update-order-status]").addClass("hidden");
+    }
+});
+
+function cancelOrder(id, cancelBy, filePath) {
+    $.ajax({
+        url: filePath,
+        method: "POST",
+        data: {
+            orderId: id,
+            cancelBy: cancelBy,
+        },
+
+        success: function (response) {
+            window.location.href = window.location.href;
+        },
+        error: function (xhr, status, error) {
+            console.log(error);
+        },
+    });
+}
+
+$("[data-cancel-order]").click(function () {
+    var orderId = $(this).attr("data-id");
+    var cancelBy = $(this).attr("data-cancel-by");
+
+    if (window.location.href.includes("admin")) {
+        cancelOrder(orderId, cancelBy, "../controllers/cancel-order.php");
+    } else {
+        cancelOrder(orderId, cancelBy, "controllers/cancel-order.php");
+    }
+});
+
+function updateOrderStatus(id, value) {
+    $.ajax({
+        url: "../controllers/update-order-status.php",
+        method: "POST",
+        data: {
+            id: id,
+            value: value,
+        },
+
+        success: function (response) {
+            console.log(response)
+            window.location.href = window.location.href;
+        },
+        error: function (xhr, status, error) {
+            console.log(error);
+        },
+    });
+}
+
+
+$("[data-update-order-status]").click(function () {
+    var orderId = $(this).attr("data-id");
+    var value = $(".order_status").val();
+    console.log(value);
+updateOrderStatus(orderId, value);
 });
