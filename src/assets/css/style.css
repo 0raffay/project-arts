@@ -695,11 +695,11 @@ input {
     cursor: pointer;
 }
 
-.li--has-submenu {
+.web-li--has-submenu {
     position: relative;
 }
 
-.li--has-submenu:hover .submenu--wrapper {
+.web-li--has-submenu:hover .submenu--wrapper {
     display: block;
 }
 

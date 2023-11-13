@@ -36,7 +36,7 @@ $promotionTitle = "Free Shipping on orders. All over Pakistan.";
                 <div class="d-flex py-3 fw-300 ff-secondary align-items-center justify-content-between">
                     <ul class="d-flex gap-30 list-unstyled">
                         <li><a href="index.php">Home</a></li>
-                        <li class="li--has-submenu">
+                        <li class="web-li--has-submenu">
                             <a href="javscript:;">Shop By Categories <span class="icon__wrap"><i class="ri-arrow-drop-down-fill"></i></span></a>
                             <div class="submenu--wrapper">
                                 <ul class="submenu">
