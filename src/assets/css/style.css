@@ -1580,6 +1580,10 @@ i {
         z-index: 2;
         background: #fff;
     }
+    .dashboard-body main {
+        position: static !important;
+
+    }
 
     footer {
         position: fixed;
