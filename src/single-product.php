@@ -68,7 +68,7 @@ checkCurrentProduct($productId);
                             <p class="small-product-stock-label fs-13 fw-300 mb-5 fc-secondary pb-2 border-bottom-hr">Hurry Only <?php echo $currentProduct->stock; ?> Left In Stock!</p>
                         <?php } ?>
                         <div class="product-policy py-3 pb-4">
-                            <a href="policy" class="addHover fc-secondary-400 mr-4"><i class="fa-solid fa-cart-shopping mr-2"></i>Delivery And Return</a>
+                            <!-- <a href="policy" class="addHover fc-secondary-400 mr-4"><i class="fa-solid fa-cart-shopping mr-2"></i>Delivery And Return</a> -->
                         </div>
 
                         <form action="POST" class="mb-20">
@@ -104,7 +104,7 @@ checkCurrentProduct($productId);
             </div>
         </div>
 
-        <div class="product-feedback">
+        <div class="product-feedback pt-4">
             <div class="container">
                 <button class="pb-1 fc-secondary fs-24 fw-400 border-bottom-hr">Product Feedback</button>
                 <div class="product-feedback-head d-flex align-items-center justify-content-between fs-23 fw-300 fc-secondary py-3">
@@ -112,7 +112,12 @@ checkCurrentProduct($productId);
                     $reviews = Feedback::showReviews($productId);
                     ?>
                     Customer Reviews (<?php echo count($reviews); ?>)
-                    <button class="btn btn-primary" data-review>Write A Review</button>
+
+                    <?php
+                    if ($currentCustomer != null) { ?>
+                        <button class="btn btn-primary" data-review>Write A Review</button>
+                    <?php } ?>
+
                 </div>
                 <div class="feedback-content py-5 mb-4 border-bottom-hr">
                     <?php
@@ -144,7 +149,7 @@ checkCurrentProduct($productId);
             </div>
         </div>
 
-    </main> 
+    </main>
     <div class="feedbackModal border">
         <div class="feedbackModalMain py-5 bg-white">
             <div class="container">
