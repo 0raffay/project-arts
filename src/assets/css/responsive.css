@@ -1,45 +1,52 @@
-@media only screen and (max-width: 1660px) {
-    
-}
-@media only screen and (max-width: 1360px) {
-    
-}
+@media only screen and (max-width: 1660px) {}
 
-@media only screen and (max-width: 1240px) {
-    
-}
+@media only screen and (max-width: 1360px) {}
+
+@media only screen and (max-width: 1240px) {}
 
 @media only screen and (max-width: 992px) {
-    
+
 }
 
 @media only screen and (max-width: 767px) {
-.header--buttons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+    .header--buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .banner-section-slider_ .item img {
+        min-height: 560px;
+        object-fit: cover;
+    }
+
+    .bottom--header {
+        display: none;
+    }
+
+    .searchHeader {
+        display: block;
+    }
+
+    .categoryCard {
+        min-height: 200px;
+        margin-bottom: 20px;
+    }
+
+    footer * {
+        text-align: center;
+    }
+
+    .showSearchedProducts {
+        display: none;
+    }
+
+    .tabbingButtons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+    }
 }
 
-.banner-section-slider_ .item img {
-    min-height: 560px;
-    object-fit: cover;
-}
-
-.bottom--header   {
-    display: none;
-}
-
-.searchHeader {
-    display: block;
-}
-
-.categoryCard {
-    min-height: 200px;
-    margin-bottom: 20px;
-}
-}
-
-@media only screen and (max-width: 480px) {
-
-}
+@media only screen and (max-width: 480px) {}

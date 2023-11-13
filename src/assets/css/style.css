@@ -1569,6 +1569,20 @@ i {
     box-shadow: 25px 7px 40px #e7e7e7;
 }
 
+table,
+table.table,
+.table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+
+.dashboard-body table {
+    display: table !important;
+}
+
 @media screen and (min-width: 992px) {
 
     body {
@@ -1580,6 +1594,7 @@ i {
         z-index: 2;
         background: #fff;
     }
+
     .dashboard-body main {
         position: static !important;
 

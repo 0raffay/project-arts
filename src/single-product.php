@@ -38,12 +38,12 @@ checkCurrentProduct($productId);
     <main id="single-product-main" class="py-5 pb-4">
         <div class="container">
             <div class="row">
-                <div class="col-6 ">
+                <div class="col-12 col-md-6">
                     <div class="product-gallery">
                         <img src="assets/images/product-images/<?php echo  $currentProduct->images; ?>">
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     <div class="product-info">
 
                         <?php
