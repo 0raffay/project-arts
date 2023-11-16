@@ -1572,7 +1572,7 @@ i {
 table,
 table.table,
 .table {
-    display: block;
+    /* display: block; */
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
